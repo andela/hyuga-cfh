@@ -1,6 +1,5 @@
 //Gulp configuration file
 
-var require = require(), process();
 
 var gulp = require('gulp'),
 	browserSync = require('browser-sync').create(),
