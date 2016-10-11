@@ -1,5 +1,5 @@
 //Gulp configuration file
-"use strict";
+
 
 
 var gulp = require('gulp'),
@@ -16,12 +16,14 @@ var gulp = require('gulp'),
 
 
 gulp.task('default', function () {
+	"use strict";
 	//Listen for changes with livereload
 	runSequence('build', 'watch');
 
 });
 
 gulp.task('build', ['browser-sync'], function () {
+	"use strict";
 	//Listen for changes with livereload
 	livereload.listen();
 
@@ -31,6 +33,7 @@ gulp.task('build', ['browser-sync'], function () {
 // Gulp browser-sync
 
 gulp.task('browser-sync', ['nodemon'], function() {
+	"use strict";
 	browserSync.init(null, {
 		proxy: "http://localhost:3000",
         files: ["public/**/*.*"],
@@ -43,7 +46,7 @@ gulp.task('browser-sync', ['nodemon'], function() {
 // Gulp nodemon 
 
 gulp.task('nodemon', function (cb) {
-	
+	"use strict";
 	var started = false;
 	
 	return nodemon({
@@ -62,6 +65,7 @@ gulp.task('nodemon', function (cb) {
 // Gulp bower
 
 gulp.task('bower', function() {
+	"use strict";
 	return bower()
 		.pipe(gulp.dest('./public/lib'))
 });
@@ -69,27 +73,30 @@ gulp.task('bower', function() {
 // Script task
 
 gulp.task('scripts', function() {
-  return gulp.src(['gruntfile.js','public/js/**/*.js','test/**/*.js', 'app/**/*.js'])
+	"use strict";
+  	return gulp.src(['gruntfile.js','public/js/**/*.js','test/**/*.js', 'app/**/*.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
     .pipe(livereload())
-    .pipe(notify({ message: 'Scripts task complete'; }))
+    .pipe(notify({ message: 'Scripts task complete' }))
 });
 
 // Gulp sass tasks
 
 gulp.task('sass', function() {
-  return gulp.src(['public/css/common.scss, public/css/views/articles.scss'])
+	"use strict";	
+  	return gulp.src(['public/css/common.scss, public/css/views/articles.scss'])
     .pipe(sass())
     .pipe(livereload())
     .pipe(browserSync.reload({
-      stream: true;
+      stream: true
     }))
 });
 
 // Setup mocha test 
 
 gulp.task('test', function() {
+	"use strict";
     return gulp.src(['test/**/*.js'], { read: false })
         .pipe(mochaTest({ reporter: 'spec' }))
         .on('error', function() { gutil.log; })
@@ -99,7 +106,7 @@ gulp.task('test', function() {
 // Gulp will watch files for changes
 
 gulp.task('watch', function() {
-
+	"use strict";
   // Watch .html files
   gulp.watch("public/views/*.html").on('change', browserSync.reload);
 
@@ -116,4 +123,3 @@ gulp.task('watch', function() {
   gulp.watch('app/views/**').on('change', browserSync.reload);
 
 });
-
