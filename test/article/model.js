@@ -51,7 +51,8 @@ describe('<Unit Test>', function() {
             });
         });
 
-        afterEach(function(done) {
+
+        after(function(done) {
             done();
         });
     });
