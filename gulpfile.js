@@ -88,8 +88,8 @@ gulp.task('sass', function() {
 // Setup mocha test 
 
 gulp.task('test', function() {
-    return gulp.src(['test/article/*.js'], { read: false })
-        .pipe(mocha({ reporter: 'list' }))
+    return gulp.src(['test/**/*.js'], { read: false })
+        .pipe(mocha({ reporter: 'spec' }))
         .once('error', () => {
         	gutil.log;
         	process.exit(1);
