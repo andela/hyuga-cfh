@@ -39,7 +39,7 @@ gulp.task('browser-sync', ['nodemon'], function() {
 });
 
 
-// Gulp nodemon
+// Gulp nodemon 
 
 gulp.task('nodemon', function (cb) {
 	
@@ -91,13 +91,7 @@ gulp.task('sass', function() {
 gulp.task('test', function() {
     return gulp.src(['test/**/*.js'], { read: false })
         .pipe(mocha({ reporter: 'spec' }))
-        .once('error', () => {
-        	gutil.log;
-        	process.exit(1);
-        })
-        .once('end', () => {
-        	process.exit();
-        })
+        .on('error', () => { gutil.log })
 });
 
 
