@@ -8,7 +8,7 @@ describe('HeaderController', function () {
     inject(function ($controller) {
       ctrl = $controller('HeaderController', { $scope: scope });
     });
-  })
+  });
 
   it('should have menus', function () {
     expect(scope.menu[0].title).toEqual('Articles');
