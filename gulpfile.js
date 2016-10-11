@@ -1,4 +1,5 @@
 //Gulp configuration file
+"use strict";
 
 
 var gulp = require('gulp'),
@@ -8,7 +9,7 @@ var gulp = require('gulp'),
 	sass = require('gulp-ruby-sass'),
 	jshint = require('gulp-jshint'),
 	livereload = require('gulp-livereload'),
-	mocha = require('gulp-mocha'),
+	mochaTest = require('gulp-mocha'),
 	gutil = require('gulp-util'),
 	notify = require('gulp-notify'),
 	runSequence = require('run-sequence');
@@ -72,7 +73,7 @@ gulp.task('scripts', function() {
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
     .pipe(livereload())
-    .pipe(notify({ message: 'Scripts task complete' }))
+    .pipe(notify({ message: 'Scripts task complete'; }))
 });
 
 // Gulp sass tasks
@@ -82,7 +83,7 @@ gulp.task('sass', function() {
     .pipe(sass())
     .pipe(livereload())
     .pipe(browserSync.reload({
-      stream: true
+      stream: true;
     }))
 });
 
@@ -90,8 +91,8 @@ gulp.task('sass', function() {
 
 gulp.task('test', function() {
     return gulp.src(['test/**/*.js'], { read: false })
-        .pipe(mocha({ reporter: 'spec' }))
-        .on('error', () => { gutil.log })
+        .pipe(mochaTest({ reporter: 'spec' }))
+        .on('error', function() { gutil.log; })
 });
 
 
