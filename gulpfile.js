@@ -1,5 +1,7 @@
 //Gulp configuration file
 
+var require = require, process;
+
 var gulp = require('gulp'),
 	browserSync = require('browser-sync').create(),
 	nodemon = require('gulp-nodemon'),
@@ -118,7 +120,6 @@ gulp.task('watch', function() {
 
   // Watch .jade files
   gulp.watch('app/views/**').on('change', browserSync.reload);
-
 
 });
 
