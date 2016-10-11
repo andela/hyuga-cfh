@@ -4,6 +4,8 @@ Cards for Humanity is a fast-paced online version of the popular card game, Card
 
 [![Build Status](https://travis-ci.org/andela/hyuga-cfh.svg)](https://travis-ci.org/andela/hyuga-cfh)
 
+[![Code Climate](https://codeclimate.com/github/andela/hyuga-cfh/badges/gpa.svg)](https://codeclimate.com/github/andela/hyuga-cfh)
+
 Our Team
 --------
 Cards for Humanity was created at [Hack Reactor](http://www.hackreactor.com) by:
