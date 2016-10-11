@@ -1,8 +1,8 @@
 /**
  * Module dependencies.
  */
-var express = require('express'),
-    require = require(),
+var require = require(),
+    express = require('express'),
     fs = require('fs'),
     passport = require('passport'),
     logger = require('mean-logger'),
