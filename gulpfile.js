@@ -67,7 +67,7 @@ gulp.task('nodemon', function (cb) {
 gulp.task('bower', function() {
 	"use strict";
 	return bower()
-		.pipe(gulp.dest('./public/lib'))
+		.pipe(gulp.dest('./public/lib'));
 });
 
 // Script task
@@ -78,7 +78,7 @@ gulp.task('scripts', function() {
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
     .pipe(livereload())
-    .pipe(notify({ message: 'Scripts task complete' }))
+    .pipe(notify({ message: 'Scripts task complete' }));
 });
 
 // Gulp sass tasks
@@ -90,7 +90,7 @@ gulp.task('sass', function() {
     .pipe(livereload())
     .pipe(browserSync.reload({
       stream: true
-    }))
+    }));
 });
 
 // Setup mocha test 
@@ -99,7 +99,7 @@ gulp.task('test', function() {
 	"use strict";
     return gulp.src(['test/**/*.js'], { read: false })
         .pipe(mochaTest({ reporter: 'spec' }))
-        .on('error', function() { gutil.log; })
+        .on('error', function() { gutil.log });
 });
 
 
