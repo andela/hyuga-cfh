@@ -1,7 +1,6 @@
 //Gulp configuration file
 
 
-
 var gulp = require('gulp'),
 	browserSync = require('browser-sync').create(),
 	nodemon = require('gulp-nodemon'),
@@ -112,7 +111,7 @@ gulp.task('test', function() {
 
 gulp.task('watch', function() {
 	"use strict";
-	
+
   // Watch .html files
   gulp.watch("public/views/*.html").on('change', browserSync.reload);
 
