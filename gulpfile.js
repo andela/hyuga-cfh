@@ -97,7 +97,7 @@ gulp.task('sass', function() {
 
 gulp.task('test', function() {
 	"use strict";
-    return gulp.src(['test/**/*.js'], { read: false })
+    return gulp.src(['test/user/*.js'], { read: false })
         .pipe(mochaTest({ reporter: 'spec' }))
         .on('error', gutil.log );
 });
