@@ -100,10 +100,11 @@ gulp.task('test', function() {
     return gulp.src([
 		'test/user/*.js',
 		'test/game/*.js',
-		'test/answer/*.js'
+		'test/article/*.js'
 		], { read: false })
         .pipe(mochaTest({ reporter: 'spec' }))
-        .on('error', gutil.log );
+        .once('error', gutil.log)
+				.once('end', process.exit);
 });
 
 
