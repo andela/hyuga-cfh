@@ -99,7 +99,7 @@ gulp.task('test', function() {
 	"use strict";
     return gulp.src(['test/**/*.js'], { read: false })
         .pipe(mochaTest({ reporter: 'spec' }))
-        .on('error', function() { gutil.log });
+        .on('error', gutil.log );
 });
 
 
