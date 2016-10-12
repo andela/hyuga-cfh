@@ -2,7 +2,6 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-    config = require('../../config/config'),
     Schema = mongoose.Schema;
 
 /**
@@ -31,7 +30,7 @@ var ArticleSchema = new Schema({
 
 ArticleSchema.path('title').validate(function(title) {
     // if you are authenticating by any of the oauth strategies, don't validate
-    return title.length > 1
+    return title.length > 1;
 }, 'Title cannot be blank');
 
 

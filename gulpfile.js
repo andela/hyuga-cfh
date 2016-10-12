@@ -104,7 +104,7 @@ gulp.task('test', function() {
 		], { read: false })
         .pipe(mochaTest({ reporter: 'spec' }))
         .once('error', gutil.log)
-				.once('end', process.exit);
+		.once('end', process.exit);
 });
 
 
@@ -112,6 +112,7 @@ gulp.task('test', function() {
 
 gulp.task('watch', function() {
 	"use strict";
+	
   // Watch .html files
   gulp.watch("public/views/*.html").on('change', browserSync.reload);
 
