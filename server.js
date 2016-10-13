@@ -9,7 +9,7 @@ var express = require('express'),
     io = require('socket.io');
 
 // Require 'dotenv' config
-require('dotenv').config();
+require('dotenv').config({ silent: true });
 
 /**
  * Main application entry file.
