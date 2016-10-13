@@ -4,3 +4,9 @@ node_js:
   - node
   - 5
   - 4
+
+after_success:
+  - coveralls
+
+services:
+  - mongodb
