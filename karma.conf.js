@@ -21,7 +21,7 @@ module.exports = function(config) {
       'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
       'public/lib/angular-ui-utils/modules/route.js',
       'public/lib/angular-mocks/angular-mocks.js',
-      'public/js/**/*.spec.js',
+      'test/public/**/*.spec.js',
       'public/js/**/*.js'
     ],
 
