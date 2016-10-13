@@ -40,7 +40,7 @@ describe('<Unit Test>', function() {
             });
         });
 
-        after(function(done) {
+        afterEach(function(done) {
             done();
         });
     });
