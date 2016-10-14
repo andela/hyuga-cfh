@@ -2,6 +2,8 @@
 // Generated on Tue Oct 11 2016 16:28:05 GMT+0100 (WAT)
 
 module.exports = function(config) {
+  "use strict";
+  
   var configuration = {
 
     // base path that will be used to resolve

@@ -98,7 +98,7 @@ gulp.task('sass', function () {
 
 // Setup mocha and frontend tests 
 
-gulp.task('test', function (done) {
+gulp.task('test', function () {
   "use strict";
    gulp.src([
       'test/user/*.js',
