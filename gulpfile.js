@@ -65,8 +65,8 @@ gulp.task('nodemon', ['bower'], function (cb) {
 
 gulp.task('bower', function() {
 	"use strict";
-	return bower()
-		.pipe(gulp.dest('./public/lib'));
+	return bower('./bower_components')
+		.pipe(gulp.dest('public/lib'));
 });
 
 // Script task
