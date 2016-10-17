@@ -12,6 +12,7 @@ var gulp = require('gulp'),
   gutil = require('gulp-util'),
   notify = require('gulp-notify'),
   runSequence = require('run-sequence'),
+  istanbul = require('gulp-istanbul'),
   childProcess = require('child_process');
 
 // Specify a default gulp task.
@@ -96,9 +97,18 @@ gulp.task('sass', function () {
     }));
 });
 
+gulp.task('before-test', function () {
+  "use strict";
+  return gulp.src(['test/**/*.js'])
+    // Covering files 
+    .pipe(istanbul())
+    // Write the covered files to a temporary directory 
+    .pipe(istanbul.hookRequire());
+})
+
 // Setup mocha and frontend tests 
 
-gulp.task('test', function () {
+gulp.task('test', ['before-test'], function () {
   "use strict";
    gulp.src([
       'test/user/*.js',
@@ -110,6 +120,7 @@ gulp.task('test', function () {
     .pipe(mochaTest({
       reporter: 'spec'
     }))
+    .pipe(istanbul.writeReports())
     .once('error', gutil.log);
 
   childProcess.spawn('node_modules/karma/bin/karma', ['start', '--single-run'], {
