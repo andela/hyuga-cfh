@@ -14,7 +14,8 @@
   },
   "scripts": {
     "start": "gulp",
-    "test": "gulp test"
+    "test": "gulp test",
+    "postinstall": "gulp bower"
   },
   "dependencies": {
     "async": "~0.2.9",
