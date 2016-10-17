@@ -14,7 +14,7 @@ var gulp = require('gulp'),
   runSequence = require('run-sequence'),
   childProcess = require('child_process');
 
-
+// Specify a default gulp task.
 
 gulp.task('default', function () {
   "use strict";
@@ -65,10 +65,10 @@ gulp.task('nodemon', function (cb) {
 
 // Gulp bower
 
-gulp.task('bower', function () {
-  "use strict";
-  return bower()
-    .pipe(gulp.dest('./public/lib'));
+gulp.task('bower', function() {
+	"use strict";
+	return bower('./bower_components')
+		.pipe(gulp.dest('public/lib'));
 });
 
 // Script task
