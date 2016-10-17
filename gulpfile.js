@@ -99,7 +99,7 @@ gulp.task('sass', function () {
 
 gulp.task('before-test', function () {
   "use strict";
-  return gulp.src(['test/**/*.js'])
+  return gulp.src(['app/controllers/*.js', 'app/models/*.js'])
     // Covering files 
     .pipe(istanbul())
     // Write the covered files to a temporary directory 
