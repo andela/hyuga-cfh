@@ -44,7 +44,7 @@ gulp.task('browser-sync', ['nodemon'], function() {
 
 // Gulp nodemon 
 
-gulp.task('nodemon', function (cb) {
+gulp.task('nodemon', ['bower'], function (cb) {
 	"use strict";
 	var started = false;
 	
