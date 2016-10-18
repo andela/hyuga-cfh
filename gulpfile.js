@@ -104,7 +104,7 @@ gulp.task('before-test', function () {
     .pipe(istanbul())
     // Write the covered files to a temporary directory 
     .pipe(istanbul.hookRequire());
-})
+});
 
 // Setup mocha and frontend tests 
 
@@ -117,9 +117,7 @@ gulp.task('test', ['before-test'], function () {
     ], {
       read: false
     })
-    .pipe(mochaTest({
-      reporter: 'spec'
-    }))
+    .pipe(mochaTest())
     .pipe(istanbul.writeReports())
     .once('error', gutil.log);
 
