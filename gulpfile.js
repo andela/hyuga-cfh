@@ -102,7 +102,7 @@ gulp.task('before-test', function () {
   return gulp.src(['app/controllers/*.js', 'app/models/*.js'])
     // Covering files 
     .pipe(istanbul())
-    // Write the covered files to a temporary directory 
+    // Force `require` to return covered files 
     .pipe(istanbul.hookRequire());
 });
 
@@ -118,7 +118,11 @@ gulp.task('test', ['before-test'], function () {
       read: false
     })
     .pipe(mochaTest())
-    .pipe(istanbul.writeReports())
+    .pipe(istanbul.writeReports({
+      dir: './coverage',
+      reporters: ['lcov'],
+      reportOpts: {dir: './coverage'}
+    }))
     .once('error', gutil.log);
 
   childProcess.spawn('node_modules/karma/bin/karma', ['start', '--single-run'], {
