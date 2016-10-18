@@ -103,7 +103,8 @@ gulp.task('test', function () {
    gulp.src([
       'test/user/*.js',
       'test/game/*.js',
-      'test/article/*.js'
+      'test/article/*.js',
+      'test/api/*.js'
     ], {
       read: false
     })
