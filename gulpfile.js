@@ -12,6 +12,7 @@ var gulp = require('gulp'),
   gutil = require('gulp-util'),
   notify = require('gulp-notify'),
   runSequence = require('run-sequence'),
+  istanbul = require('gulp-istanbul'),
   childProcess = require('child_process');
 
 // Specify a default gulp task.
@@ -96,9 +97,18 @@ gulp.task('sass', function () {
     }));
 });
 
+gulp.task('before-test', function () {
+  "use strict";
+  return gulp.src(['app/controllers/*.js', 'app/models/*.js'])
+    // Covering files 
+    .pipe(istanbul())
+    // Force `require` to return covered files 
+    .pipe(istanbul.hookRequire());
+});
+
 // Setup mocha and frontend tests 
 
-gulp.task('test', function () {
+gulp.task('test', ['before-test'], function () {
   "use strict";
    gulp.src([
       'test/user/*.js',
@@ -108,8 +118,11 @@ gulp.task('test', function () {
     ], {
       read: false
     })
-    .pipe(mochaTest({
-      reporter: 'spec'
+    .pipe(mochaTest())
+    .pipe(istanbul.writeReports({
+      dir: './coverage',
+      reporters: ['lcov'],
+      reportOpts: {dir: './coverage'}
     }))
     .once('error', gutil.log);
 
