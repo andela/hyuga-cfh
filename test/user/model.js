@@ -1,46 +1,44 @@
 /**
  * Module dependencies.
  */
+require('../../server');
+
 var should = require('should'),
-    app = require('../../server'),
     mongoose = require('mongoose'),
-    User = mongoose.model('User');
+    User = mongoose.model('User'),
+    userFactory = require('../factories').user;
 
 //Globals
 var user;
 
 //The tests
-describe('<Unit Test>', function() {
-    describe('Model User:', function() {
-        before(function(done) {
-            user = new User({
-                name: 'Full name',
-                email: 'test@test.com',
-                username: 'user',
-                password: 'password'
-            });
-
+describe('<Unit Test>', function () {
+    "use strict";
+    
+    describe('Model User:', function () {
+        before(function (done) {
+            user = new User(userFactory);
             done();
         });
 
-        describe('Method Save', function() {
-            it('should be able to save whithout problems', function(done) {
-                return user.save(function(err) {
+        describe('Method Save', function () {
+            it('should be able to save whithout problems', function (done) {
+                return user.save(function (err) {
                     should.not.exist(err);
                     done();
                 });
             });
 
-            it('should be able to show an error when try to save witout name', function(done) {
+            it('should be able to show an error when try to save witout name', function (done) {
                 user.name = '';
-                return user.save(function(err) {
+                return user.save(function (err) {
                     should.exist(err);
                     done();
                 });
             });
         });
 
-        afterEach(function(done) {
+        afterEach(function (done) {
             done();
         });
     });

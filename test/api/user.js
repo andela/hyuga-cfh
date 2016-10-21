@@ -1,22 +1,17 @@
 var app = require('../../server'),
   request = require('supertest'),
   mongoose = require('mongoose'),
-  User = mongoose.model('User');
+  User = mongoose.model('User'),
+  userFactory = require('../factories').user;
 
 // Globals
-var user,
-  userObject = {
-    name: 'Full name',
-    email: 'test@test.com',
-    username: 'user',
-    password: 'password'
-  };
+var user;
 
 describe('Auth api', function () {
   "use strict";
 
   beforeEach(function (done) {
-    user = new User(userObject);
+    user = new User(userFactory);
     user.save(done);
   });
 
@@ -28,32 +23,19 @@ describe('Auth api', function () {
   describe('login route', function () {
     it('should fail for invalid user', function (done) {
       request(app).post('/api/auth/login')
-        .send({
-          email: 'fake@fake.com',
-          password: userObject.password
-        })
-        .expect(404, {
-          message: 'User not found'
-        }, done);
+        .send({ email: 'fake@fake.com', password: userFactory.password })
+        .expect(401, { message: 'User not found' }, done);
     });
 
     it('should fail for invalid password', function (done) {
       request(app).post('/api/auth/login')
-        .send({
-          email: userObject.email,
-          password: ''
-        })
-        .expect(400, {
-          message: 'Invalid password'
-        }, done);
+        .send({ email: userFactory.email, password: '' })
+        .expect(400, { message: 'Invalid password' }, done);
     });
 
     it('should log the user in', function (done) {
       request(app).post('/api/auth/login')
-        .send({
-          email: userObject.email,
-          password: userObject.password
-        })
+        .send(userFactory)
         .expect(200, done);
     });
 
@@ -64,50 +46,42 @@ describe('Auth api', function () {
       it('should fail without a name', function (done) {
         request(app).post('/api/auth/signup')
           .send({
-            email: userObject.email,
-            password: userObject.password
+            email: userFactory.email,
+            password: userFactory.password
           })
-          .expect(400, {
-            message: 'Incomplete params.'
-          }, done);
+          .expect(400, { message: 'Incomplete params.' }, done);
       });
 
       it('should fail without a email', function (done) {
         request(app).post('/api/auth/signup')
           .send({
-            name: userObject.name,
-            password: userObject.password
+            name: userFactory.name,
+            password: userFactory.password
           })
-          .expect(400, {
-            message: 'Incomplete params.'
-          }, done);
+          .expect(400, { message: 'Incomplete params.' }, done);
       });
 
       it('should fail without a password', function (done) {
         request(app).post('/api/auth/signup')
           .send({
-            email: userObject.email,
-            name: userObject.name
+            email: userFactory.email,
+            name: userFactory.name
           })
-          .expect(400, {
-            message: 'Incomplete params.'
-          }, done);
+          .expect(400, { message: 'Incomplete params.' }, done);
       });
     });
 
     it('should not create user thet exists.', function (done) {
       request(app).post('/api/auth/signup')
-        .send(userObject)
-        .expect(409, {
-          message: 'User already exist.'
-        }, done);
+        .send(userFactory)
+        .expect(409, { message: 'User already exist.' }, done);
     });
 
     it('should signup successfully', function (done) {
       // delete existing user.
       user.remove();
       request(app).post('/api/auth/signup')
-        .send(userObject)
+        .send(userFactory)
         .expect(200, done);
     });
   });
