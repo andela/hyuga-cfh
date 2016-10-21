@@ -1,7 +1,8 @@
 var app = require('../../server'),
   request = require('supertest'),
   mongoose = require('mongoose'),
-  User = mongoose.model('User');
+  User = mongoose.model('User'),
+  userFactory = require('../factories').user;
 
 // Globals
 var user;
@@ -10,13 +11,7 @@ describe('Auth api', function () {
   "use strict";
 
   beforeEach(function (done) {
-    user = new User({
-      name: 'Full name',
-      email: 'test@test.com',
-      username: 'user',
-      password: 'password'
-    });
-
+    user = new User(userFactory);
     user.save(function () {
       done();
     });
@@ -25,19 +20,19 @@ describe('Auth api', function () {
   describe('login route', function () {
     it('should fail for invalid user', function (done) {
       request(app).post('/api/auth/login')
-        .send({ email: 'fake@fake.com', password: 'password' })
+        .send({ email: 'fake@fake.com', password: userFactory.password })
         .expect(401, done);
     });
 
     it('should fail for invalid password', function (done) {
       request(app).post('/api/auth/login')
-        .send({ email: 'test@test.com', password: '' })
+        .send({ email: userFactory.email, password: '' })
         .expect(401, done);
     });
 
     it('should log the user in', function (done) {
       request(app).post('/api/auth/login')
-        .send({ email: 'test@test.com', password: 'password' })
+        .send({ email: userFactory.email, password: userFactory.password })
         .expect(200, done);
     });
 
