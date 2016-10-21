@@ -12,9 +12,7 @@ describe('Auth api', function () {
 
   beforeEach(function (done) {
     user = new User(userFactory);
-    user.save(function () {
-      done();
-    });
+    user.save(done);
   });
 
   describe('login route', function () {
@@ -32,7 +30,7 @@ describe('Auth api', function () {
 
     it('should log the user in', function (done) {
       request(app).post('/api/auth/login')
-        .send({ email: userFactory.email, password: userFactory.password })
+        .send(userFactory)
         .expect(200, done);
     });
 
