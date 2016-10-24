@@ -1,36 +1,24 @@
 /**
  * Module dependencies.
  */
+require('../../server');
+
 var should = require('should'),
-    app = require('../../server'),
     mongoose = require('mongoose'),
-    User = mongoose.model('User'),
-    Article = mongoose.model('Article');
+    Article = mongoose.model('Article'),
+    articleFactory = require('../factories').article;
 
 //Globals
-var user;
 var article;
 
 //The tests
 describe('<Unit Test>', function() {
+    "use strict";
+
     describe('Model Article:', function() {
         beforeEach(function(done) {
-            user = new User({
-                name: 'Full name',
-                email: 'test@test.com',
-                username: 'user',
-                password: 'password'
-            });
-
-            user.save(function(err) {                
-                article = new Article({
-                    title: 'Article Title',
-                    content: 'Article Content',
-                    user: user
-                });
-
-                done();
-            });
+            article = new Article(articleFactory);
+            article.save(done);
         });
 
         describe('Method Save', function() {
