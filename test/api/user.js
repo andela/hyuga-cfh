@@ -49,7 +49,7 @@ describe('Auth api', function () {
             email: userFactory.email,
             password: userFactory.password
           })
-          .expect(400, { message: 'Incomplete params.' }, done);
+          .expect(400, { message: 'Incomplete parameters. User\'s name, email and password are required.' }, done);
       });
 
       it('should fail without a email', function (done) {
@@ -58,7 +58,7 @@ describe('Auth api', function () {
             name: userFactory.name,
             password: userFactory.password
           })
-          .expect(400, { message: 'Incomplete params.' }, done);
+          .expect(400, { message: 'Incomplete parameters. User\'s name, email and password are required.' }, done);
       });
 
       it('should fail without a password', function (done) {
@@ -67,7 +67,7 @@ describe('Auth api', function () {
             email: userFactory.email,
             name: userFactory.name
           })
-          .expect(400, { message: 'Incomplete params.' }, done);
+          .expect(400, { message: 'Incomplete parameters. User\'s name, email and password are required.' }, done);
       });
     });
 

@@ -34,7 +34,7 @@ exports.signup = function (req, res) {
   "use strict";
 
   if (!(req.body.name && req.body.password && req.body.email)) {
-    return res.send(400, { message: 'Incomplete params.' });
+    return res.send(400, { message: 'Incomplete parameters. User\'s name, email and password are required.' });
   }
 
   User.findOne({ email: req.body.email }, function(err, existingUser) {
