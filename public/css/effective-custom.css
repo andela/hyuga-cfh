@@ -1,0 +1,18 @@
+#main_background {
+  background: #ccc;
+  width:100%;
+}
+nav{
+  background: #D7DCE2;
+}
+nav li a{
+  color:#000;
+}
+
+nav li a:hover{
+  background:#A1232E;
+  color:#fff;
+}
+#mobile-menu-icon{
+  color:#000;
+}
