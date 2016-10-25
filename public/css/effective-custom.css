@@ -2,17 +2,60 @@
   background: #ccc;
   width:100%;
 }
-nav{
+nav {
   background: #D7DCE2;
 }
-nav li a{
+nav li a {
   color:#000;
 }
 
-nav li a:hover{
+nav li a:hover {
   background:#A1232E;
   color:#fff;
 }
-#mobile-menu-icon{
+#mobile-menu-icon {
   color:#000;
+}
+#banner {
+  background: #FAFAFA;
+}
+#banner .container {
+  padding:20px 0;
+}
+.pull-right {
+  float:right;
+}
+.card-content h5 {
+  line-height: 40px;
+}
+.app-color-blue {
+  color:#4575B5;
+}
+.app-color-red {
+  color: #A1232E;
+}
+.app-color-green {
+  color: #4F914A;
+}
+#banner-bg-card{
+  transform: rotate(345deg);
+  margin:20px 0 -227px 0;
+}
+#intro-text {
+  line-height: 40px;
+}
+.inline-link {
+  color: #A1232E;
+}
+.inline-link:hover {
+  font-weight: bold;
+  color: #4575B5
+}
+@media screen and (min-width: 600px) {
+
+}
+@media screen and (min-width: 992px) {
+  #banner-bg-card{
+    margin:60px 0 -227px 0;
+  }
 }

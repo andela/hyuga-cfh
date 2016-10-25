@@ -9,13 +9,15 @@ $(document).ready(function() {
 
 <script></script>
 <div id="main_background">
+  
+  <!-- Beginning of navigation bar -->
   <nav>
     <div class="nav-wrapper container">
       <a href="#" class="brand-logo">
         <img src="img/logo.png"/>
       </a>
       <a id="mobile-menu-icon" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
-      <ul class="right hide-on-med-and-down">
+      <ul class="right hide-on-small-only">
         <li><a href="how-to-play">HOW TO PLAY</a></li>
         <li><a href="charity">CHARITY</a></li>
         <li><a href="signup/login">SIGN UP/LOGIN</a></li>
@@ -27,4 +29,52 @@ $(document).ready(function() {
       </ul>
     </div>
   </nav>
+  <!-- End of navigation bar -->
+
+  <div id="banner">
+    <div class="container">
+      <div class="row">
+        <div class="col s6 m4 l3 offset-s3">
+          <!-- card display for cards for humanity -->
+          <div class="card" id="banner-bg-card">
+            <div class="card-content">
+              <img src="img/tri_1.png"/>
+              <h5 class="center-align">
+                <span class="app-color-blue">CARDS</span><br/>
+                <span class="app-color-red">FOR</span><br/>
+                <span class="app-color-green">HUMANITY</span></h5>
+              <img class="pull-right" src="img/tri_2.png"/>
+              <br clear="all"/>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-content">
+              <img src="img/tri_1.png"/>
+              <h5 class="center-align">
+                <span class="app-color-blue">CARDS</span><br/>
+                <span class="app-color-red">FOR</span><br/>
+                <span class="app-color-green">HUMANITY</span></h5>
+              <img class="pull-right" src="img/tri_2.png"/>
+              <br clear="all"/>
+            </div>
+          </div>
+
+          <!-- end of card display -->
+        </div>
+        <div class="col s12 m8 l9">
+          <div class="video-container">
+            <iframe width="854" height="480" src="https://www.youtube.com/embed/sw3HXyICwAU" frameborder="0" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <blockquote id="intro-text">
+          Cards for Humanity is a fast-paced online version of the popular card game, Cards Against Humanity. This however gives you the opportunity to <a href="donate" class="inline-link">donate to children</a> in need while remaining as despicable and awkward as you naturally are.
+        </blockquote>
+        
+      </div>
+    </div>
+  </div>
+
 </div>
