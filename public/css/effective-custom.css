@@ -1,5 +1,5 @@
 #main_background {
-  background: #ccc;
+  background: #666;
   width:100%;
 }
 nav {
@@ -16,11 +16,12 @@ nav li a:hover {
 #mobile-menu-icon {
   color:#000;
 }
+.section {
+  margin-bottom: 50px;
+  padding: 20px 0;
+}
 #banner {
   background: #FAFAFA;
-}
-#banner .container {
-  padding:20px 0;
 }
 .pull-right {
   float:right;
@@ -41,8 +42,8 @@ nav li a:hover {
   transform: rotate(345deg);
   margin:20px 0 -227px 0;
 }
-#intro-text {
-  line-height: 40px;
+.brief-text {
+  line-height: 30px;
 }
 .inline-link {
   color: #A1232E;
@@ -50,6 +51,29 @@ nav li a:hover {
 .inline-link:hover {
   font-weight: bold;
   color: #4575B5
+}
+#how-section {
+  background: #E9E9E9;
+}
+#how-section .card {
+  height:250px;
+}
+#how-section .card:hover {
+  transform: scale(1.05, 1.05);
+  transition:0.5s;
+}
+#charity {
+  background: #E9E9E9;
+}
+.quote{
+  font-weight: bold;
+}
+.app-buttons {
+  background: #A1232E;
+  color: #fff;
+}
+.app-buttons:hover {
+  background: #4575B5;
 }
 @media screen and (min-width: 600px) {
 
