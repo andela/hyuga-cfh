@@ -1,5 +1,5 @@
 #main_background {
-  background: #666;
+  background: url('../img/bg_card.png');
   width:100%;
 }
 nav {
@@ -74,6 +74,28 @@ nav li a:hover {
 }
 .app-buttons:hover {
   background: #4575B5;
+}
+#give-card .card {
+  height:250px;
+}
+#give-card .card {
+  background-image: url('../img/love.png');
+  background-size: 100%;
+  background-position:0 31px;
+  background-repeat: no-repeat;
+}
+#give-card .card .card-content {
+  width:100%;
+}
+#give-card .bg-card {
+  margin-bottom: -250px;
+  transform-origin: bottom left;
+}
+#give-card #bg1 {
+  transform: rotate(350deg);
+}
+#give-card #bg2 {
+  transform: rotate(355deg);
 }
 @media screen and (min-width: 600px) {
 
