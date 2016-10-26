@@ -1255,3 +1255,12 @@
       margin: 0 0 0 4px;
    }
  }
+ 
+ #chat_frame{
+  width: 30%;
+  height: auto;
+  position: relative;
+  float: right;
+  right: 5px;
+  z-index: 999;
+}
