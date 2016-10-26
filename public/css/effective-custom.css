@@ -44,6 +44,7 @@ nav li a:hover {
 }
 .brief-text {
   line-height: 30px;
+  text-align: justify;
 }
 .inline-link {
   color: #A1232E;
