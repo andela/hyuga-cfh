@@ -1,5 +1,4 @@
 'use strict';
-$(document).ready(function() {
-  $('.parallax').parallax();
-  //$('.button-collapse').sideNav();
-});
+window.onload = function() {
+  $('.button-collapse').sideNav();
+}

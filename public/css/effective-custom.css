@@ -56,13 +56,13 @@ nav li a:hover {
   font-weight: bold;
   color: #4575B5
 }
-#how-section, footer {
+#how-to-play, footer {
   background: #E9E9E9;
 }
-#how-section .card {
+#how-to-play .card {
   height:250px;
 }
-#how-section .card:hover {
+#how-to-play .card:hover {
   transform: scale(1.05, 1.05);
   transition:0.5s;
 }

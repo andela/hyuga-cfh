@@ -7,7 +7,7 @@ $(document).ready(function() {
   });
 </script>
 
-<div id="main_background">
+<div id="main_background" ng-controller="IndexController">
   
   <!-- Beginning of navigation bar -->
   <nav>
@@ -17,13 +17,13 @@ $(document).ready(function() {
       </a>
       <a id="mobile-menu-icon" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-small-only">
-        <li><a href="how-to-play">HOW TO PLAY</a></li>
-        <li><a href="charity">CHARITY</a></li>
+        <li><a ng-click="goTo('how-to-play')">HOW TO PLAY</a></li>
+        <li><a ng-click="goTo('charity')">CHARITY</a></li>
         <li><a href="signup">SIGN UP/LOGIN</a></li>
       </ul>
       <ul class="side-nav" id="mobile-menu">
-        <li><a href="how-to-play">HOW TO PLAY</a></li>
-        <li><a href="charity">CHARITY</a></li>
+        <li><a ng-click="goTo('how-to-play')">HOW TO PLAY</a></li>
+        <li><a ng-click="goTo('charity')">CHARITY</a></li>
         <li><a href="signup">SIGN UP/LOGIN</a></li>
       </ul>
     </div>
@@ -81,7 +81,7 @@ $(document).ready(function() {
   <!-- Banner ends -->
 
   <!-- how to play section -->
-  <div id="how-section" class="section">
+  <div id="how-to-play" class="section">
     <div class="container row">
       <h5 class="center-align">HOW TO PLAY</h5>
       <br/>
