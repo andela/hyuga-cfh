@@ -1,6 +1,12 @@
+body {
+  font-family: "Roboto";
+}
 #main_background {
   background: url('../img/bg_card.png');
   background-attachment: fixed;
+}
+a:hover {
+  border-radius:none;
 }
 nav {
   background: #D7DCE2;
@@ -75,6 +81,7 @@ nav li a:hover {
 }
 .app-buttons:hover {
   background: #4575B5;
+  color:#fff;
 }
 #give-card .card {
   height:250px;
