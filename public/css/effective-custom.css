@@ -1,6 +1,9 @@
-#main_background {
+/*.parallax {
   background: url('../img/bg_card.png');
   width:100%;
+}*/
+.parallax-container {
+  height: 100px;
 }
 nav {
   background: #D7DCE2;
