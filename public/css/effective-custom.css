@@ -1,9 +1,6 @@
-/*.parallax {
+#main_background {
   background: url('../img/bg_card.png');
-  width:100%;
-}*/
-.parallax-container {
-  height: 100px;
+  background-attachment: fixed;
 }
 nav {
   background: #D7DCE2;
@@ -20,10 +17,10 @@ nav li a:hover {
   color:#000;
 }
 .section {
-  margin-bottom: 50px;
+  margin-bottom: 40px;
   padding: 20px 0;
 }
-.section::last-of-type {
+.section:last-of-type {
   margin-bottom: 0;
 }
 #banner, #charity {
