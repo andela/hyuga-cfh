@@ -179,8 +179,7 @@ body {
   border-radius: 8px;
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
-  font-size: 20px;
-  font-size: 1.25rem;
+  font-size: 12.5px;
   font-weight: 400;
   text-align: center;
   color: white;
@@ -353,17 +352,17 @@ body {
     width: 60%;
   }
 }
-#main-container #app-container #social-bar-container #player-container #above-czar-container #player-container-inner #player-name h4 {
+#main-container #app-container #social-bar-container #player-container #above-czar-container #player-container-inner #player-name span {
   font-family: 'Lobster', cursive;
   margin-bottom: 0px;
 }
 @media only screen and (min-width: 521px) and (max-width: 768px) {
-  #main-container #app-container #social-bar-container #player-container #above-czar-container #player-container-inner #player-name h4 {
+  #main-container #app-container #social-bar-container #player-container #above-czar-container #player-container-inner #player-name span {
     font-size: 14px;
   }
 }
 @media (max-width: 520px) {
-  #main-container #app-container #social-bar-container #player-container #above-czar-container #player-container-inner #player-name h4 {
+  #main-container #app-container #social-bar-container #player-container #above-czar-container #player-container-inner #player-name span {
     font-family: 'Lobster', cursive;
     font-size: 10px;
     margin-top: 3px;
