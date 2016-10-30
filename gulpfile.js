@@ -5,7 +5,7 @@ var gulp = require('gulp'),
   browserSync = require('browser-sync').create(),
   nodemon = require('gulp-nodemon'),
   bower = require('gulp-bower'),
-  sass = require('gulp-ruby-sass'),
+  sass = require('gulp-sass'),
   jshint = require('gulp-jshint'),
   livereload = require('gulp-livereload'),
   mochaTest = require('gulp-mocha'),
@@ -81,7 +81,7 @@ gulp.task('scripts', function () {
     .pipe(jshint.reporter('default'))
     .pipe(livereload())
     .pipe(notify({
-      message: 'Scripts task complete'
+      // message: 'Scripts task complete'
     }));
 });
 

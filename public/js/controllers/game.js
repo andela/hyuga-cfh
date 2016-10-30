@@ -1,10 +1,11 @@
 angular.module('mean.system')
-.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', function ($scope, game, $timeout, $location, MakeAWishFactsService, $dialog) {
+.controller('GameController', ['$scope', 'game', 'chat', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', function ($scope, game, chat, $timeout, $location, MakeAWishFactsService, $dialog) {
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
     $scope.modalShown = false;
     $scope.game = game;
+    $scope.chat = chat;
     $scope.pickedCards = [];
     var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
     $scope.makeAWishFact = makeAWishFacts.pop();
@@ -127,6 +128,11 @@ angular.module('mean.system')
     $scope.abandonGame = function() {
       game.leaveGame();
       $location.path('/');
+    };
+
+    // Send message in group chat
+    $scope.sendMessage = function(msg) {
+     $scope.chat.sendMessage(msg);
     };
 
     // Catches changes to round to update when no players pick card
