@@ -4,7 +4,9 @@ angular.module('mean.system')
 
     var chat = {
         username : "",
-        message : ""
+        message : "",
+        id: null,
+        messageArray: []
     };
 
 // // Checks that the Firebase SDK has been correctly setup and configured.
@@ -20,14 +22,31 @@ angular.module('mean.system')
 //     'displayed there.');
 // }
 
-chat.username = window.user.name;
+// Shortcuts to DOM Elements.
+var messageList = document.getElementById('messages');
+var messageForm = document.getElementById('message-form');
+var messageInput = document.getElementById('message');
 
-console.log(firebase);
+chat.username = window.user.name;
+chat.id = window.user.id;
 
 var database = firebase.database();
 
 // Reference to the /messages/ database path.
 var messagesRef = database.ref('messages');
+
+// Loads previous 12 messages and listen for more
+  messagesRef.off();
+
+  // Loads the last 12 messages and listen for new ones.
+  var setMessage = function(data) {
+    var val = data.val();
+    displayMessage(data.key, val.name, val.text);
+  }.bind(this);
+  messagesRef.limitToLast(12).on('child_added', setMessage);
+  messagesRef.limitToLast(12).on('child_changed', setMessage);
+
+
 
 chat.sendMessage = function(msg) {
     // Add a new message entry to the Firebase Database.
@@ -41,56 +60,37 @@ chat.sendMessage = function(msg) {
     // console.log(msg+" from "+chat.username);
 };
 
+// Template for messages.
+var MESSAGE_TEMPLATE =
+    '<div class="message-container">' +
+      '<div class="message"></div>' +
+      '<div class="name"></div>' +
+    '</div>';
 
-    // window.user that us an object that holds our gamers name
-    // return 'Ẁelcome '+ window.user.name;
 
-    // sendMessage = function (data) {
-    //     console.log(data);
-    // };
+// Displays a Message in the UI.
+var displayMessage = function(key, name, text) {
+  var div = document.getElementById(key);
+  // If an element for that message does not exists yet we create it.
+  if (!div) {
+    var container = document.createElement('div');
+    container.innerHTML = MESSAGE_TEMPLATE;
+    div = container.firstChild;
+    div.setAttribute('id', key);
+    document.getElementById('messages').appendChild(div);
+  }
+  div.querySelector('.name').textContent = name;
+  var messageElement = div.querySelector('.message');
+  if (text) { // If the message is text.
+    messageElement.textContent = text;
+    // Replace all line breaks by <br>.
+    messageElement.innerHTML = messageElement.innerHTML.replace(/\n/g, '<br>');
+  }
+  // Show the card fading-in and scroll to view the new message.
+  setTimeout(function() {div.classList.add('visible')}, 1);
+  document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight;
+  document.getElementById('message').focus();
+};
 
-    // var submitButton = document.getElementById('submitChat');
-    // submitButton.onclick = saveMessage();
-
-    // function saveMessage(e){
-    //     // e.preventDefault();
-    //     console.log(window.user.name);
-    // }
-
-    // function CfhChat(){
-    //       // Shortcuts to DOM Elements.
-    //         this.messageList = document.getElementById('messages');
-    //         this.messageForm = document.getElementById('message-form');
-    //         this.messageInput = document.getElementById('message');
-    //         // this.submitButton = document.getElementById('submitChat');
-
-    //     // Saves message on form submit.
-    //     // this.messageForm.addEventListener('submit', this.saveMessage.bind(this));
-
-    //     // Saves a new message on the Firebase DB.
-    //     function saveMessage(e){
-    //         e.preventDefault();
-    //         console.log(window.user.name);
-    //     }
-    //     // CfhChat.prototype.saveMessage = function(e) {
-    //     // e.preventDefault();
-    //     // console.log(game.players, userID, window.user.name);
-    //     // // Check that the user entered a message and is signed in.
-    //     // // if (this.messageInput.value) {
-    //     // //     // Add a new message entry to the Firebase Database.
-    //     // //     this.messagesRef.push({
-    //     // //     name: window.user,
-    //     // //     text: this.messageInput.value,
-    //     // //     photoUrl: currentUser.photoURL || '/images/profile_placeholder.png'
-    //     // //     }).then(function() {
-    //     // //     // Clear message text field and SEND button state.
-    //     // //     FriendlyChat.resetMaterialTextfield(this.messageInput);
-    //     // //     this.toggleButton();
-    //     // //     }.bind(this)).catch(function(error) {
-    //     // //     console.error('Error writing new message to Firebase Database', error);
-    //     // //     });
-    //     // // }
-    //     // };
-    // }
     return chat;
 }]);
