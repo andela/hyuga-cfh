@@ -10,8 +10,13 @@ angular.module('mean.system')
         unreadMsg : 0
     };
 
+if(!window.user){
+  chat.username = 'guest';
+} else {
 chat.username = window.user.name;
 chat.id = window.user.id;
+}
+
 chat.unreadMsg = 0;
 
 var database = firebase.database();
@@ -89,7 +94,7 @@ var displayMessage = function(key, name, text) {
     messageElement.innerHTML = messageElement.innerHTML.replace(/\n/g, '<br>');
   }
   // Show the card fading-in and scroll to view the new message.
-  if(name !== window.user.name){
+  if(window.user && (name !== window.user.name)){
     document.getElementById('unread').setAttribute('data-badge', chat.unreadMsg+1);
   }
   setTimeout(function() {div.classList.add('visible')}, 1);

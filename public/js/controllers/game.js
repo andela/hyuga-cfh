@@ -130,7 +130,6 @@ angular.module('mean.system')
       $location.path('/');
     };
 
-    $scope.msgCount = 0;
     // Send message in group chat
     $scope.sendMessage = function() {
       var msg= document.getElementById('message').value;
@@ -138,18 +137,12 @@ angular.module('mean.system')
         $scope.chat.sendMessage(msg);
       }
     };
-    
- // get a value for the chat badge
-//  $scope.getBadge = function() {
-//     $scope.msgCount = $scope.chat.unreadMsg();
-//     $scope.$apply();
-//  };
-    $scope.msgCount = $scope.chat.unreadMsg;
-    console.log($scope.msgCount);
 
     // Resize chat panel
     $scope.resize = function() {
       $('#show_message').toggle(200);
+
+      // check if there are unread messages and clear the badge
       if($scope.chat.unreadMsg > 1){
         document.getElementById('unread').setAttribute('data-badge', '');
       }

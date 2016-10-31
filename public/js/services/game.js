@@ -1,24 +1,7 @@
 angular.module('mean.system')
   .factory('game', ['socket', '$timeout', function (socket, $timeout) {
 
-  // function CfhChat(){startGame
-    
-  //       // Shortcuts to DOM Elements.
-  //       this.messageList = document.getElementById('messages');
-  //       // this.messageForm = document.getElementById('message-form');
-  //       this.messageInput = document.getElementById('message');
-  //       this.submitButton = document.getElementById('submitChat');
-
-  //       // Saves message on form submit.
-  //       // this.messageForm.addEventListener('submit', this.saveMessage.bind(this));
-
-  //       // Saves a new message on the Firebase DB.
-  //       CfhChat.prototype.saveMessage = function(e) {
-  //         e.preventDefault();
-  //         console.log('clicked')
-  //       };
-  // }
-  // CfhChat();
+console.log(window.user);
 
   var game = {
     id: null, // This player's socket ID, so we know who this player is
