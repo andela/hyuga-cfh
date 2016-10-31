@@ -132,7 +132,9 @@ angular.module('mean.system')
 
     // Send message in group chat
     $scope.sendMessage = function(msg) {
-     $scope.chat.sendMessage(msg);
+      if(msg && msg.trim() !== ''){
+        $scope.chat.sendMessage(msg);
+      }
     };
 
     // Catches changes to round to update when no players pick card
@@ -157,6 +159,11 @@ angular.module('mean.system')
 
     $scope.$watch('game.gameID', function() {
       if (game.gameID && game.state === 'awaiting players') {
+        // Clear the chat history if player is first to join room
+        if(game.playerIndex === 0){
+          $scope.chat.clearMessage();
+        }
+
         if (!$scope.isCustomGame() && $location.search().game) {
           // If the player didn't successfully enter the request room,
           // reset the URL so they don't think they're in the requested room.
