@@ -1256,11 +1256,10 @@
    }
  }
  
- /*#chat_frame{
-  width: 100%;
-  height: 100px;
-  position: relative;
-  float: right;
-  right: 5px;
-  z-index: 999;
-}*/
+ #chat_frame{
+    position: fixed;
+    min-width: 400px;
+    right: 0;
+    bottom: 0;
+    z-index: 99
+}

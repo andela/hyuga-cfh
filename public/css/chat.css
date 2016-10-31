@@ -26,7 +26,26 @@ main, #messages-card {
   padding-bottom: 0;
 }
 #messages-card {
+  width: 100%;
   margin-top: 15px;
+  height: auto;
+  overflow: auto;
+}
+#show_message {
+  height: 500px;
+}
+#chat_header {
+  position: relative; 
+  height: 40px; 
+  width: 100%;
+  padding-top: 10px;
+  cursor: pointer; 
+  background-color: #C54141;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  font-family: 'Caudex', serif;
+  z-index: 99999;
 }
 .mdl-layout__header-row span {
   margin-left: 15px;

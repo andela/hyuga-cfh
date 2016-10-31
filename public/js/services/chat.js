@@ -6,11 +6,13 @@ angular.module('mean.system')
         username : "",
         message : "",
         id: null,
-        messageArray: []
+        messageArray: [],
+        unreadMsg : 0
     };
 
 chat.username = window.user.name;
 chat.id = window.user.id;
+chat.unreadMsg = 0;
 
 var database = firebase.database();
 
@@ -27,6 +29,9 @@ var messagesRef = database.ref('messages');
   }.bind(this);
   messagesRef.limitToLast(12).on('child_added', setMessage);
   messagesRef.limitToLast(12).on('child_changed', setMessage);
+  messagesRef.on('child_added', function() {
+    chat.unreadMsg++;
+  });
 
 
 
@@ -52,6 +57,10 @@ chat.clearMessage = function() {
       console.log('Could not clear previous chats'+ err.message);
     });
 };
+
+// chat.unreadMsgCount = function() {
+//   return chat.unreadMsg;
+// };
 
 // Template for messages.
 var MESSAGE_TEMPLATE =
@@ -80,6 +89,9 @@ var displayMessage = function(key, name, text) {
     messageElement.innerHTML = messageElement.innerHTML.replace(/\n/g, '<br>');
   }
   // Show the card fading-in and scroll to view the new message.
+  if(name !== window.user.name){
+    document.getElementById('unread').setAttribute('data-badge', chat.unreadMsg+1);
+  }
   setTimeout(function() {div.classList.add('visible')}, 1);
   document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight;
   document.getElementById('message').focus();

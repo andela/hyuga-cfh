@@ -10,7 +10,7 @@ var gulp = require('gulp'),
   livereload = require('gulp-livereload'),
   mochaTest = require('gulp-mocha'),
   gutil = require('gulp-util'),
-  notify = require('gulp-notify'),
+  // notify = require('gulp-notify'),
   runSequence = require('run-sequence'),
   istanbul = require('gulp-istanbul'),
   childProcess = require('child_process');
@@ -79,10 +79,10 @@ gulp.task('scripts', function () {
   return gulp.src(['public/js/**/*.js', 'test/**/*.js', 'app/**/*.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
-    .pipe(livereload())
-    .pipe(notify({
-      // message: 'Scripts task complete'
-    }));
+    .pipe(livereload());
+    // .pipe(notify({
+    //   // message: 'Scripts task complete'
+    // }));
 });
 
 // Gulp sass tasks
