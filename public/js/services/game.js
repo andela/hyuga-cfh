@@ -23,8 +23,6 @@ angular.module('mean.system')
     joinOverride: false,
   };
 
-  console.log(chat.username);
-
   var notificationQueue = [];
   var timeout = false;
   var self = this;

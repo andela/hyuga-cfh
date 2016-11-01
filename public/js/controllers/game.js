@@ -130,9 +130,6 @@ angular.module('mean.system')
       $location.path('/');
     };
 
-    // send game id for for this chat session
-   console.log($scope.game.gameID);
-
     // Send message in group chat
     $scope.sendMessage = function() {
       var msg= document.getElementById('message').value;
