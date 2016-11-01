@@ -96,7 +96,7 @@ angular.module('mean.system')
         document.getElementById('unread').setAttribute('data-badge', chat.unreadMsg + 1);
       }
       setTimeout(function() {
-        div.classList.add('visible')
+        div.classList.add('visible');
       }, 1);
       document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight;
       document.getElementById('message').focus();
