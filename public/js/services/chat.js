@@ -18,11 +18,17 @@ chat.id = window.user.id;
 }
 
 chat.unreadMsg = 0;
+ var messagesRef;
 
-var database = firebase.database();
+chat.createDB = function(gameID) {
 
-// Reference to the /messages/ database path.
-var messagesRef = database.ref('messages');
+  console.log(gameID);
+
+  var database = firebase.database();
+
+
+// Create a chat db for this session.
+ messagesRef = database.ref('messages/'+gameID);
 
 // Cancel previous message listeners
   messagesRef.off();
@@ -30,7 +36,7 @@ var messagesRef = database.ref('messages');
   // Loads the last 12 messages and listen for new ones.
   var setMessage = function(data) {
     var val = data.val();
-    displayMessage(data.key, val.name, val.text);
+    chat.displayMessage(data.key, val.name, val.text);
   }.bind(this);
   messagesRef.limitToLast(12).on('child_added', setMessage);
   messagesRef.limitToLast(12).on('child_changed', setMessage);
@@ -38,7 +44,7 @@ var messagesRef = database.ref('messages');
     chat.unreadMsg++;
   });
 
-
+};
 
 chat.sendMessage = function(msg) {
     // Add a new message entry to the Firebase Database.
@@ -63,10 +69,6 @@ chat.clearMessage = function() {
     });
 };
 
-// chat.unreadMsgCount = function() {
-//   return chat.unreadMsg;
-// };
-
 // Template for messages.
 var MESSAGE_TEMPLATE =
     '<div class="message-container">' +
@@ -76,7 +78,7 @@ var MESSAGE_TEMPLATE =
 
 
 // Displays a Message in the UI.
-var displayMessage = function(key, name, text) {
+chat.displayMessage = function(key, name, text) {
   var div = document.getElementById(key);
   // If an element for that message does not exists yet we create it.
   if (!div) {
@@ -101,5 +103,6 @@ var displayMessage = function(key, name, text) {
   document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight;
   document.getElementById('message').focus();
 };
+
     return chat;
 }]);
