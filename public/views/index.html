@@ -10,14 +10,16 @@
       <ul class="right hide-on-med-and-down">
         <li><a ng-click="goTo('how-to-play')">HOW TO PLAY</a></li>
         <li><a ng-click="goTo('charity')">CHARITY</a></li>
-        <li><a href="signup">SIGN UP</a></li>
-        <li><a href="signin">SIGN IN</a></li>
+        <li ng-show="showOptions"><a href="signup">SIGN UP/LOGIN</a></li>
+        <li ng-show="showOptions"><a href="signin">SIGN IN</a></li>
+        <li ng-hide="showOptions"><a href="signout">SIGN OUT</a></li>
       </ul>
       <ul class="side-nav" id="mobile-menu">
         <li><a ng-click="goTo('how-to-play')">HOW TO PLAY</a></li>
         <li><a ng-click="goTo('charity')">CHARITY</a></li>
-        <li><a href="signup">SIGN UP/LOGIN</a></li>
-        <li><a href="signin">SIGN IN</a></li>
+        <li ng-show="showOptions"><a href="signup">SIGN UP/LOGIN</a></li>
+        <li ng-show="showOptions"><a href="signin">SIGN IN</a></li>
+        <li ng-hide="showOptions"><a href="signout">SIGN OUT</a></li>
       </ul>
     </div>
   </nav>
