@@ -28,7 +28,6 @@ nav li a:hover {
 }
 
 .section {
-  margin-bottom: 40px;
   padding: 20px 0;
 }
 
@@ -68,6 +67,7 @@ nav li a:hover {
 
 .brief-text {
   line-height: 30px;
+  width:95%;
   text-align: justify;
 }
 
