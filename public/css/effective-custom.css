@@ -3,8 +3,7 @@ body {
 }
 
 #main_background {
-  background: url('../img/bg_card.png');
-  background-attachment: fixed;
+  background: #fff;
 }
 
 a:hover {
