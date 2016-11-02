@@ -77,10 +77,11 @@ gulp.task('webpack', function (done) {
 // Script task
 
 gulp.task('scripts', function () {
+  "use strict";
   gulp.src(['public/js/**/*.js', 'test/**/*.js', 'app/**/*.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
-})
+});
 
 // Gulp sass tasks
 
@@ -152,7 +153,7 @@ gulp.task('watch', function () {
     'app/**/*.js'
   ], ['scripts']);
 
-  
-  gulp.watch('./src/js/**/*.js', ['webpack'])
+
+  gulp.watch('./src/js/**/*.js', ['webpack']);
 
 });

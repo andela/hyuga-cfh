@@ -1,5 +1,5 @@
-var debug = process.env.NODE_ENV != 'production'
-var webpack = require('webpack')
+var debug = process.env.NODE_ENV !== 'production';
+var webpack = require('webpack');
 
 module.exports = {
   context: __dirname + '/src',
@@ -27,4 +27,4 @@ module.exports = {
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false })
   ]
-}
+};
