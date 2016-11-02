@@ -1,5 +1,10 @@
+[![Build Status](https://travis-ci.org/andela/hyuga-cfh.svg)](https://travis-ci.org/andela/hyuga-cfh)
+[![Code Climate](https://codeclimate.com/repos/57fd23b340b3f60059000657/badges/1c99a2600313b09f275e/gpa.svg)](https://codeclimate.com/repos/57fd23b340b3f60059000657/feed)
+[![Coverage Status](https://coveralls.io/repos/github/andela/hyuga-cfh/badge.svg)](https://coveralls.io/github/andela/hyuga-cfh/badge.svg)
+
+
 Cards for Humanity - [http://cfh.io](http://cfh.io)
-===========
+
 Cards for Humanity is a fast-paced online version of the popular card game, Cards Against Humanity, that gives you the opportunity to donate to children in need - all while remaining as despicable and awkward as you naturally are.
 
 Our Team

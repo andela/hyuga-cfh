@@ -140,7 +140,6 @@
  a:hover {
    text-decoration: none;
    color: #2ecc71;
-   border-radius:0px !important;
  }
 
  p a {
@@ -448,15 +447,12 @@
 
  .input-info {
    max-width: 100%;
+   color: #fff;
  }
 
  #how-to {
    max-width: 1400px;
    margin-top: -15px;
- }
-
- #how-to-play {
-   margin-top: 190px;
  }
 
  #how-to-cards {
