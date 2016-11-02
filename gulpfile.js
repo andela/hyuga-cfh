@@ -5,7 +5,7 @@ var gulp = require('gulp'),
   browserSync = require('browser-sync').create(),
   nodemon = require('gulp-nodemon'),
   bower = require('gulp-bower'),
-  sass = require('gulp-ruby-sass'),
+  sass = require('gulp-sass'),
   jshint = require('gulp-jshint'),
   livereload = require('gulp-livereload'),
   mochaTest = require('gulp-mocha'),
@@ -17,12 +17,7 @@ var gulp = require('gulp'),
 
 // Specify a default gulp task.
 
-gulp.task('default', function () {
-  "use strict";
-  //Listen for changes with livereload
-  runSequence('build', 'watch');
-
-});
+gulp.task('default', ['build', 'watch']);
 
 gulp.task('build', ['browser-sync'], function () {
   "use strict";
@@ -39,7 +34,6 @@ gulp.task('browser-sync', ['nodemon'], function () {
   browserSync.init(null, {
     proxy: "http://localhost:3000",
     files: ["public/**/*.*"],
-    browser: "google-chrome",
     port: 5000,
   });
 });
@@ -72,25 +66,31 @@ gulp.task('bower', function() {
 		.pipe(gulp.dest('public/lib'));
 });
 
+// Webpack task
+gulp.task('webpack', function (done) {
+  "use strict";
+  return childProcess
+    .spawn('node_modules/webpack/bin/webpack.js', { stdio: 'inherit' })
+    .on('close', done);
+});
+
 // Script task
 
 gulp.task('scripts', function () {
   "use strict";
-  return gulp.src(['public/js/**/*.js', 'test/**/*.js', 'app/**/*.js'])
+  gulp.src(['public/js/**/*.js', 'test/**/*.js', 'app/**/*.js'])
     .pipe(jshint())
-    .pipe(jshint.reporter('default'))
-    .pipe(livereload())
-    .pipe(notify({
-      message: 'Scripts task complete'
-    }));
+    .pipe(jshint.reporter('default'));
 });
 
 // Gulp sass tasks
 
 gulp.task('sass', function () {
   "use strict";
-  return gulp.src(['public/css/common.scss, public/css/views/articles.scss'])
+  return gulp.src('public/css/*.scss')
     .pipe(sass())
+    .on('error', sass.logError)
+    .pipe(gulp.dest('public/css/'))
     .pipe(livereload())
     .pipe(browserSync.reload({
       stream: true
@@ -110,7 +110,7 @@ gulp.task('before-test', function () {
 
 gulp.task('test', ['before-test'], function () {
   "use strict";
-   gulp.src([
+  gulp.src([
       'test/user/*.js',
       'test/game/*.js',
       'test/article/*.js',
@@ -127,8 +127,8 @@ gulp.task('test', ['before-test'], function () {
     .once('error', gutil.log);
 
   childProcess.spawn('node_modules/karma/bin/karma', ['start', '--single-run'], {
-    stdio: 'inherit'
-  }).on('close', process.exit);
+      stdio: 'inherit'
+    }).on('close', process.exit);
 });
 
 
@@ -138,18 +138,22 @@ gulp.task('watch', function () {
   "use strict";
 
   // Watch .html files
-  gulp.watch("public/views/*.html").on('change', browserSync.reload);
+  gulp.watch([
+    'public/views/*.html',
+    'app/views/**'
+  ], browserSync.reload);
 
   // Watch .scss files
-  gulp.watch(['public/css/common.scss, public/css/views/articles.scss'], ['sass']);
-
-  // Watch .css files 
   gulp.watch('public/css/**', ['sass']);
 
   // Watch .js files
-  gulp.watch(['public/js/**/*.js', 'test/**/*.js', 'app/**/*.js'], ['scripts']);
+  gulp.watch([
+    'public/js/**/*.js',
+    'test/**/*.js',
+    'app/**/*.js'
+  ], ['scripts']);
 
-  // Watch .jade files
-  gulp.watch('app/views/**').on('change', browserSync.reload);
+
+  gulp.watch('./src/js/**/*.js', ['webpack']);
 
 });
