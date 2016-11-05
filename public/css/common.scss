@@ -291,7 +291,7 @@ background-image: linear-gradient(to bottom right, #0B394E 0%, #ABCE8D 100%);
     cursor: pointer;
 }
 
-.card {
+.old_card {
     position: relative;
 
     display: inline-block;
@@ -872,7 +872,7 @@ body{
                     #question-container-inner{
                         width: 100%;
                         height: 100%;
-                        .card{
+                        .old_card{
                             width: 100%;
                             margin: 0px auto;
                             display: block;
