@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import Player from "./Game/Player";
 import Question from "./Game/Question";
 import Timer from "./Game/Timer";
+import Answer from "./Game/Answer";
 
 const Game = () => {
   return(
@@ -30,6 +31,9 @@ const Game = () => {
       </div>
       <div className="timer">
         <Timer />
+      </div>
+      <div>
+        <Answer />
       </div>
     </div>
   );
