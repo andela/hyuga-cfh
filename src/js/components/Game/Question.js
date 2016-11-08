@@ -3,7 +3,7 @@ import React, {Component} from "react";
 const Question = () => {
   return(
     <div className="question row container">
-      <div className="col s6 m4 l3 offset-s3">
+      <div className="col s6 m4 l3 offset-l1 offset-s3">
         <div className="card hoverable" id="banner-bg-card">
           <div className="card-content">
             <img src="img/tri_1.png" />
@@ -29,10 +29,11 @@ const Question = () => {
           </div>
         </div>
       </div>
-
-      <div className="col s6 m4 l3 offset-s3">
+      <div className="col s6 m4 l3 offset-l4 offset-s3">
         <div className="card hoverable">
-          <p></p>
+          <div className="card-content valign-wrapper each-question">
+            <p className="valign">This is a sample question with quite a number of unneccessary details</p>
+          </div>
         </div>
       </div>
     </div>
