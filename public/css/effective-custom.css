@@ -2,9 +2,9 @@ body {
   font-family: "Roboto";
 }
 
-#main_background {
-  background: url('../img/bg_card.png');
-  background-attachment: fixed;
+#main_background,
+.main_background {
+  background: #fff;
 }
 
 a:hover {

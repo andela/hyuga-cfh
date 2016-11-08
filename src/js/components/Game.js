@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import Player from "./Game/Player";
 
 const Game = () => {
   return(
@@ -19,6 +20,9 @@ const Game = () => {
           </ul>
         </div>
       </nav>
+      <div>
+        <Player />
+      </div>
     </div>
   );
 };
