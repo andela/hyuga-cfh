@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import Player from "./Game/Player";
 import Question from "./Game/Question";
+import Timer from "./Game/Timer";
 
 const Game = () => {
   return(
@@ -26,6 +27,9 @@ const Game = () => {
       </div>
       <div className="Question">
         <Question />
+      </div>
+      <div className="timer">
+        <Timer />
       </div>
     </div>
   );
