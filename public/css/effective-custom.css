@@ -146,6 +146,48 @@ footer {
   background-color: #A1232E;
 }
 
+.a_player {
+  background: #fff;
+}
+
+.a_player>div {
+  width: 90%;
+  margin-left: 5%;
+  background: #E9E9E9;
+  height: 50px;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.a_player .score {
+  height: 30px;
+  width: 30px;
+  color: #fff;
+  text-align: center;
+  background: #A1232E;
+  float: left;
+  margin-left: -10px;
+  padding-top: 5px;
+}
+
+.a_player>div img {
+  float: right;
+  width: 25%;
+}
+
+.a_player span {
+  width: 65%;
+}
+
+.players h5 {
+  text-align: center;
+}
+
+.players .container {
+  padding: 0;
+  margin-bottom: 0
+}
+
 @media screen and (min-width: 992px) {
   #banner-bg-card {
     margin: 60px 0 -227px 0;

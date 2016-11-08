@@ -20,7 +20,7 @@ const Game = () => {
           </ul>
         </div>
       </nav>
-      <div>
+      <div className="players">
         <Player />
       </div>
     </div>

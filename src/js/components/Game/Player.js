@@ -5,32 +5,32 @@ class Player extends Component{
     super();
     const players = [
       {
-        name: 'OREOLUWA AGUNBIADE',
+        name: 'Oreoluwa Agunbiade',
         avi: 'img/chosen/FI02.png',
         score: 10
       },
       {
-        name: 'JOSHUA AZEMOH',
+        name: 'Joshua Azemoh',
         avi: 'img/chosen/E01.png',
         score: 5
       },
       {
-        name: 'ATANDA SEMIU',
+        name: 'Atanda Semiu',
         avi: 'img/chosen/F01.png',
         score: 2
       },
       {
-        name: 'ETHAN NWANKWO',
+        name: 'Ethan Nwankwo',
         avi: 'img/chosen/H01.png',
         score: 5
       },
       {
-        name: 'BAYO ADESANYA',
+        name: 'Bayo Adesanya',
         avi: 'img/chosen/J01.png',
         score: 5
       },
       {
-        name: 'KENNY ONI',
+        name: 'Kenny Oni',
         avi: 'img/chosen/FI02.png',
         score: 10
       }
@@ -53,7 +53,7 @@ class Player extends Component{
   render() {
     return (
       <div>
-        <h5>{Object.keys(this.state.players).length} PLAYERS</h5>
+        <h5>{Object.keys(this.state.players).length} Players</h5>
         <div className="row container">
           {this.displayPlayers()}
         </div>
