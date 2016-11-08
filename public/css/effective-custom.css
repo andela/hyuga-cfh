@@ -230,6 +230,10 @@ footer {
   margin: 30px auto;
 }
 
+.waiting {
+  height:300px;
+}
+
 @media screen and (min-width: 992px) {
   #banner-bg-card {
     margin: 40px 0 -227px 0;

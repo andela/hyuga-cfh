@@ -3,6 +3,7 @@ import Player from "./Game/Player";
 import Question from "./Game/Question";
 import Timer from "./Game/Timer";
 import Answer from "./Game/Answer";
+import Waiting from "./Game/Waiting";
 
 const Game = () => {
   return(
@@ -27,7 +28,8 @@ const Game = () => {
         <Player />
       </div>
       <div className="Question">
-        <Question />
+        {/*<Question />*/}
+        <Waiting />
       </div>
       <div className="timer">
         <Timer />
