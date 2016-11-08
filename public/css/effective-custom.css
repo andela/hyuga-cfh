@@ -231,7 +231,11 @@ footer {
 }
 
 .waiting {
-  height:300px;
+  height: 300px;
+}
+
+.answer-section li {
+  line-height: 40px;
 }
 
 @media screen and (min-width: 992px) {

@@ -4,6 +4,7 @@ import Question from "./Game/Question";
 import Timer from "./Game/Timer";
 import Answer from "./Game/Answer";
 import Waiting from "./Game/Waiting";
+import Instruction from "./Game/Instruction";
 
 const Game = () => {
   return(
@@ -28,13 +29,14 @@ const Game = () => {
         <Player />
       </div>
       <div className="Question">
-        {/*<Question />*/}
-        <Waiting />
+        <Question />
+        {/*<Waiting />*/}
       </div>
       <div className="timer">
         <Timer />
       </div>
       <div>
+        {/*<Instruction />*/}
         <Answer />
       </div>
       <div className="donate row container">
