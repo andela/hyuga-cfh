@@ -35,6 +35,12 @@ const Game = () => {
       <div>
         <Answer />
       </div>
+
+      <div className="donate row container">
+        <div className="col s6 m4 l2 offset-s3 offset-m4 offset-l5">
+          <button className="btn btn-large app-buttons">DONATE NOW</button>
+        </div>
+      </div>
     </div>
   );
 };

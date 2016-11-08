@@ -224,6 +224,10 @@ footer {
   height: 220px;
 }
 
+.donate {
+  margin: 30px auto;
+}
+
 @media screen and (min-width: 992px) {
   #banner-bg-card {
     margin: 40px 0 -227px 0;
