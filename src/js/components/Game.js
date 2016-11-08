@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import Player from "./Game/Player";
+import Question from "./Game/Question";
 
 const Game = () => {
   return(
@@ -22,6 +23,9 @@ const Game = () => {
       </nav>
       <div className="players">
         <Player />
+      </div>
+      <div className="Question">
+        <Question />
       </div>
     </div>
   );
