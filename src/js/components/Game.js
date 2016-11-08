@@ -35,12 +35,18 @@ const Game = () => {
       <div>
         <Answer />
       </div>
-
       <div className="donate row container">
         <div className="col s6 m4 l2 offset-s3 offset-m4 offset-l5">
           <button className="btn btn-large app-buttons">DONATE NOW</button>
         </div>
       </div>
+      <footer className="section">
+        <div className="container">
+          <p className="center-align">
+            Legal stuff: This game is based on the <a href="https://cardsagainsthumanity.com" className="inline-link">Cards against humanity</a> card game, which is CC licensed (BY-NC-SA). Cards for Humanity is not affiliated with Cards Against Humanity. In complying with the Creative Commons license of the Cards Against Humanity card game, all proceeds from donations go directly to charity, as managed by <a href="https://crowdrise.com" className="inline-link">crowdrise</a>
+          </p>
+        </div>
+      </footer>
     </div>
   );
 };
