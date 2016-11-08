@@ -19,7 +19,7 @@ var gulp = require('gulp'),
 
 gulp.task('default', ['build', 'watch']);
 
-gulp.task('build', ['browser-sync'], function () {
+gulp.task('build', ['browser-sync', 'scripts', 'webpack', 'sass'], function () {
   "use strict";
   //Listen for changes with livereload
   livereload.listen();
