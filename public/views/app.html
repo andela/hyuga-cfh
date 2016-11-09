@@ -9,14 +9,14 @@
         <i class="material-icons">menu</i>
       </a>
       <ul class="right hide-on-med-and-down">
-        <li><a href="exit">ABANDON GAME</a></li>
+        <li><a ng-click="abandonGame()">ABANDON GAME</a></li>
         <li>
           <a href="https://twitter.com/share" data-url="http://cfh.io" data-text="Cards for Humanity: A Game for Horrible People Desperately Trying to do Good" data-related="CFH_App">TWEET</a>
           <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
         </li>
       </ul>
       <ul class="side-nav" id="mobile-menu">
-        <li><a href="exit">EXIT</a></li>
+        <li><a ng-click="abandonGame()">EXIT</a></li>
         <li>
           <a href="https://twitter.com/share" data-url="http://cfh.io" data-text="Cards for Humanity: A Game for Horrible People Desperately Trying to do Good" data-related="CFH_App">TWEET</a>
           <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
@@ -24,6 +24,9 @@
       </ul>
     </div>
   </nav>
+  <div class="players">
+    <player></player>
+  </div>
   <div id="gameplay-container">
     <div id="upper-gameplay-container">
       <div id="menu-timeremaining-container">

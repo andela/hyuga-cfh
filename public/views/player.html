@@ -1,4 +1,22 @@
-<div id="player-container" ng-repeat="player in game.players" style="background-color:{{colors[player.color]}}">
+<h5>{{game.players.length}} Player(s)</h5>
+<div class="row container">
+  <div ng-repeat="player in game.players" class="col s6 m4 l2 a_player">
+    <div class="valign-wrapper">
+      <div class="circle score">{{player.points}}</div>
+      <span class="valign">
+        {{player.username | upperFirstLetter}}
+        <span ng-show="currentCzar($index)">(CZAR)</span>
+      </span>
+      <span ng-show="isPremium($index)">
+        <img ng-src="img/king.png" id="king">
+      </span>
+      <img class="avi" ng-src="{{player.avatar}}"/>
+    </div>
+  </div>
+</div>
+<!--
+
+<div id="player-container"  style="background-color:{{colors[player.color]}}">
   <div id ="above-czar-container">
     <div id="avatar_">
       <span ng-show="isPremium($index)">
@@ -17,5 +35,7 @@
   <div id="czar-container" ng-show="currentCzar($index)">
     <span id='the-czar'>CZAR</span>
   </div>
-</div>
+</div>-->
+
+
 
