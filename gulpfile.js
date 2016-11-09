@@ -1,44 +1,51 @@
 // Gulp configuration file
-/* global require: true*/
 
-'use strict';
+var gulp = require('gulp');
+var browserSync = require('browser-sync').create();
+var nodemon = require('gulp-nodemon');
+var bower = require('gulp-bower');
+var sass = require('gulp-sass');
+var eslint = require('gulp-eslint');
+var livereload = require('gulp-livereload');
+var mochaTest = require('gulp-mocha');
+var gutil = require('gulp-util');
+var runSequence = require('run-sequence');
+var istanbul = require('gulp-istanbul');
+var childProcess = require('child_process');
 
-const gulp = require('gulp');
-const browserSync = require('browser-sync').create();
-const nodemon = require('gulp-nodemon');
-const bower = require('gulp-bower');
-const sass = require('gulp-ruby-sass');
-const eslint = require('gulp-eslint');
-const livereload = require('gulp-livereload');
-const mochaTest = require('gulp-mocha');
-const gutil = require('gulp-util');
-const runSequence = require('run-sequence');
-const istanbul = require('gulp-istanbul');
-const childProcess = require('child_process');
-
-gulp.task('default', () => {
+// Specify a default gulp task.
+gulp.task('default', function () {
+  'use strict';
+  // Listen for changes with livereload
   runSequence('build', 'watch');
 });
 
-gulp.task('build', ['browser-sync'], () => {
+gulp.task('build', ['browser-sync', 'sass'], function () {
+  'use strict';
+  // Listen for changes with livereload
   livereload.listen();
 });
 
-gulp.task('browser-sync', ['nodemon'], () => {
+// Gulp browser-sync
+gulp.task('browser-sync', ['nodemon'], function () {
+  'use strict';
   browserSync.init(null, {
     proxy: 'http://localhost:3000',
     files: ['public/**/*.*'],
     browser: 'google-chrome',
-    port: 5000,
+    port: 5000
   });
 });
 
-gulp.task('nodemon', (cb) => {
-  let started = false;
+// Gulp nodemon
+gulp.task('nodemon', function (cb) {
+  'use strict';
+  var started = false;
 
   return nodemon({
-    script: 'server.js',
-  }).on('start', () => {
+    script: 'server.js'
+  }).on('start', function () {
+    // Callback used to ensure browser-sync does not start before nodemon
     if (!started) {
       cb();
       started = true;
@@ -46,60 +53,83 @@ gulp.task('nodemon', (cb) => {
   });
 });
 
-gulp.task('bower', () => {
+
+// Gulp bower
+gulp.task('bower', function () {
+  'use strict';
   return bower('./bower_components')
     .pipe(gulp.dest('public/lib'));
 });
 
-gulp.task('lint', () => {
-  gulp.src(['public/js/**/*.js', 'test/**/*.js', 'app/**/*.js'])
+// Script task
+gulp.task('scripts', function () {
+  'use strict';
+  return gulp.src(['public/js/**/*.js', 'test/**/*.js', 'app/**/*.js'])
     .pipe(eslint())
     .pipe(eslint.format());
 });
 
-gulp.task('sass', () => {
-  return gulp.src(['public/css/common.scss, public/css/views/articles.scss'])
-    .pipe(sass())
-    .pipe(livereload())
+// Gulp sass tasks
+gulp.task('sass', function () {
+  'use strict';
+  return gulp.src('public/css/*.scss')
+    .pipe(sass({
+      outputStyle: 'compressed'
+    }))
+    .on('error', sass.logError)
+    .pipe(gulp.dest('public/css/'))
     .pipe(browserSync.reload({
-      stream: true,
+      stream: true
     }));
 });
 
-gulp.task('before-test', () => {
+gulp.task('before-test', function () {
+  'use strict';
   return gulp.src(['app/controllers/*.js', 'app/models/*.js'])
+    // Covering files
     .pipe(istanbul())
+    // Force `require` to return covered files
     .pipe(istanbul.hookRequire());
 });
 
-gulp.task('test', ['before-test'], () => {
+// Setup mocha and frontend tests
+gulp.task('test', ['before-test'], function () {
+  'use strict';
   gulp.src([
     'test/user/*.js',
     'test/game/*.js',
     'test/article/*.js',
-    'test/api/*.js',
+    'test/api/*.js'
   ], {
-    read: false,
+    read: false
   })
     .pipe(mochaTest())
     .pipe(istanbul.writeReports({
       dir: './coverage',
       reporters: ['lcov'],
       reportOpts: {
-        dir: './coverage',
-      },
+        dir: './coverage'
+      }
     }))
     .once('error', gutil.log);
 
   childProcess.spawn('node_modules/karma/bin/karma', ['start', '--single-run'], {
-    stdio: 'inherit',
+    stdio: 'inherit'
   }).on('close', process.exit);
 });
 
-gulp.task('watch', () => {
+
+// Gulp will watch files for changes
+gulp.task('watch', function () {
+  'use strict';
+  // Watch .html files
   gulp.watch('public/views/*.html').on('change', browserSync.reload);
+  // Watch .scss files
   gulp.watch(['public/css/common.scss, public/css/views/articles.scss'], ['sass']);
+  // Watch .css files
   gulp.watch('public/css/**', ['sass']);
-  gulp.watch(['public/js/**/*.js', 'test/**/*.js', 'app/**/*.js']);
+  // Watch .js files
+  gulp.watch(['public/js/**/*.js', 'test/**/*.js', 'app/**/*.js'], ['scripts']);
+  // Watch .jade files
   gulp.watch('app/views/**').on('change', browserSync.reload);
 });
