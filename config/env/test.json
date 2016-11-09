@@ -22,5 +22,6 @@
         "clientID": "APP_ID",
         "clientSecret": "APP_SECRET",
         "callbackURL": "http://localhost:3000/auth/google/callback"
-    }
+    },
+    "db": "mongodb://localhost:27017/test-hyuga-cfh"
 }
