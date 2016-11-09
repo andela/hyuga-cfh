@@ -233,6 +233,9 @@ footer {
 .waiting {
   height: 300px;
 }
+.waiting p {
+  width: 100%;
+}
 
 .answer-section li {
   line-height: 40px;
