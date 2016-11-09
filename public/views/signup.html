@@ -1,45 +1,80 @@
-<div id="main-bod">
-  <!-- Fixed Logo & Menu Bar Start -->
-  <div id="top-part">
-    <div class="wpb-top-bar">
-      <div class="mod-contain" id="navver">
-        <div class="row">
-          <!-- Logo -->
-          <div class="wpb-logo-container">
-            <div id="landing-logo"> 
-              <span id="first-word">Cards</span>
-              <span id="second-word"> for</span> 
-              <span id="third-word">Humanity</span> 
-            </div> 
-            <div class="col-md-9 wpb-menu-container">
-              <ul class="wpb-main-menu">
-                <li><a href="/">Home</a></li>
-              </ul>
-            </div>
-          </div>      
-        </div>
-      </div>
+<div id="main_background">
+    <!-- Beginning of navigation bar -->
+  <nav>
+    <div class="nav-wrapper container">
+      <a href="#" class="brand-logo">
+        <img src="img/logo.png"/>
+      </a>
+      <a id="mobile-menu-icon" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+        <li><a href="/">Home</a></li>
+      </ul>
+      <ul class="side-nav" id="mobile-menu">
+        <li><a href="signup">SIGN UP/LOGIN</a></li>
+        <li><a class="waves-effect waves-light btn" href="#modal1">SIGN IN</a></li>
+      </ul>
     </div>
-  </div>
-<!-- Fixed Logo & Menu Bar End -->
+  </nav>
+  <!-- End of navigation bar -->
 
 <!-- Landing Start -->
 <div class="wpb-teaser parallax-background" id="homer">
-  <div class="background-opacity"></div> 
-  <div class="modified-container">
+  <div id="white"></div> 
+  <div class="">
     <div class="row" id="main-text"> 
     <!-- Teaser Text Start -->
     <div id="landing-logo">
       <h2 id="slogan">Sign Up with:</h2>
       <div id="login-buttons">
-        <a href="/auth/facebook"><img class="login-item" src="/img/icons/facebook.png"></a>
-        <a href="/auth/github"><img class="login-item" src="/img/icons/github.png"></a>
-        <a href="/auth/twitter"><img class="login-item" src="/img/icons/twitter.png"></a>
+        <a href="/auth/facebook"><img class="login-item" src="/img/icons/fb.png"></a>
+        <a href="/auth/github"><img class="login-item" src="/img/icons/git.png"></a>
+        <a href="/auth/twitter"><img class="login-item" src="/img/icons/twit.png"></a>
         <a href="/auth/google"><img class="login-item" src="/img/icons/google.png"></a>
       </div>
       <p id="create">Or create a username/password and select an avatar:</p>
-
-      <div class="sign-body">
+        <div class="row" id="form" >
+          <form class="col s12" action="/users" method="post">
+            <div class="row">
+              <div class="input-field col s6">
+                <i class="material-icons prefix">account_circle</i>
+                <input type="text" name="name" class="validate" id="name" required>
+                <label for="icon_prefix">Name</label>
+              </div>
+              <div class="input-field col s6">
+                <i class="material-icons prefix">email</i>
+                <input type="email" name="email" class="validate" id="email" required>
+                <label for="icon_email">Email</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s6">
+                <i class="material-icons prefix">lock</i>
+                <input type="password" name="password" id="password" class="validate" required>
+                <label for="icon_password">Password</label>
+              </div>
+              <div class="input-field col s6">
+                <i class="material-icons prefix">lock</i>
+                <input id="icon_password" type="password" class="validate" required>
+                <label for="icon_password">Re-type Password</label>
+              </div>
+            </div>
+            <div id="contain-avatars">
+              <ul ng-controller="IndexController" class="avatar-list">
+                <li ng-repeat="avatar in avatars" class="avatars ng-scope">
+                  <input name="avatar" type='radio' value="{{$index}}">
+                    <img ng-src="{{avatar}}">
+                  </input>
+                </li>
+              </ul>
+            </div>
+            <div class="row">
+              <button class="btn waves-effect waves-light center" type="submit" name="action">SIGN UP
+                <i class="material-icons right">send</i>
+              </button>
+            </div>
+          </form>
+        </div>
+      <!--<div class="sign-body">
         <div class="more-sign">
           <form class="signup form-horizontal" action="/users" method="post">
             <div class="control-group">
@@ -74,7 +109,7 @@
             </div>
           </form>
         </div>
-      </div>
+      </div>-->
     </div>
     </div>
     </div>

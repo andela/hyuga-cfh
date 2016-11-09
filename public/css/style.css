@@ -84,6 +84,60 @@
    max-width: 25%;
 }
 
+#modal1{
+  width: 50%;
+  height: 70%;
+}
+
+.modal-content{
+  height: 100%;
+}
+
+#form {
+  margin-top: 5%;
+}
+
+.center{
+  margin-top: 5%;
+  margin-left: 45%;
+}
+
+#social {
+  margin-top: -10% !important;
+  margin-left: 55% !important;
+  border-left: 1px solid black !important;
+}
+.btn{
+  background-color: #A1232E !important;
+}
+
+i:focus{
+  color: #A1232E !important;
+}
+
+.row .input-field input:focus {
+   border-bottom: 1px solid #A1232E !important;
+   box-shadow: 0 1px 0 0 #A1232E !important
+ }
+
+ h3 {
+   text-align: center;
+   color: #A1232E;
+ }
+
+ #modal2 {
+   width: 28%;
+   height: 70%
+ }
+/*.prefix:active,.label:active {
+  color:#A1232E !important;
+}*/
+
+#recover{
+    margin-top: 20%;
+    position: relative;
+    color: #A1232E
+}
 
 @media(min-width: 400px) and (max-width: 950px) {
    .some-text {
@@ -165,9 +219,9 @@
 #landing-logo {
    margin: 5px 0 5px 0px;
    font-size: 28px;
-   font-family: 'Lobster', cursive;
+   font-family: inherit;
    border-radius: 8px;
-   background: #252525;
+   background: #f5f5f5;
    padding: 5px 5px 5px 13px;
 }
 
@@ -329,7 +383,7 @@
 
  #slogan {
    text-align: center;
-   color: white;
+   color: black;
  }
 
  .wpb-teaser .wpb-text p {
@@ -374,8 +428,8 @@
 
  #create {
     text-align: center;
-    color: white;
-    font-family: arial;
+    color: black;
+    font-family: inherit;
     margin-bottom: -13px;
  }
 
@@ -442,7 +496,7 @@
  }
 
  .login-item {
-   max-width: 48%;
+   max-width: 15%;
  }
 
  .input-info {
