@@ -1,4 +1,5 @@
 // Gulp configuration file
+/* global require: true*/
 
 'use strict';
 
