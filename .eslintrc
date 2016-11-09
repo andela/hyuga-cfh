@@ -1,11 +1,14 @@
 {
-  "extends": "airbnb/base",
+  "extends": "eslint-config-airbnb-es5",
   "parserOptions": {
-      "ecmaVersion": 5,
-      "sourceType": "module"
+    "ecmaVersion": 5,
+    "sourceType": "module"
   },
   "env": {
-  "browser": true,
-  "node": true
+    "browser": true,
+    "node": true
+  },
+  "globals": {
+    "require": true
   }
 }

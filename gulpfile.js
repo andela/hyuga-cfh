@@ -1,5 +1,6 @@
 // Gulp configuration file
 
+
 var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
 var nodemon = require('gulp-nodemon');
@@ -9,6 +10,7 @@ var eslint = require('gulp-eslint');
 var livereload = require('gulp-livereload');
 var mochaTest = require('gulp-mocha');
 var gutil = require('gulp-util');
+
 var runSequence = require('run-sequence');
 var istanbul = require('gulp-istanbul');
 var childProcess = require('child_process');
