@@ -1,5 +1,5 @@
 // Gulp configuration file
-
+/* global require: true */
 
 var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
