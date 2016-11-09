@@ -90,7 +90,7 @@ gulp.task('scripts', function () {
 gulp.task('sass', function () {
   "use strict";
   return gulp.src('public/css/*.scss')
-    .pipe(sass())
+    .pipe(sass({outputStyle: 'compressed'}))
     .on('error', sass.logError)
     .pipe(gulp.dest('public/css/'))
     .pipe(browserSync.reload({
