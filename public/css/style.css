@@ -151,6 +151,12 @@
   border-left: 1px solid black !important;
 }
 
+.avatar-list input{
+  position: relative !important; 
+  left: 0px !important;
+  opacity:  1 !important;
+}
+
 #social a {
   color: white !important;
 }
