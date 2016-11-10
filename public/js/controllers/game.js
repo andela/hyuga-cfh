@@ -186,23 +186,25 @@ angular.module('mean.system')
         case 'gameEndPeopleLeft':
           return game.state === 'game dissolved' && game.gameWinner === -1;
         case 'gameNotOn':
-          return game.state === 'game ended' || game.state === 'game dissolved'
-          || game.state === 'awaiting players';
+          return game.state === 'game ended' ||
+          game.state === 'game dissolved' || game.state === 'awaiting players';
         case 'youWon':
-          return game.state === 'game ended' && game.gameWinner === game.playerIndex;
+          return game.state === 'game ended' &&
+          game.gameWinner === game.playerIndex;
         case 'youLost':
-          return game.state === 'game ended' && game.gameWinner !== game.playerIndex;
+          return game.state === 'game ended' &&
+          game.gameWinner !== game.playerIndex;
         case 'gameCanStart':
-          return (game.playerIndex === 0 || game.joinOverride)
-          && game.players.length >= game.playerMinLimit;
+          return (game.playerIndex === 0 || game.joinOverride) &&
+          game.players.length >= game.playerMinLimit;
         case 'noGame':
           return game.state === 'game ended' || game.state === 'game dissolved';
         case 'canCzar':
-          return game.table.length === 0 && game.state !== 'game dissolved'
-          && game.state !== 'awaiting players';
+          return game.table.length === 0 && game.state !== 'game dissolved' &&
+          game.state !== 'awaiting players';
         case 'canNotPickCard':
-          return game.state === 'game ended' || game.state === 'game dissolved'
-          || game.state === 'awaiting players';
+          return game.state === 'game ended' || game.state === 'game dissolved' ||
+          game.state === 'awaiting players';
         default: return false;
       }
     };
