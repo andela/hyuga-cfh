@@ -198,12 +198,14 @@ angular.module('mean.system')
           return (game.playerIndex === 0 || game.joinOverride) &&
           game.players.length >= game.playerMinLimit;
         case 'noGame':
-          return game.state === 'game ended' || game.state === 'game dissolved';
+          return game.state === 'game ended' ||
+          game.state === 'game dissolved';
         case 'canCzar':
           return game.table.length === 0 && game.state !== 'game dissolved' &&
           game.state !== 'awaiting players';
         case 'canNotPickCard':
-          return game.state === 'game ended' || game.state === 'game dissolved' ||
+          return game.state === 'game ended' ||
+          game.state === 'game dissolved' ||
           game.state === 'awaiting players';
         default: return false;
       }
