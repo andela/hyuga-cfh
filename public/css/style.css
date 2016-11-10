@@ -121,13 +121,32 @@
   background-color: #00405D !important;
 }
 
+#route {
+    margin-top: -25%;
+    border-left: 1px solid black;
+    margin-left: 55%;
+}
+
+#route a {
+  color: white !important;
+}
+
+#route a:hover {
+  color: black !important;
+}
+
+#error {
+  text-align: center;
+  color:#A1232E;
+}
+
 .center{
   margin-top: 5%;
   margin-left: 45%;
 }
 
 #social {
-  margin-top: -42% !important;
+  margin-top: -35% !important;
   margin-left: 52% !important;
   border-left: 1px solid black !important;
 }
@@ -161,12 +180,6 @@ i:focus{
    text-align: center;
    color: #A1232E;
  }
-
-#recover{
-    margin-top: 20%;
-    position: relative;
-    color: #A1232E
-}
 
 @media(min-width: 400px) and (max-width: 950px) {
    .some-text {

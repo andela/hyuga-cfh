@@ -12,7 +12,7 @@
         <li><a ng-click="goTo('charity')">CHARITY</a></li>
         <li ng-show="showOptions"><a href="#!signup">SIGN UP</a></li>
         <li ng-hide="showOptions"><a href="/signout">SIGN OUT</a></li>
-        <li ng-show="showOptions"><button class="waves-effect waves-light btn" data-target='modal1' id='signin'>SIGN IN</button></li>
+        <li ng-show="showOptions" data-target='modal1'><a>SIGN IN</a></li>
       </ul>
       <ul class="side-nav" id="mobile-menu">
         <li><a ng-click="goTo('how-to-play')">HOW TO PLAY</a></li>
@@ -183,27 +183,21 @@
           </div>
           <div class"col s6">
             <form class="col s12" action="/users/session" method="post">
-              <div class="sign-error" ng-show="showError() === 'invalid'">
-                Please check your username/password and try again.
-              </div>
               <div class="row">
                 <div class="input-field col s6">
                   <i class="material-icons prefix">email</i>
                   <input id="icon_email" name="email" type="email" class="validate" required>
-                  <label for="icon_email" class="label">Email</label>
+                  <label for="icon_email">Email</label>
                 </div>
               </div>
               <div class="row">
                 <div class="input-field col s6">
                   <i class="material-icons prefix">lock</i>
                   <input id="icon_lock" name="password" type="password" class="validate" required>
-                  <label for="icon_lock" class="label">Password</label>
+                  <label for="icon_lock">Password</label>
                   <button class="btn waves-effect waves-light right" type="submit">LOG IN
                     <i class="material-icons right">send</i>
                   </button>
-                  <div id="recover">
-                    <span class="right">Forgot Password?</span>
-                  </div>
                 </div>
               </div>
             </form>
