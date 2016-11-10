@@ -70,10 +70,15 @@ angular.module('mean.directives', [])
       restrict: 'EA',
       link: function(scope, elem, attr) {
         scope.showOptions = true;
-
-        if (scope.$$childHead.global.authenticated === true) {
+        if (window.user) {
           scope.showOptions = false;
         }
       }
+    };
+  }).directive('chat', function(){
+    return {
+      restrict: 'EA',
+      templateUrl: '/views/chat.html',
+      link: function(scope, elem, attr){}
     };
   });

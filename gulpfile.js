@@ -1,39 +1,32 @@
 //Gulp configuration file
 
-
 var gulp = require('gulp'),
   browserSync = require('browser-sync').create(),
   nodemon = require('gulp-nodemon'),
   bower = require('gulp-bower'),
-  sass = require('gulp-ruby-sass'),
+  sass = require('gulp-sass'),
   jshint = require('gulp-jshint'),
   livereload = require('gulp-livereload'),
   mochaTest = require('gulp-mocha'),
   gutil = require('gulp-util'),
-  notify = require('gulp-notify'),
   runSequence = require('run-sequence'),
   istanbul = require('gulp-istanbul'),
   childProcess = require('child_process');
 
 // Specify a default gulp task.
-
 gulp.task('default', function () {
   "use strict";
   //Listen for changes with livereload
   runSequence('build', 'watch');
-
 });
 
-gulp.task('build', ['browser-sync'], function () {
+gulp.task('build', ['browser-sync', 'sass'], function () {
   "use strict";
   //Listen for changes with livereload
   livereload.listen();
-
 });
 
-
 // Gulp browser-sync
-
 gulp.task('browser-sync', ['nodemon'], function () {
   "use strict";
   browserSync.init(null, {
@@ -44,17 +37,13 @@ gulp.task('browser-sync', ['nodemon'], function () {
   });
 });
 
-
 // Gulp nodemon 
-
 gulp.task('nodemon', function (cb) {
   "use strict";
   var started = false;
-
   return nodemon({
     script: 'server.js'
   }).on('start', function () {
-
     //Callback used to ensure browser-sync does not start before nodemon
     if (!started) {
       cb();
@@ -65,7 +54,6 @@ gulp.task('nodemon', function (cb) {
 
 
 // Gulp bower
-
 gulp.task('bower', function() {
 	"use strict";
 	return bower('./bower_components')
@@ -73,28 +61,24 @@ gulp.task('bower', function() {
 });
 
 // Script task
-
 gulp.task('scripts', function () {
   "use strict";
   return gulp.src(['public/js/**/*.js', 'test/**/*.js', 'app/**/*.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
-    .pipe(livereload())
-    .pipe(notify({
-      message: 'Scripts task complete'
-    }));
+    .pipe(livereload());
 });
 
 // Gulp sass tasks
-
 gulp.task('sass', function () {
   "use strict";
-  return gulp.src(['public/css/common.scss, public/css/views/articles.scss'])
-    .pipe(sass())
-    .pipe(livereload())
+  return gulp.src('public/css/*.scss')
+    .pipe(sass({outputStyle: 'compressed'}))
+    .on('error', sass.logError)
+    .pipe(gulp.dest('public/css/'))
     .pipe(browserSync.reload({
       stream: true
-    }));
+  }));
 });
 
 gulp.task('before-test', function () {
@@ -107,7 +91,6 @@ gulp.task('before-test', function () {
 });
 
 // Setup mocha and frontend tests 
-
 gulp.task('test', ['before-test'], function () {
   "use strict";
    gulp.src([
@@ -133,22 +116,16 @@ gulp.task('test', ['before-test'], function () {
 
 
 // Gulp will watch files for changes
-
 gulp.task('watch', function () {
   "use strict";
-
   // Watch .html files
   gulp.watch("public/views/*.html").on('change', browserSync.reload);
-
   // Watch .scss files
   gulp.watch(['public/css/common.scss, public/css/views/articles.scss'], ['sass']);
-
   // Watch .css files 
   gulp.watch('public/css/**', ['sass']);
-
   // Watch .js files
   gulp.watch(['public/js/**/*.js', 'test/**/*.js', 'app/**/*.js'], ['scripts']);
-
   // Watch .jade files
   gulp.watch('app/views/**').on('change', browserSync.reload);
 

@@ -1,5 +1,5 @@
 angular.module('mean.system')
-  .factory('game', ['socket', '$timeout', function (socket, $timeout) {
+  .factory('game', ['socket', '$timeout','chat', function (socket, $timeout, chat) {
 
   var game = {
     id: null, // This player's socket ID, so we know who this player is
@@ -20,7 +20,7 @@ angular.module('mean.system')
     curQuestion: null,
     notification: null,
     timeLimits: {},
-    joinOverride: false
+    joinOverride: false,
   };
 
   var notificationQueue = [];
@@ -72,6 +72,8 @@ angular.module('mean.system')
     // That way, we don't trigger the $scope.$watch too often
     if (game.gameID !== data.gameID) {
       game.gameID = data.gameID;
+      // Create the chat messages DB in the chat service using the gameID
+      chat.createDB(game.gameID);
     }
 
     game.joinOverride = false;
@@ -129,7 +131,6 @@ angular.module('mean.system')
         }
       }
     }
-
     if (game.state !== 'waiting for players to pick' || game.players.length !== data.players.length) {
       game.players = data.players;
     }

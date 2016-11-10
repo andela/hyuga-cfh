@@ -1,10 +1,11 @@
 angular.module('mean.system')
-.controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', function ($scope, game, $timeout, $location, MakeAWishFactsService, $dialog) {
+.controller('GameController', ['$scope', 'game', 'chat', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', function ($scope, game, chat, $timeout, $location, MakeAWishFactsService, $dialog) {
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
     $scope.modalShown = false;
     $scope.game = game;
+    $scope.chat = chat;
     $scope.pickedCards = [];
     var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
     $scope.makeAWishFact = makeAWishFacts.pop();
@@ -129,6 +130,29 @@ angular.module('mean.system')
       $location.path('/');
     };
 
+    // Send message in group chat
+    $scope.sendMessage = function () {
+      var msg = document.getElementById('message').value;
+      if (msg && msg.trim() !== '') {
+        // pop up chat window if minimized.
+        $scope.openChat = true;
+        $scope.chat.sendMessage(msg);
+      }
+    };
+
+    // Resize chat panel
+    $scope.resize = function () {
+      if (!$scope.openChat) {
+        $scope.openChat = true;
+      } else {
+        $scope.openChat = false;
+      }
+      // check if there are unread messages and clear the badge
+      if ($scope.chat.unreadMsg > 1) {
+        document.getElementById('unread').setAttribute('data-badge', '');
+      }
+    };
+
     // Catches changes to round to update when no players pick card
     // (because game.state remains the same)
     $scope.$watch('game.round', function() {
@@ -151,6 +175,11 @@ angular.module('mean.system')
 
     $scope.$watch('game.gameID', function() {
       if (game.gameID && game.state === 'awaiting players') {
+        // Clear the chat history if player is first to join room
+        if(game.playerIndex === 0){
+          $scope.chat.clearMessage();
+        }
+
         if (!$scope.isCustomGame() && $location.search().game) {
           // If the player didn't successfully enter the request room,
           // reset the URL so they don't think they're in the requested room.

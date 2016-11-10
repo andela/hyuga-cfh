@@ -1251,3 +1251,11 @@
       margin: 0 0 0 4px;
    }
  }
+ 
+ #chat_frame{
+    position: fixed;
+    min-width: 400px;
+    right: 0;
+    bottom: 0;
+    z-index: 9999999;
+}
