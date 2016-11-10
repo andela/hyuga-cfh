@@ -140,7 +140,7 @@ angular.module('mean.system')
 
     // Resize chat panel
     $scope.resize = function() {
-      $('#show_message').toggle(200);
+      $('.show_message').toggle(200);
       // check if there are unread messages and clear the badge
       if($scope.chat.unreadMsg > 1){
         document.getElementById('unread').setAttribute('data-badge', '');

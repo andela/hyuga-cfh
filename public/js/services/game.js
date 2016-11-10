@@ -72,7 +72,7 @@ angular.module('mean.system')
     // That way, we don't trigger the $scope.$watch too often
     if (game.gameID !== data.gameID) {
       game.gameID = data.gameID;
-      // We create the chat messages DB in the chat service using the gameID
+      // Create the chat messages DB in the chat service using the gameID
       chat.createDB(game.gameID);
     }
 

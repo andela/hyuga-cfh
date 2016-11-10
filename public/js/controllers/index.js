@@ -1,5 +1,6 @@
+'use strict';
 angular.module('mean.system')
-.controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', 'AvatarService' , function ($scope, Global, $location, socket, game, AvatarService) {
+.controller('IndexController', ['$scope', 'Global', '$location', 'socket', 'game', 'AvatarService', '$anchorScroll', function ($scope, Global, $location, socket, game, AvatarService, $anchorScroll) {
     $scope.global = Global;
 
     $scope.playAsGuest = function() {
@@ -13,6 +14,11 @@ angular.module('mean.system')
       } else {
         return false;
       }
+    };
+
+    $scope.goTo = function(targetId) {
+      $location.hash(targetId);
+      $anchorScroll();
     };
 
     $scope.avatars = [];

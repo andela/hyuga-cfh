@@ -84,7 +84,7 @@ angular.module('mean.system')
         div.setAttribute('id', key);
         document.getElementById('messages').appendChild(div);
       }
-      div.querySelector('.name').textContent = name;
+      div.querySelector('.name').textContent = ' ~ '+name;
       var messageElement = div.querySelector('.message');
       if (text) { // If the message is text.
         messageElement.textContent = text;
@@ -93,7 +93,8 @@ angular.module('mean.system')
       }
       // Show the card fading-in and scroll to view the new message.
       if (window.user && (name !== window.user.name)) {
-        document.getElementById('unread').setAttribute('data-badge', chat.unreadMsg + 1);
+        // document.getElementById('unread').setAttribute('data-badge', chat.unreadMsg + 1);
+        document.getElementById('unread').textContent = chat.unreadMsg + 1;
       }
       setTimeout(function() {
         div.classList.add('visible');
