@@ -85,8 +85,8 @@
 }
 
 #modal1{
-  width: 50%;
-  height: 70%;
+  width: 55%;
+  height: 60%;
 }
 
 .modal-content{
@@ -97,16 +97,53 @@
   margin-top: 5%;
 }
 
+#fb, #twit, #google, #git {
+  width:38%;
+  padding: 0 0.7rem !important;
+  margin-left: 5%;
+  margin-bottom: 15%;
+  margin-top: 5%;
+}
+
+#fb {
+  background-color: #3b5998 !important;
+}
+
+#google {
+  background-color: #d34836 !important;
+}
+
+#twit {
+  background-color: #4099FF !important;
+}
+
+#git {
+  background-color: #00405D !important;
+}
+
 .center{
   margin-top: 5%;
   margin-left: 45%;
 }
 
 #social {
-  margin-top: -10% !important;
-  margin-left: 55% !important;
+  margin-top: -42% !important;
+  margin-left: 52% !important;
   border-left: 1px solid black !important;
 }
+
+#social a {
+  color: white !important;
+}
+
+#social a:hover {
+  color: black !important;
+}
+
+form {
+  margin-left: 0px !important;
+}
+
 .btn{
   background-color: #A1232E !important;
 }
@@ -124,14 +161,6 @@ i:focus{
    text-align: center;
    color: #A1232E;
  }
-
- #modal2 {
-   width: 28%;
-   height: 70%
- }
-/*.prefix:active,.label:active {
-  color:#A1232E !important;
-}*/
 
 #recover{
     margin-top: 20%;
@@ -496,7 +525,7 @@ i:focus{
  }
 
  .login-item {
-   max-width: 15%;
+   max-width: 5%;
  }
 
  .input-info {
