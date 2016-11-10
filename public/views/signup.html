@@ -61,7 +61,7 @@
             <div id="contain-avatars">
               <ul ng-controller="IndexController" class="avatar-list">
                 <li ng-repeat="avatar in avatars" class="avatars ng-scope">
-                  <input name="avatar" type='checkbox' value="{{$index}}" class="avatar">
+                  <input name="avatar" type='radio' value="{{$index}}" class="avatar">
                     <img ng-src="{{avatar}}">
                   </input>
                 </li>
