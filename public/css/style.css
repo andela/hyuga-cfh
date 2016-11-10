@@ -15,25 +15,25 @@
    top: -65px;
 }
 
-#tweet-container-index{
+#tweet-container-index {
    margin-top: 10px;
    display: inline-block;
    position: relative;
    top: 5px;
 }
 
-#twitter-facebook{
+#twitter-facebook {
    display: block;
 }
 
-#send-link{
+#send-link {
    color: white;
    text-align: center;
    display: block;
    margin-bottom: 10px;
 }
 
-#facebook-share{
+#facebook-share {
    font-size: 12px;
    padding: 3px;
    background: white;
@@ -59,7 +59,7 @@
    cursor: pointer;
 }
 
-#facebook-share a{
+#facebook-share a {
    color: #333;
 }
 
@@ -84,12 +84,12 @@
    max-width: 25%;
 }
 
-#modal1{
+#modal1 {
   width: 55%;
   height: 60%;
 }
 
-.modal-content{
+.modal-content {
   height: 100%;
 }
 
@@ -140,7 +140,7 @@
   color:#A1232E;
 }
 
-.center{
+.center {
   margin-top: 5%;
   margin-left: 45%;
 }
@@ -151,7 +151,7 @@
   border-left: 1px solid black !important;
 }
 
-.avatar-list input{
+.avatar-list input {
   position: relative !important; 
   left: 0px !important;
   opacity:  1 !important;
@@ -169,11 +169,11 @@ form {
   margin-left: 0px !important;
 }
 
-.btn{
+.btn {
   background-color: #A1232E !important;
 }
 
-i:focus{
+i:focus {
   color: #A1232E !important;
 }
 
