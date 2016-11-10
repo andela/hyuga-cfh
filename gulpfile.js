@@ -52,7 +52,6 @@ gulp.task('nodemon', function (cb) {
   });
 });
 
-
 // Gulp bower
 gulp.task('bower', function() {
 	"use strict";
@@ -113,7 +112,6 @@ gulp.task('test', ['before-test'], function () {
     stdio: 'inherit'
   }).on('close', process.exit);
 });
-
 
 // Gulp will watch files for changes
 gulp.task('watch', function () {
