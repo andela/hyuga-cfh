@@ -172,6 +172,19 @@ angular.module('mean.system')
       }
     });
 
+    $scope.makeDecision = function(state) {
+      switch(state) {
+        case 'gameEndPeopleLeft' : return game.state ==='game dissolved' && game.gameWinner === -1;
+        case 'gameNotOn' : return game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players';
+        case 'youWon' : return game.state === 'game ended' && game.gameWinner === game.playerIndex;
+        case 'youLost' : return game.state === 'game ended' && game.gameWinner !== game.playerIndex;
+        case 'gameCanStart' : return (game.playerIndex === 0 || game.joinOverride) && game.players.length >= game.playerMinLimit;
+        case 'noGame' : return game.state === 'game ended' || game.state ==='game dissolved';
+        case 'canCzar' : return game.table.length===0 && game.state !== 'game dissolved' && game.state !== 'awaiting players';
+        case 'canNotPickCard' : return game.state === 'game ended' || game.state === 'game dissolved' || game.state === 'awaiting players';
+      }
+    };
+
     if ($location.search().game && !(/^\d+$/).test($location.search().game)) {
       console.log('joining custom game');
       game.joinGame('joinGame',$location.search().game);

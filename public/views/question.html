@@ -1,31 +1,34 @@
 <div class="question row container">
   <div id="notifications" ng-if="game.notification" ng-animate="{enter:'animated fadeInLeft', leave:'animated fadeOut'}">{{game.notification}}</div>
   <div class="col s4 m2 l2 offset-l5 offset-m5 offset-s4 waiting valign-wrapper" ng-show="game.state === 'awaiting players'">
-    <div class="preloader-wrapper big active valign" >
-      <div class="spinner-layer spinner-red-only">
-        <div class="circle-clipper left">
-          <div class="circle"></div>
-        </div><div class="gap-patch">
-          <div class="circle"></div>
-        </div><div class="circle-clipper right">
-          <div class="circle"></div>
+    <div class="valign">
+      <div class="preloader-wrapper big active" >
+        <div class="spinner-layer spinner-red-only">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
         </div>
       </div>
+      <p class="center-align" ng-show="game.state === 'awaiting players'">Awaiting Players</p>
     </div>
-    <button ng-show="(game.playerIndex === 0 || game.joinOverride) && game.players.length >= game.playerMinLimit" ng-click="startGame()" class="btn btn-large valign app-buttons">START GAME</button>   
+    <button ng-show="makeDecision('gameCanStart')" ng-click="startGame()" class="btn btn-large valign app-buttons">START GAME</button>
   </div>
-  <div class="waiting valign-wrapper" ng-show="game.state ==='game dissolved' && game.gameWinner === -1">
+  <div class="waiting valign-wrapper" ng-show="makeDecision('gameEndPeopleLeft')">
     <p class="center-align" >What the!? The game ended because too many people left! Our sincere apologies.</p>
   </div>
-  <div class="waiting valign-wrapper" ng-show="game.state === 'game ended' && game.gameWinner === game.playerIndex">
+  <div class="waiting valign-wrapper" ng-show="makeDecision('youWon')">
     <p class="center-align">Congratulations! You won the game, {{game.players[game.playerIndex].username | upperFirstLetter}}!</p>
     <p class="center-align">We hope you feel special. If you'd like to share that special feeling with the world, consider donating to charity. Or just horde it all for youself</p>
   </div>
-  <div class="waiting valign-wrapper" ng-show="game.state === 'game ended' && game.gameWinner !== game.playerIndex">
+  <div class="waiting valign-wrapper" ng-show="makeDecision('youLost')">
     <p class="center-align" >Aw, shucks! {{game.players[game.gameWinner].username | upperFirstLetter }} won the game!</p>
     <p class="center-align">That makes you a loser, unfortunately.</p>
   </div>
-  <div ng-hide="game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players'">
+  <div ng-hide="makeDecision('gameNotOn')">
     <div class="col s6 m4 l3 offset-l1 offset-s3">
       <div class="card hoverable" id="banner-bg-card">
         <div class="card-content">
