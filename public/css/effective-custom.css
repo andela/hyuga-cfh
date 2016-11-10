@@ -232,12 +232,17 @@ footer {
 .waiting {
   height: 300px;
 }
+
 .waiting p {
   width: 100%;
 }
 
 .answer-section li {
   line-height: 40px;
+}
+
+.crowdrise-give {
+  padding-top: 5px;
 }
 
 @media screen and (min-width: 992px) {
