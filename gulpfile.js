@@ -5,7 +5,7 @@ var gulp = require('gulp'),
   browserSync = require('browser-sync').create(),
   nodemon = require('gulp-nodemon'),
   bower = require('gulp-bower'),
-  sass = require('gulp-ruby-sass'),
+  sass = require('gulp-sass'),
   jshint = require('gulp-jshint'),
   livereload = require('gulp-livereload'),
   mochaTest = require('gulp-mocha'),
@@ -24,7 +24,7 @@ gulp.task('default', function () {
 
 });
 
-gulp.task('build', ['browser-sync'], function () {
+gulp.task('build', ['browser-sync', 'sass'], function () {
   "use strict";
   //Listen for changes with livereload
   livereload.listen();
@@ -89,12 +89,13 @@ gulp.task('scripts', function () {
 
 gulp.task('sass', function () {
   "use strict";
-  return gulp.src(['public/css/common.scss, public/css/views/articles.scss'])
-    .pipe(sass())
-    .pipe(livereload())
+  return gulp.src('public/css/*.scss')
+    .pipe(sass({outputStyle: 'compressed'}))
+    .on('error', sass.logError)
+    .pipe(gulp.dest('public/css/'))
     .pipe(browserSync.reload({
       stream: true
-    }));
+  }));
 });
 
 gulp.task('before-test', function () {
