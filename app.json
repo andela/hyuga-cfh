@@ -1,6 +1,7 @@
 {
   "name": "hyuga-cfh",
-  "scripts": {},
+  "scripts": {
+  },
   "env": {
     "MONGOHQ_URL": {
       "required": true
@@ -19,4 +20,5 @@
       "url": "heroku/nodejs"
     }
   ]
+
 }
