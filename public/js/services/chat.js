@@ -4,9 +4,6 @@ angular.module('mean.system')
 
     var chat = {
       username: "",
-      message: "",
-      id: null,
-      messageArray: [],
       unreadMsg: 0
     };
 
@@ -19,18 +16,18 @@ angular.module('mean.system')
 
     chat.unreadMsg = 0;
     var messagesRef;
+    // Template for messages.
+    var MESSAGE_TEMPLATE = '<div class="message-container">' +
+      '<div class="message"></div>' +
+      '<div class="name"></div>' +
+      '</div>';
 
     chat.createDB = function(gameID) {
-
       var database = firebase.database();
-
-
       // Create a chat db for this session.
       messagesRef = database.ref('messages/' + gameID);
-
       // Cancel previous message listeners
       messagesRef.off();
-
       // Loads the messages and listen for new ones.
       var setMessage = function(data) {
         var val = data.val();
@@ -41,7 +38,6 @@ angular.module('mean.system')
       messagesRef.on('child_added', function() {
         chat.unreadMsg++;
       });
-
     };
 
     chat.sendMessage = function(msg) {
@@ -66,13 +62,6 @@ angular.module('mean.system')
         });
     };
 
-    // Template for messages.
-    var MESSAGE_TEMPLATE = '<div class="message-container">' +
-      '<div class="message"></div>' +
-      '<div class="name"></div>' +
-      '</div>';
-
-
     // Displays a Message in the UI.
     chat.displayMessage = function(key, name, text) {
       var div = document.getElementById(key);
@@ -84,7 +73,7 @@ angular.module('mean.system')
         div.setAttribute('id', key);
         document.getElementById('messages').appendChild(div);
       }
-      div.querySelector('.name').textContent = ' ~ '+name;
+      div.querySelector('.name').textContent = ' ~ ' + name;
       var messageElement = div.querySelector('.message');
       if (text) { // If the message is text.
         messageElement.textContent = text;
@@ -93,15 +82,13 @@ angular.module('mean.system')
       }
       // Show the card fading-in and scroll to view the new message.
       if (window.user && (name !== window.user.name)) {
-        // document.getElementById('unread').setAttribute('data-badge', chat.unreadMsg + 1);
         document.getElementById('unread').textContent = chat.unreadMsg + 1;
       }
       setTimeout(function() {
         div.classList.add('visible');
       }, 1);
-      document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight;
+      document.getElementById(key).scrollIntoView();
       document.getElementById('message').focus();
     };
-
     return chat;
   }]);
