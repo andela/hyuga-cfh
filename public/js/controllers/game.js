@@ -134,19 +134,24 @@ angular.module('mean.system')
     $scope.sendMessage = function() {
       var msg= document.getElementById('message').value;
       if(msg && msg.trim() !== ''){
+        // pop up chat window if minimized.
+        $scope.openChat = true;
         $scope.chat.sendMessage(msg);
       }
     };
 
     // Resize chat panel
     $scope.resize = function() {
-      $('.show_message').toggle(200);
+      if(!$scope.openChat) {
+        $scope.openChat = true;
+      } else {
+        $scope.openChat = false;
+      }
       // check if there are unread messages and clear the badge
       if($scope.chat.unreadMsg > 1){
         document.getElementById('unread').setAttribute('data-badge', '');
       }
     };
-
 
     // Catches changes to round to update when no players pick card
     // (because game.state remains the same)

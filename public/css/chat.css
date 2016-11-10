@@ -4,8 +4,9 @@
 
 .chat_header {
   padding: 10px;
-  background: #efefef;
+  background: #26a69a;
   cursor: pointer;
+  color: #fff;
 }
 
 .show_message {
