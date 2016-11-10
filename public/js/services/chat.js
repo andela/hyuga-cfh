@@ -3,7 +3,7 @@ angular.module('mean.system')
     'use strict';
 
     var chat = {
-      username: "",
+      username: '',
       unreadMsg: 0
     };
 

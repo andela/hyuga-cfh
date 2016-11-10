@@ -136,6 +136,7 @@ angular.module('mean.system')
       if (msg && msg.trim() !== '') {
         // pop up chat window if minimized.
         $scope.openChat = true;
+        document.getElementById('unread').textContent = '';
         $scope.chat.sendMessage(msg);
       }
     };
@@ -144,12 +145,10 @@ angular.module('mean.system')
     $scope.resize = function () {
       if (!$scope.openChat) {
         $scope.openChat = true;
+        // clear chat badge
+        document.getElementById('unread').textContent = '';
       } else {
         $scope.openChat = false;
-      }
-      // check if there are unread messages and clear the badge
-      if ($scope.chat.unreadMsg > 1) {
-        document.getElementById('unread').setAttribute('data-badge', '');
       }
     };
 

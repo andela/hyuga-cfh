@@ -9,6 +9,10 @@
   color: #fff;
 }
 
+.chat_header span {
+  color: #fff;
+}
+
 .show_message {
   height: 300px;
   padding: 10px;
