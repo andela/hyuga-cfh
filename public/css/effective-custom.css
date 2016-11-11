@@ -195,6 +195,10 @@ footer {
   margin-bottom: 0px;
 }
 
+.answer-section {
+    padding-top: 20px;
+}
+
 .question {
   height: 300px;
 }
@@ -254,6 +258,21 @@ footer {
 .fact h4 {
   font-style: italic;
   font-weight: bold;
+}
+
+.time {
+  float:right;
+  width: 2%;
+  font-size:18px;
+  display:block;
+}
+
+.timer-wrapper {
+  padding: 0;
+}
+
+.timer-wrapper .progress {
+  width: 98%;
 }
 
 @media screen and (min-width: 992px) {

@@ -205,8 +205,7 @@ angular.module('mean.system')
           game.state !== 'awaiting players';
         case 'canNotPickCard':
           return game.state === 'game ended' ||
-          game.state === 'game dissolved' ||
-          game.state === 'awaiting players';
+          game.state === 'game dissolved';
         default: return false;
       }
     };
