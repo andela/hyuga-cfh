@@ -15,20 +15,20 @@
       </div>
       <p class="center-align" ng-show="game.state === 'awaiting players'">Awaiting Players</p>
     </div>
-    <button ng-show="makeDecision('gameCanStart')" ng-click="startGame()" class="btn btn-large valign app-buttons">START GAME</button>
+    <button ng-show="checkState('gameCanStart')" ng-click="startGame()" class="btn btn-large valign app-buttons">START GAME</button>
   </div>
-  <div class="waiting valign-wrapper" ng-show="makeDecision('gameEndPeopleLeft')">
+  <div class="waiting valign-wrapper" ng-show="checkState('gameEndPeopleLeft')">
     <p class="center-align" >What the!? The game ended because too many people left! Our sincere apologies.</p>
   </div>
-  <div class="waiting valign-wrapper" ng-show="makeDecision('youWon')">
+  <div class="waiting valign-wrapper" ng-show="checkState('youWon')">
     <p class="center-align">Congratulations! You won the game, {{game.players[game.playerIndex].username | upperFirstLetter}}!</p>
     <p class="center-align">We hope you feel special. If you'd like to share that special feeling with the world, consider donating to charity. Or just horde it all for youself</p>
   </div>
-  <div class="waiting valign-wrapper" ng-show="makeDecision('youLost')">
+  <div class="waiting valign-wrapper" ng-show="checkState('youLost')">
     <p class="center-align" >Aw, shucks! {{game.players[game.gameWinner].username | upperFirstLetter }} won the game!</p>
     <p class="center-align">That makes you a loser, unfortunately.</p>
   </div>
-  <div ng-hide="makeDecision('gameNotOn')">
+  <div ng-hide="checkState('gameNotOn')">
     <div class="col s6 m4 l3 offset-l1 offset-s3">
       <div class="card hoverable" id="banner-bg-card">
         <div class="card-content">

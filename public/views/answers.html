@@ -1,5 +1,5 @@
 <div class="answer-section row container">
-  <div ng-cloak ng-hide="makeDecision('canNotPickCard')">
+  <div ng-cloak ng-hide="checkState('canNotPickCard')">
     <div id="cards" class='hand'>
       <span ng-show="winnerPicked()"></span>
       <div class="col s6 m4 l3" ng-style="{'cursor':'pointer'}" ng-click="pickCard(card)" ng-hide="showTable || isCzar()" ng-repeat="card in game.players[game.playerIndex].hand"
@@ -36,9 +36,9 @@
       </ul>
     </div>
   </div>
-  <div ng-show="makeDecision('noGame')">
+  <div ng-show="checkState('noGame')">
     <h4 class="center-align">What would you like to do now?</h4>
-    <p class="center-align" ng-show="makeDecision('gameends')">
+    <p class="center-align" ng-show="checkState('gameends')">
       You might consider donating to charity to atone for the horrifying answers you've submitted. Donating will also place a lovely
       crown on your avatar's head.
     </p>
@@ -51,7 +51,7 @@
       <script type="text/javascript" src="https://www.crowdrise.com/widgets/donate/fundraiser/121142/?callback=userDonationCb"></script>
     </div>
   </div>
-  <div ng-show="isCzar() && makeDecision('canCzar')">
+  <div ng-show="isCzar() && checkState('canCzar')">
     <h4 class="center-align">You are the Card Czar</h4>
     <p>Players are choosing their answers. Prepare to select a winner.</p>
     <div class="fact">

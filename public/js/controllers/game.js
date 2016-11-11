@@ -181,7 +181,7 @@ angular.module('mean.system')
       }
     });
 
-    $scope.makeDecision = function (state) {
+    $scope.checkState = function (state) {
       switch (state) {
         case 'gameEndPeopleLeft':
           return game.state === 'game dissolved' && game.gameWinner === -1;
