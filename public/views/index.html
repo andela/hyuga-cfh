@@ -69,7 +69,17 @@
         <blockquote class="brief-text">
           Cards for Humanity is a fast-paced online version of the popular card game, Cards Against Humanity. This however gives you the opportunity to <a href="donate" class="inline-link">donate to children</a> in need while remaining as despicable and awkward as you naturally are.
         </blockquote>
-        
+
+        <div class="play-buttons">
+          <div ng-hide="showOptions">
+            <a href="/play" class="waves-effect waves-light btn app-buttons">Play with strangers</a> or
+            <a href="/play?custom" class="waves-effect waves-light btn app-buttons">Play with friends</a>
+          </div>
+          <div ng-show="showOptions">
+            <a href="#!/signup" class="waves-effect waves-light btn app-buttons">Signup</a> or
+            <a href="/play" class="waves-effect waves-light btn app-buttons">Play as guest</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
