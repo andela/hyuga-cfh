@@ -241,12 +241,27 @@ footer {
   line-height: 40px;
 }
 
-.crowdrise-give {
-  padding-top: 5px;
+#crDonateWidget_cfhio_cards4humanity {
+  margin:auto;
+  margin-top: 60px;
+}
+
+.fact {
+  padding: 10px 2%;
+  background: #ccc;
+}
+
+.fact h4 {
+  font-style: italic;
+  font-weight: bold;
 }
 
 @media screen and (min-width: 992px) {
   #banner-bg-card {
     margin: 40px 0 -227px 0;
+  }
+
+  .brief-text {
+    padding-right: 20px;
   }
 }
