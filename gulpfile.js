@@ -7,26 +7,14 @@ var nodemon = require('gulp-nodemon');
 var bower = require('gulp-bower');
 var sass = require('gulp-sass');
 var eslint = require('gulp-eslint');
-var livereload = require('gulp-livereload');
 var mochaTest = require('gulp-mocha');
 var gutil = require('gulp-util');
 
-var runSequence = require('run-sequence');
 var istanbul = require('gulp-istanbul');
-var childProcess = require('child_process');
+var spawn = require('child_process').spawn;
 
-// Specify a default gulp task.
-gulp.task('default', function () {
-  'use strict';
-  // Listen for changes with livereload
-  runSequence('build', 'watch');
-});
-
-gulp.task('build', ['browser-sync', 'sass'], function () {
-  'use strict';
-  // Listen for changes with livereload
-  livereload.listen();
-});
+// default task.
+gulp.task('default', ['browser-sync', 'sass', 'watch']);
 
 // Gulp browser-sync
 gulp.task('browser-sync', ['nodemon'], function () {
@@ -64,7 +52,7 @@ gulp.task('bower', function () {
 });
 
 // Script task
-gulp.task('scripts', function () {
+gulp.task('lint', function () {
   'use strict';
   return gulp.src(['public/js/**/*.js', 'test/**/*.js', 'app/**/*.js'])
     .pipe(eslint())
@@ -115,7 +103,7 @@ gulp.task('test', ['before-test'], function () {
     }))
     .once('error', gutil.log);
 
-  childProcess.spawn('node_modules/karma/bin/karma', ['start', '--single-run'], {
+  spawn('node_modules/karma/bin/karma', ['start', '--single-run'], {
     stdio: 'inherit'
   }).on('close', process.exit);
 });
@@ -125,13 +113,9 @@ gulp.task('test', ['before-test'], function () {
 gulp.task('watch', function () {
   'use strict';
   // Watch .html files
-  gulp.watch('public/views/*.html').on('change', browserSync.reload);
-  // Watch .scss files
-  gulp.watch(['public/css/common.scss, public/css/views/articles.scss'], ['sass']);
+  gulp.watch(['public/views/*.html', 'public/js/**/*.js'], browserSync.reload);
   // Watch .css files
   gulp.watch('public/css/**', ['sass']);
-  // Watch .js files
-  gulp.watch(['public/js/**/*.js', 'test/**/*.js', 'app/**/*.js'], ['scripts']);
   // Watch .jade files
-  gulp.watch('app/views/**').on('change', browserSync.reload);
+  gulp.watch('app/views/**', browserSync.reload);
 });
