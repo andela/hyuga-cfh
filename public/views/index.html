@@ -1,30 +1,28 @@
 <div id="main_background" ng-controller="IndexController">
-  
   <!-- Beginning of navigation bar -->
   <nav>
     <div landing class="nav-wrapper container">
       <a href="#" class="brand-logo">
-        <img src="img/logo.png"/>
+        <img src="img/logo.png" />
       </a>
       <a id="mobile-menu-icon" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
         <li><a ng-click="goTo('how-to-play')">HOW TO PLAY</a></li>
         <li><a ng-click="goTo('charity')">CHARITY</a></li>
+        <li ng-show="showOptions" data-target='modal1'><a>SIGN IN</a></li>
         <li ng-show="showOptions"><a href="#!signup">SIGN UP</a></li>
-        <li ng-show="showOptions"><a href="#!signin">SIGN IN</a></li>
         <li ng-hide="showOptions"><a href="/signout">SIGN OUT</a></li>
       </ul>
       <ul class="side-nav" id="mobile-menu">
         <li><a ng-click="goTo('how-to-play')">HOW TO PLAY</a></li>
         <li><a ng-click="goTo('charity')">CHARITY</a></li>
+        <li ng-show="showOptions"><a class="waves-effect waves-light btn" href="#modal1">SIGN IN</a></li>
         <li ng-show="showOptions"><a href="#!signup">SIGN UP</a></li>
-        <li ng-show="showOptions"><a href="#!signin">SIGN IN</a></li>
-        <li ng-hide="showOptions"><a href="signout">SIGN OUT</a></li>
+        <li ng-hide="showOptions"><a href="/signout">SIGN OUT</a></li>
       </ul>
     </div>
   </nav>
   <!-- End of navigation bar -->
-
   <!-- Banner begins -->
   <div id="banner" class="section">
     <div class="container">
@@ -33,30 +31,28 @@
           <!-- card display for cards for humanity -->
           <div class="card hoverable" id="banner-bg-card">
             <div class="card-content">
-              <img src="img/tri_1.png"/>
+              <img src="img/tri_1.png" />
               <h5 class="center-align">
                 <span class="app-color-blue">CARDS</span><br/>
                 <span class="app-color-red">FOR</span><br/>
                 <span class="app-color-green">HUMANITY</span>
               </h5>
-              <img class="pull-right" src="img/tri_2.png"/>
-              <br clear="all"/>
+              <img class="pull-right" src="img/tri_2.png" />
+              <br clear="all" />
             </div>
           </div>
-
           <div class="card hoverable">
             <div class="card-content">
-              <img src="img/tri_1.png"/>
+              <img src="img/tri_1.png" />
               <h5 class="center-align">
                 <span class="app-color-blue">CARDS</span><br/>
                 <span class="app-color-red">FOR</span><br/>
                 <span class="app-color-green">HUMANITY</span>
               </h5>
-              <img class="pull-right" src="img/tri_2.png"/>
-              <br clear="all"/>
+              <img class="pull-right" src="img/tri_2.png" />
+              <br clear="all" />
             </div>
           </div>
-
           <!-- end of card display -->
         </div>
         <div class="col s12 m8 l9">
@@ -67,9 +63,10 @@
       </div>
       <div class="row">
         <blockquote class="brief-text">
-          Cards for Humanity is a fast-paced online version of the popular card game, Cards Against Humanity. This however gives you the opportunity to <a href="donate" class="inline-link">donate to children</a> in need while remaining as despicable and awkward as you naturally are.
+          Cards for Humanity is a fast-paced online version of the popular card game, Cards Against Humanity. This however gives you
+          the opportunity to <a href="donate" class="inline-link">donate to children</a> in need while remaining
+          as despicable and awkward as you naturally are.
         </blockquote>
-
         <div class="play-buttons">
           <div ng-hide="showOptions">
             <a href="/play" class="waves-effect waves-light btn app-buttons">Play with strangers</a> or
@@ -84,7 +81,6 @@
     </div>
   </div>
   <!-- Banner ends -->
-
   <!-- how to play section -->
   <div id="how-to-play" class="section">
     <div class="container row">
@@ -99,7 +95,6 @@
           </div>
         </div>
       </div>
-
       <div class="col s6 m4 l3">
         <div class="card hoverable valign-wrapper">
           <div class="card-content valign">
@@ -109,7 +104,6 @@
           </div>
         </div>
       </div>
-
       <div class="col s6 m4 offset-m2 l3">
         <div class="card hoverable valign-wrapper">
           <div class="card-content valign">
@@ -118,7 +112,6 @@
           </div>
         </div>
       </div>
-
       <div class="col s6 m4 l3">
         <div class="card hoverable valign-wrapper">
           <div class="card-content valign">
@@ -131,15 +124,17 @@
     </div>
   </div>
   <!-- how to play section ends -->
-
   <div id="charity" class="section">
     <div class="container row">
       <h5 class="center-align">CHARITY</h5>
       <div class="col s12 m8 l9">
         <blockquote class="quote">"If you don't give, no one will like you"</blockquote>
         <span> - crowdrise.com</span>
-        <p class="brief-text">We're quite sure you feel the same way, so we've integrated donation widgets, along with some not-so-subtle reminders throughout the game to give you the opportunity to donate.<br/>All donations go to make a wish foundation and benefit children in need</p>
-        <a href="https://www.crowdrise.com/fundraise-and-volunteer/donate-mobile/project/cfhio/cards4humanity?widget=true&redirect_to=http%3A%2F%2Fhyuga-cfh-staging.herokuapp.com%2F%23!%2F&stylesheet=&amounts=" class="waves-effect waves-light btn app-buttons">DONATE NOW</a>
+        <p class="brief-text">We're quite sure you feel the same way, so we've integrated donation widgets, along with some not-so-subtle reminders
+          throughout the game to give you the opportunity to donate.<br/>All donations go to make a wish foundation and benefit
+          children in need</p>
+        <a href="https://www.crowdrise.com/fundraise-and-volunteer/donate-mobile/project/cfhio/cards4humanity?widget=true&redirect_to=http%3A%2F%2Fhyuga-cfh-staging.herokuapp.com%2F%23!%2F&stylesheet=&amounts="
+          class="waves-effect waves-light btn app-buttons">DONATE NOW</a>
       </div>
       <div class="col s6 offset-s3 m4 l3" id="give-card">
         <div class="card hoverable valign-wrapper bg-card" id="bg1">
@@ -149,7 +144,6 @@
             </p>
           </div>
         </div>
-
         <div class="card hoverable valign-wrapper bg-card" id="bg2">
           <div class="card-content valign">
             <p class="center-align">
@@ -157,7 +151,6 @@
             </p>
           </div>
         </div>
-
         <div class="card hoverable valign-wrapper">
           <div class="card-content valign">
             <p class="center-align">
@@ -168,18 +161,71 @@
       </div>
     </div>
   </div>
-
   <footer class="section">
     <div class="container">
       <p>
-        Legal stuff: This game is based on the <a href="https://cardsagainsthumanity.com" class="inline-link">Cards against humanity</a> card game, which is CC licensed (BY-NC-SA). Cards for Humanity is not affiliated with Cards Against Humanity. In complying with the Creative Commons license of the Cards Against Humanity card game, all proceeds from donations go directly to charity, as managed by <a href="https://crowdrise.com" class="inline-link">crowdrise</a>
+        Legal stuff: This game is based on the <a href="https://cardsagainsthumanity.com" class="inline-link">Cards against humanity</a>        card game, which is CC licensed (BY-NC-SA). Cards for Humanity is not affiliated with Cards Against Humanity. In
+        complying with the Creative Commons license of the Cards Against Humanity card game, all proceeds from donations
+        go directly to charity, as managed by <a href="https://crowdrise.com" class="inline-link">crowdrise</a>
       </p>
     </div>
   </footer>
-
   <div class="fixed-action-btn" id="play-action">
     <a class="btn-floating btn-large" href="play">
       <i class="large material-icons">gamepad</i>
     </a>
   </div>
 </div>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <div class="row">
+      <div class="col s12">
+        <h3>SIGN IN</h3>
+      </div>
+      <div class "col s6">
+        <form class="col s12" action="/users/session" method="post">
+          <div class="row">
+            <div class="input-field col s6">
+              <i class="material-icons prefix">email</i>
+              <input id="icon_email" name="email" type="email" class="validate" required>
+              <label for="icon_email">Email</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6">
+              <i class="material-icons prefix">lock</i>
+              <input id="icon_lock" name="password" type="password" class="validate" required>
+              <label for="icon_lock">Password</label>
+              <button class="btn waves-effect waves-light right" type="submit">LOG IN
+                    <i class="material-icons right">send</i>
+                  </button>
+            </div>
+          </div>
+        </form>
+        <div class="col s6 offset-s6" id="social">
+          <button class="btn waves-effect waves-light left" type="submit" name="action" id="fb">
+                <a href="/auth/facebook"><i class="fa fa-facebook" aria-hidden="true"></i> FACEBOOK</a>
+              </button>
+          <button class="btn waves-effect waves-light left" type="submit" name="action" id="twit">
+                <a href="/auth/twitter"><i class="fa fa-twitter" aria-hidden="true"></i> TWITTER</a>
+              </button>
+          <button class="btn waves-effect waves-light left" type="submit" name="action" id="google">
+                <a href="/auth/google"><i class="fa fa-google" aria-hidden="true"></i> GOOGLE</a>
+              </button>
+          <button class="btn waves-effect waves-light left" type="submit" name="action" id="git">
+                <a href="/auth/github"><i class="fa fa-github" aria-hidden="true"></i> GITHUB</a>
+              </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  // Modal Trigger
+    $(document).ready(function(){
+      $('#modal1').modal();
+    });
+
+</script>
