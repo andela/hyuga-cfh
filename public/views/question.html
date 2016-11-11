@@ -13,7 +13,7 @@
           </div>
         </div>
       </div>
-      <p class="center-align" ng-show="game.state === 'awaiting players'">Awaiting Players</p>
+      <p class="center-align" ng-show="checkState('awaiting-players')">Awaiting Players</p>
     </div>
     <button ng-show="checkState('gameCanStart')" ng-click="startGame()" class="btn btn-large valign app-buttons">START GAME</button>
   </div>

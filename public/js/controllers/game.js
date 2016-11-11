@@ -209,6 +209,7 @@ angular.module('mean.system')
         case 'gameends':
           return game.state === 'game ended' ||
           game.state === 'game dissolved';
+        case 'awaiting-players': return game.state === 'awaiting players';
         default: return false;
       }
     };
