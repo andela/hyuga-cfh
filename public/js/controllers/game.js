@@ -206,6 +206,9 @@ angular.module('mean.system')
         case 'canNotPickCard':
           return game.state === 'game ended' ||
           game.state === 'game dissolved';
+        case 'gameends':
+          return game.state === 'game ended' ||
+          game.state === 'game dissolved';
         default: return false;
       }
     };
