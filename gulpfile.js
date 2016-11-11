@@ -19,10 +19,9 @@ gulp.task('default', ['browser-sync', 'sass', 'watch']);
 // Gulp browser-sync
 gulp.task('browser-sync', ['nodemon'], function () {
   'use strict';
-  browserSync.init(null, {
+  browserSync.init({
     proxy: 'http://localhost:3000',
     files: ['public/**/*.*'],
-    browser: 'google-chrome',
     port: 5000
   });
 });
@@ -68,9 +67,7 @@ gulp.task('sass', function () {
     }))
     .on('error', sass.logError)
     .pipe(gulp.dest('public/css/'))
-    .pipe(browserSync.reload({
-      stream: true
-    }));
+    .pipe(browserSync.stream());
 });
 
 gulp.task('before-test', function () {
@@ -112,10 +109,12 @@ gulp.task('test', ['before-test'], function () {
 // Gulp will watch files for changes
 gulp.task('watch', function () {
   'use strict';
-  // Watch .html files
-  gulp.watch(['public/views/*.html', 'public/js/**/*.js'], browserSync.reload);
   // Watch .css files
   gulp.watch('public/css/**', ['sass']);
   // Watch .jade files
-  gulp.watch('app/views/**', browserSync.reload);
+  gulp.watch([
+    'public/views/**/*',
+    'public/js/**/*',
+    'app/views/**'
+  ]).on('change', browserSync.reload);
 });
