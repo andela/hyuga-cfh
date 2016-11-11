@@ -4,9 +4,17 @@
     "ecmaVersion": 5,
     "sourceType": "module"
   },
+  "rules": {
+    "func-names": [
+      2,
+      "never"
+    ]
+  },
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "mocha": true,
+    "jquery": true
   },
   "globals": {
     "require": true
