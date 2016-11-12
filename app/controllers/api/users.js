@@ -63,3 +63,38 @@ exports.signup = function (req, res) {
     });
   });  
 };
+
+exports.friendship = function (req, res) {
+  saveFriend(req.body.friendemail, req.body.useremail,
+  function (reply) {
+    if (reply.status === 200) {
+      saveFriend(req.body.useremail, req.body.friendemail,
+      function (finalReply) {
+        res.send(finalReply.status, {message: 'Friendship done'});
+      });
+    } else {
+      res.send(reply.status, {message: reply.message});
+    }
+  });
+};
+
+function saveFriend(user1, user2, callback) {
+  User.find({email: user1}, function (err, userDetails) {
+    if (err) {
+      return callback({status: 500, message: 'Internal server error'});
+    }
+    if (userDetails.length === 0) {
+      return callback({status: 401, message: 'Friend does not exist'});
+    }
+    if (userDetails[0].friends.indexOf(user2) >= 0) {
+      return callback({status: 401, message: 'Already friends'});
+    }
+    userDetails[0].friends.push(user2);
+    userDetails[0].save(function (err, updates) {
+      if (err) {
+        return callback({status: 500, message: 'Internal server error'});
+      }
+      return callback({status: 200});
+    });
+  });
+}
