@@ -26,15 +26,13 @@
     </div>
   </div>
   <div ng-show="checkState('awaiting-players')">
-    <h5>INSTRUCTIONS</h5>
-    <div>
-      <ul>
-        <li>Each player begins with, and will always have, 10 white answer cards.</li>
-        <li>For each round, one player is randomly chosen as the Card Czar.</li>
-        <li>Everyone else answers the black question card by clicking on the answer card they want to use.</li>
-        <li>The Card Czar then picks a favorite answer, and whoever played that answer wins the round.</li>
-      </ul>
-    </div>
+    <h5 id="lobby-how-to-play">HOW TO PLAY</h5>
+    <ul id="oh-el">
+      <li>Each player begins with, and will always have, 10 white answer cards.</li>
+      <li>For each round, one player is randomly chosen as the Card Czar.</li>
+      <li>Everyone else answers the black question card by clicking on the answer card they want to use.</li>
+      <li>The Card Czar then picks a favorite answer, and whoever played that answer wins the round.</li>
+    </ul>
   </div>
   <div ng-show="checkState('noGame')">
     <h4 class="center-align">What would you like to do now?</h4>
