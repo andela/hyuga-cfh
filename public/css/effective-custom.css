@@ -275,6 +275,21 @@ footer {
   width: 98%;
 }
 
+.a_player .material-icons {
+  color: #A1232E;
+  margin: -38px 0 0 35%;
+  display: none;
+}
+
+.a_player:hover {
+  opacity: 0.3;
+}
+
+.a_player:hover .material-icons {
+  display: block;
+  cursor: pointer;
+}
+
 @media screen and (min-width: 992px) {
   #banner-bg-card {
     margin: 40px 0 -227px 0;
