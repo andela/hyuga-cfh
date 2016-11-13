@@ -225,7 +225,7 @@ angular.module('mean.system')
     }
 
     $scope.addFriend = function (friendId) {
-      $http.post('/api/friend', {friendId}).then(function (response) {
+      $http.post('/api/friend', {friendId:friendId}).then(function (response) {
         console.log(response);
       }, function (err) {
         console.log(err);
