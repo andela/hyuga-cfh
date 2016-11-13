@@ -66,7 +66,7 @@ exports.signup = function (req, res) {
 
 exports.friendship = function (req, res) {
   // req.user._id = req.body.userid;
-  saveFriend(req.body.userid, req.body.friendid,
+  saveFriend(req.user._id, req.body.friendid,
   function (reply) {
     if (reply.status === 200) {
       res.send(reply.status, {message: 'Friendship done'});
@@ -77,7 +77,6 @@ exports.friendship = function (req, res) {
 };
 
 function saveFriend(user1, user2, callback) {
-  console.log(user1);
   User.findById(user1, function (err, userDetails) {
     if (err) {
       return callback({status: 500, message: 'Internal server error'});
