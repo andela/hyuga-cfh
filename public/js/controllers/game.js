@@ -224,8 +224,8 @@ angular.module('mean.system')
       game.joinGame();
     }
 
-    $scope.addFriend = function (friendId) {
-      $http.post('/api/friend', {friendId:friendId}).then(function (response) {
+    $scope.addFriend = function (friendid) {
+      $http.post('/api/friend', {friendid: friendid}).then(function (response) {
         console.log(response);
       }, function (err) {
         console.log(err);
