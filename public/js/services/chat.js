@@ -1,5 +1,5 @@
 angular.module('mean.system')
-  .factory('chat', [function() {
+  .factory('chat', ['storage', function(storage) {
     'use strict';
 
     var chat = {
@@ -7,11 +7,11 @@ angular.module('mean.system')
       unreadMsg: 0
     };
 
-    if (!window.user) {
+    if (!storage.getUser()) {
       chat.username = 'guest';
     } else {
-      chat.username = window.user.name;
-      chat.id = window.user.id;
+      chat.username = storage.getUser().name;
+      chat.id = storage.getUser().id;
     }
 
     chat.unreadMsg = 0;
@@ -81,7 +81,7 @@ angular.module('mean.system')
         messageElement.innerHTML = messageElement.innerHTML.replace(/\n/g, '<br>');
       }
       // Show the card fading-in and scroll to view the new message.
-      if (window.user && (name !== window.user.name)) {
+      if (storage.getUser() && (name !== storage.getUser().name)) {
         document.getElementById('unread').textContent = chat.unreadMsg + 1;
       }
       setTimeout(function() {
