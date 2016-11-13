@@ -77,12 +77,12 @@ exports.friendship = function (req, res) {
 };
 
 function saveFriend(user1, user2, callback) {
-  User.find({_id: user1}, function (err, userDetails) {
+  User.findById(user1, function (err, userDetails) {
     if (err) {
       return callback({status: 500, message: 'Internal server error'});
     }
     if (userDetails.length === 0) {
-      return callback({status: 401, message: 'Friend does not exist'});
+      return callback({status: 401, message: 'User does not exist'});
     }
     if (userDetails[0].friends.indexOf(user2) >= 0) {
       return callback({status: 401, message: 'Already friends'});
