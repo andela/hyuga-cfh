@@ -65,8 +65,7 @@ exports.signup = function (req, res) {
 };
 
 exports.friendship = function (req, res) {
-  console.log(req.user, 'sdfds');
-  saveFriend(req.body.userid, req.user.friendid,
+  saveFriend(req.user._id, req.body.friendid,
   function (reply) {
     if (reply.status === 200) {
       res.send(reply.status, {message: 'Friendship done'});
