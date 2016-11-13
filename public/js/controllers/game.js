@@ -1,5 +1,6 @@
 angular.module('mean.system')
-  .controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', function ($scope, game, $timeout, $location, MakeAWishFactsService) {
+  .controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$http',
+  function ($scope, game, $timeout, $location, MakeAWishFactsService, $http) {
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
@@ -223,4 +224,11 @@ angular.module('mean.system')
       game.joinGame();
     }
 
+    $scope.addFriend = function () {
+      $http.post('/api/friend', {}).then(function (response) {
+        console.log(response);
+      }, function (err) {
+        console.log(err);
+      });
+    };
   }]);

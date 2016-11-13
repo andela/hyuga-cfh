@@ -65,6 +65,7 @@ exports.signup = function (req, res) {
 };
 
 exports.friendship = function (req, res) {
+  console.log(req.user, 'sdfds');
   saveFriend(req.body.friendemail, req.body.useremail,
   function (reply) {
     if (reply.status === 200) {
