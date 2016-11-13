@@ -66,10 +66,10 @@ exports.signup = function (req, res) {
 
 exports.friendship = function (req, res) {
   console.log(req.user, 'sdfds');
-  saveFriend(req.body.friendemail, req.body.useremail,
+  saveFriend(req.body.friendid, req.user.userid,
   function (reply) {
     if (reply.status === 200) {
-      saveFriend(req.body.useremail, req.body.friendemail,
+      saveFriend(req.user.userid, req.body.friendid,
       function (finalReply) {
         res.send(finalReply.status, {message: 'Friendship done'});
       });
@@ -80,7 +80,7 @@ exports.friendship = function (req, res) {
 };
 
 function saveFriend(user1, user2, callback) {
-  User.find({email: user1}, function (err, userDetails) {
+  User.find({_id: user1}, function (err, userDetails) {
     if (err) {
       return callback({status: 500, message: 'Internal server error'});
     }
