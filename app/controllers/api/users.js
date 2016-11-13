@@ -63,3 +63,10 @@ exports.signup = function (req, res) {
     });
   });  
 };
+
+exports.currentUser = function (req, res) {
+  if(req.user){
+   return res.send(req.user);
+  }
+  res.status(404).send('Not Found!');
+};

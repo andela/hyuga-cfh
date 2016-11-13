@@ -6,4 +6,5 @@ module.exports = function(app) {
   // User routes
   app.post('/api/auth/signup', users.signup);
   app.post('/api/auth/login', users.login);
+  app.get('/api/auth/currentuser', users.currentUser);
 };
