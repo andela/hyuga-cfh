@@ -19,7 +19,7 @@ Original Contributors:
 
 New Contributors:
 * [Kehinde Oni](https://github.com/andela-koni) 
-* [Joshua Azemoh](https://github.com/andela-jazemoh)
+* [Joshua Azemoh](https://github.com/azemoh)
 * [Atanda Abdulsemiu](https://github.com/andela-aatanda)
 * [Femi Oladeji](https://github.com/andela-foladeji)
 * [Ore Agunbiade](https://github.com/andela-oagunbiade)
