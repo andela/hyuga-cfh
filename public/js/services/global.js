@@ -1,12 +1,10 @@
 angular.module('mean.system')
-  .factory('Global', ['storage', function(storage) {
-    storage.setUser();
+  .factory('Global', ['storage', function(storage, $scope) {
     var _this = this;
     _this._data = {
         user: storage.getUser(),
-        authenticated: !! storage.getUser()
+        authenticated: !!storage.getUser()
     };
-
     return _this._data;
   }])
   .factory('AvatarService', ['$http', '$q', function($http, $q) {

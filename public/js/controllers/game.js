@@ -1,5 +1,5 @@
 angular.module('mean.system')
-.controller('GameController', ['$scope', 'game', 'chat', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', function ($scope, game, chat, $timeout, $location, MakeAWishFactsService, $dialog) {
+  .controller('GameController', ['$scope', 'game', 'chat', '$timeout', '$location', 'MakeAWishFactsService', '$dialog', function($scope, game, chat, $timeout, $location, MakeAWishFactsService, $dialog) {
     $scope.hasPickedCards = false;
     $scope.winningCardPicked = false;
     $scope.showTable = false;
@@ -31,7 +31,9 @@ angular.module('mean.system')
 
     $scope.pointerCursorStyle = function() {
       if ($scope.isCzar() && $scope.game.state === 'waiting for czar to decide') {
-        return {'cursor': 'pointer'};
+        return {
+          'cursor': 'pointer'
+        };
       } else {
         return {};
       }
@@ -58,18 +60,18 @@ angular.module('mean.system')
       }
     };
 
-    $scope.firstAnswer = function($index){
-      if($index % 2 === 0 && game.curQuestion.numAnswers > 1){
+    $scope.firstAnswer = function($index) {
+      if ($index % 2 === 0 && game.curQuestion.numAnswers > 1) {
         return true;
-      } else{
+      } else {
         return false;
       }
     };
 
-    $scope.secondAnswer = function($index){
-      if($index % 2 === 1 && game.curQuestion.numAnswers > 1){
+    $scope.secondAnswer = function($index) {
+      if ($index % 2 === 1 && game.curQuestion.numAnswers > 1) {
         return true;
-      } else{
+      } else {
         return false;
       }
     };
@@ -131,7 +133,7 @@ angular.module('mean.system')
     };
 
     // Send message in group chat
-    $scope.sendMessage = function () {
+    $scope.sendMessage = function() {
       var msg = document.getElementById('message').value;
       if (msg && msg.trim() !== '') {
         // pop up chat window if minimized.
@@ -142,7 +144,7 @@ angular.module('mean.system')
     };
 
     // Resize chat panel
-    $scope.resize = function () {
+    $scope.resize = function() {
       if (!$scope.openChat) {
         $scope.openChat = true;
         // clear chat badge
@@ -175,7 +177,7 @@ angular.module('mean.system')
     $scope.$watch('game.gameID', function() {
       if (game.gameID && game.state === 'awaiting players') {
         // Clear the chat history if player is first to join room
-        if(game.playerIndex === 0){
+        if (game.playerIndex === 0) {
           $scope.chat.clearMessage();
         }
 
@@ -186,13 +188,20 @@ angular.module('mean.system')
         } else if ($scope.isCustomGame() && !$location.search().game) {
           // Once the game ID is set, update the URL if this is a game with friends,
           // where the link is meant to be shared.
-          $location.search({game: game.gameID});
-          if(!$scope.modalShown){
-            setTimeout(function(){
+          $location.search({
+            game: game.gameID
+          });
+          if (!$scope.modalShown) {
+            setTimeout(function() {
               var link = document.URL;
               var txt = 'Give the following link to your friends so they can join your game: ';
               $('#lobby-how-to-play').text(txt);
-              $('#oh-el').css({'text-align': 'center', 'font-size':'22px', 'background': 'white', 'color': 'black'}).text(link);
+              $('#oh-el').css({
+                'text-align': 'center',
+                'font-size': '22px',
+                'background': 'white',
+                'color': 'black'
+              }).text(link);
             }, 200);
             $scope.modalShown = true;
           }
@@ -200,13 +209,48 @@ angular.module('mean.system')
       }
     });
 
+    $scope.checkState = function(state) {
+      switch (state) {
+        case 'gameEndPeopleLeft':
+          return game.state === 'game dissolved' && game.gameWinner === -1;
+        case 'gameNotOn':
+          return game.state === 'game ended' ||
+            game.state === 'game dissolved' || game.state === 'awaiting players';
+        case 'youWon':
+          return game.state === 'game ended' &&
+            game.gameWinner === game.playerIndex;
+        case 'youLost':
+          return game.state === 'game ended' &&
+            game.gameWinner !== game.playerIndex;
+        case 'gameCanStart':
+          return (game.playerIndex === 0 || game.joinOverride) &&
+            game.players.length >= game.playerMinLimit;
+        case 'noGame':
+          return game.state === 'game ended' ||
+            game.state === 'game dissolved';
+        case 'canCzar':
+          return game.table.length === 0 && game.state !== 'game dissolved' &&
+            game.state !== 'awaiting players';
+        case 'canNotPickCard':
+          return game.state === 'game ended' ||
+            game.state === 'game dissolved';
+        case 'gameends':
+          return game.state === 'game ended' ||
+            game.state === 'game dissolved';
+        case 'awaiting-players':
+          return game.state === 'awaiting players';
+        default:
+          return false;
+      }
+    };
+
     if ($location.search().game && !(/^\d+$/).test($location.search().game)) {
       console.log('joining custom game');
-      game.joinGame('joinGame',$location.search().game);
+      game.joinGame('joinGame', $location.search().game);
     } else if ($location.search().custom) {
-      game.joinGame('joinGame',null,true);
+      game.joinGame('joinGame', null, true);
     } else {
       game.joinGame();
     }
 
-}]);
+  }]);

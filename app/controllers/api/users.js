@@ -65,6 +65,7 @@ exports.signup = function (req, res) {
 };
 
 exports.currentUser = function (req, res) {
+  console.log(req.user);
   if(req.user){
    return res.send(req.user);
   }

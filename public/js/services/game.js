@@ -17,6 +17,8 @@ angular.module('mean.system')
     state: null,
     round: 0,
     time: 0,
+    fullTime : 0,
+    percentageTime: 0,
     curQuestion: null,
     notification: null,
     timeLimits: {},
@@ -49,6 +51,7 @@ angular.module('mean.system')
   var decrementTime = function() {
     if (game.time > 0 && !timeSetViaUpdate) {
       game.time--;
+      game.percentageTime = ((game.fullTime - game.time) / game.fullTime) * 100;
     } else {
       timeSetViaUpdate = false;
     }
@@ -92,13 +95,13 @@ angular.module('mean.system')
     //Handle updating game.time
     if (data.round !== game.round && data.state !== 'awaiting players' &&
       data.state !=='game ended' && data.state !== 'game dissolved') {
-      game.time = game.timeLimits.stateChoosing - 1;
+      game.fullTime = game.time = game.timeLimits.stateChoosing - 1;
       timeSetViaUpdate = true;
     } else if (newState && data.state === 'waiting for czar to decide') {
-      game.time = game.timeLimits.stateJudging - 1;
+      game.fullTime = game.time = game.timeLimits.stateJudging - 1;
       timeSetViaUpdate = true;
     } else if (newState && data.state === 'winner has been chosen') {
-      game.time = game.timeLimits.stateResults - 1;
+      game.fullTime = game.time = game.timeLimits.stateResults - 1;
       timeSetViaUpdate = true;
     }
 
@@ -182,7 +185,8 @@ angular.module('mean.system')
     mode = mode || 'joinGame';
     room = room || '';
     createPrivate = createPrivate || false;
-    var userID = !!storage.getUser() ? user._id : 'unauthenticated';
+    var currentUser = storage.getUser();
+    var userID = !!currentUser ? currentUser._id : 'unauthenticated';
     socket.emit(mode,{userID: userID, room: room, createPrivate: createPrivate});
   };
 
