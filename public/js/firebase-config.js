@@ -1,4 +1,4 @@
-  var firebase;
+// Firebase config script
   var config = {
     apiKey: "AIzaSyCRcHjH380LGWO7vx6IO65D0hnsLuLDtbI",
     authDomain: "chat-4e75b.firebaseapp.com",
