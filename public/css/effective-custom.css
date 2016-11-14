@@ -281,13 +281,26 @@ footer {
   display: none;
 }
 
-.a_player:hover {
+.aplayer-hover:hover {
   opacity: 0.3;
 }
 
-.a_player:hover .material-icons {
+.aplayer-hover:hover .material-icons {
   display: block;
   cursor: pointer;
+}
+
+.friend-notifications {
+  position: fixed;
+  top: 64px;
+  right: 0px;
+  padding: 10px;
+  background: #A1232E;
+  color: #fff;
+}
+
+.success-notify {
+  background: #4F914A;
 }
 
 @media screen and (min-width: 992px) {

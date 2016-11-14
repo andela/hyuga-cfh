@@ -224,11 +224,23 @@ angular.module('mean.system')
       game.joinGame();
     }
 
+    $scope.clearMessage = function() {
+      $timeout(function () {
+        $scope.friendship = false;
+      }, 5000);
+    };
+
     $scope.addFriend = function (friendid) {
+      $scope.friendship = {};
       $http.post('/api/friend', {friendid: friendid}).then(function (response) {
-        console.log(response);
-      }, function (err) {
-        console.log(err);
+        if(response.status === 200) {
+          $scope.friendship.done = true;
+        }
+        $scope.friendship.message = response.data.message;
+        $scope.clearMessage();
+      }, function (error) {
+        $scope.friendship.message = error.data.message;
+        $scope.clearMessage();
       });
     };
   }]);
