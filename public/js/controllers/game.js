@@ -5,9 +5,9 @@ angular.module('mean.system')
     'chat',
     '$timeout',
     '$location',
-    'MakeAWishFactsService',
     '$http',
-    '$dialog', function ($scope, game, chat, $timeout, $location, MakeAWishFactsService, $dialog, $http) {
+    'MakeAWishFactsService',
+    '$dialog', function ($scope, game, chat, $timeout, $location, $http, MakeAWishFactsService, $dialog) {
       $scope.hasPickedCards = false;
       $scope.winningCardPicked = false;
       $scope.showTable = false;
@@ -42,9 +42,8 @@ angular.module('mean.system')
           return {
             'cursor': 'pointer'
           };
-        } else {
-          return {};
         }
+        return {};
       };
 
       $scope.sendPickedCards = function () {
@@ -55,33 +54,23 @@ angular.module('mean.system')
       $scope.cardIsFirstSelected = function (card) {
         if (game.curQuestion.numAnswers > 1) {
           return card === $scope.pickedCards[0];
-        } else {
-          return false;
         }
+        return false;
       };
 
       $scope.cardIsSecondSelected = function (card) {
         if (game.curQuestion.numAnswers > 1) {
           return card === $scope.pickedCards[1];
-        } else {
-          return false;
         }
+        return false;
       };
 
       $scope.firstAnswer = function ($index) {
-        if ($index % 2 === 0 && game.curQuestion.numAnswers > 1) {
-          return true;
-        } else {
-          return false;
-        }
+        return ($index % 2 === 0 && game.curQuestion.numAnswers > 1);
       };
 
       $scope.secondAnswer = function ($index) {
-        if ($index % 2 === 1 && game.curQuestion.numAnswers > 1) {
-          return true;
-        } else {
-          return false;
-        }
+        return ($index % 2 === 1 && game.curQuestion.numAnswers > 1);
       };
 
       $scope.showFirst = function (card) {
@@ -115,9 +104,8 @@ angular.module('mean.system')
       $scope.winningColor = function ($index) {
         if (game.winningCardPlayer !== -1 && $index === game.winningCard) {
           return $scope.colors[game.players[game.winningCardPlayer].color];
-        } else {
-          return '#f9f9f9';
         }
+        return '#f9f9f9';
       };
 
       $scope.pickWinning = function (winningSet) {
