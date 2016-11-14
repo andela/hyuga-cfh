@@ -1,0 +1,25 @@
+<html>
+
+<body>
+  <!-- Messages container -->
+  <div class="col l2 m3 s12 chat-container card">
+    <div class="chat_header center-align" ng-click="resize()"><span id="unread" ng-show="!openChat" class="badge"></span>Chat</div>
+    <div class="card-content">
+      <div class="show_message" ng-show="openChat">
+        <div id="messages">
+          <span id="message-filler"></span>
+        </div>
+      </div>
+    </div>
+    <form id="message-form" class="message-form" ng-submit="sendMessage()">
+      <div>
+        <input placeholder="Message..." type="text" id="message">
+      </div>
+      <button class="btn waves-effect waves-light" type="submit" name="action">Send
+      <i class="material-icons right">send</i>
+      </button>
+    </form>
+  </div>
+</body>
+
+</html>

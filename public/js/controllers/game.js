@@ -1,11 +1,19 @@
 angular.module('mean.system')
-  .controller('GameController', ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService', '$http',
-    function ($scope, game, $timeout, $location, MakeAWishFactsService, $http) {
+  .controller('GameController', [
+    '$scope',
+    'game',
+    'chat',
+    '$timeout',
+    '$location',
+    'MakeAWishFactsService',
+    '$http',
+    '$dialog', function ($scope, game, chat, $timeout, $location, MakeAWishFactsService, $dialog, $http) {
       $scope.hasPickedCards = false;
       $scope.winningCardPicked = false;
       $scope.showTable = false;
       $scope.modalShown = false;
       $scope.game = game;
+      $scope.chat = chat;
       $scope.pickedCards = [];
       var makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
       $scope.makeAWishFact = makeAWishFacts.pop();
@@ -132,8 +140,30 @@ angular.module('mean.system')
         $location.path('/');
       };
 
-      // Catches changes to round to update when no players pick card
-      // (because game.state remains the same)
+    // Send message in group chat
+      $scope.sendMessage = function () {
+        var msg = document.getElementById('message').value;
+        if (msg && msg.trim() !== '') {
+        // pop up chat window if minimized.
+          $scope.openChat = true;
+          document.getElementById('unread').textContent = '';
+          $scope.chat.sendMessage(msg);
+        }
+      };
+
+    // Resize chat panel
+      $scope.resize = function () {
+        if (!$scope.openChat) {
+          $scope.openChat = true;
+          // clear chat badge
+          document.getElementById('unread').textContent = '';
+        } else {
+          $scope.openChat = false;
+        }
+      };
+
+    // Catches changes to round to update when no players pick card
+    // (because game.state remains the same)
       $scope.$watch('game.round', function () {
         $scope.hasPickedCards = false;
         $scope.showTable = false;
@@ -145,7 +175,7 @@ angular.module('mean.system')
         $scope.pickedCards = [];
       });
 
-      // In case player doesn't pick a card in time, show the table
+    // In case player doesn't pick a card in time, show the table
       $scope.$watch('game.state', function () {
         if (game.state === 'waiting for czar to decide' && $scope.showTable === false) {
           $scope.showTable = true;
@@ -154,6 +184,11 @@ angular.module('mean.system')
 
       $scope.$watch('game.gameID', function () {
         if (game.gameID && game.state === 'awaiting players') {
+        // Clear the chat history if player is first to join room
+          if (game.playerIndex === 0) {
+            $scope.chat.clearMessage();
+          }
+
           if (!$scope.isCustomGame() && $location.search().game) {
             // If the player didn't successfully enter the request room,
             // reset the URL so they don't think they're in the requested room.
@@ -188,28 +223,28 @@ angular.module('mean.system')
           return game.state === 'game dissolved' && game.gameWinner === -1;
         case 'gameNotOn':
           return game.state === 'game ended' ||
-              game.state === 'game dissolved' || game.state === 'awaiting players';
+            game.state === 'game dissolved' || game.state === 'awaiting players';
         case 'youWon':
           return game.state === 'game ended' &&
-              game.gameWinner === game.playerIndex;
+            game.gameWinner === game.playerIndex;
         case 'youLost':
           return game.state === 'game ended' &&
-              game.gameWinner !== game.playerIndex;
+            game.gameWinner !== game.playerIndex;
         case 'gameCanStart':
           return (game.playerIndex === 0 || game.joinOverride) &&
-              game.players.length >= game.playerMinLimit;
+            game.players.length >= game.playerMinLimit;
         case 'noGame':
           return game.state === 'game ended' ||
-              game.state === 'game dissolved';
+            game.state === 'game dissolved';
         case 'canCzar':
           return game.table.length === 0 && game.state !== 'game dissolved' &&
-              game.state !== 'awaiting players';
+            game.state !== 'awaiting players';
         case 'canNotPickCard':
           return game.state === 'game ended' ||
-              game.state === 'game dissolved';
+            game.state === 'game dissolved';
         case 'gameends':
           return game.state === 'game ended' ||
-              game.state === 'game dissolved';
+            game.state === 'game dissolved';
         case 'awaiting-players':
           return game.state === 'awaiting players';
         default:
@@ -259,5 +294,4 @@ angular.module('mean.system')
         return playerID !== 'unauthenticated' &&
           playerID !== userID && userID;
       };
-    }
-  ]);
+    }]);
