@@ -3,7 +3,7 @@
 <body>
   <!-- Messages container -->
   <div class="col l2 m3 s12 chat-container card">
-    <div class="chat_header center-align" ng-click="resize()"><span id="unread" class="badge"></span>Chat</div>
+    <div class="chat_header center-align" ng-click="resize()"><span id="unread" ng-show="!openChat" class="badge"></span>Chat</div>
     <div class="card-content">
       <div class="show_message" ng-show="openChat">
         <div id="messages">

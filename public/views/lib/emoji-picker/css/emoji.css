@@ -54,14 +54,17 @@ img.emoji {
 
 .emoji-picker-icon {
     float: right;
-    margin-top: -28px;
+    margin-top: -25px;
+    margin-right: 5px;
+    height: 16px;
+    width: 16px;
     right: 10px;
     top: 30px;
     font-size: 20px;
     opacity: 0.7;
     z-index: 100;
     transition: none;
-    color: black;
+    color: red;
     -moz-user-select: none;
     -khtml-user-select: none;
     -webkit-user-select: none;

@@ -1,6 +1,8 @@
-<div id = "inner-timer-container">
-  <span id="timer-status-round" ng-hide="game.state === 'winner has been chosen' || game.state === 'waiting for czar to decide'"> Time Remaining</span>
-  <span id="timer-status-czar-choosing" ng-show="game.state === 'winner has been chosen'"> Next Round In</span>
-  <span id="timer-status-czar-choosing" ng-show="game.state === 'waiting for czar to decide'"> Czar Choosing</span>
-  <div id="time" ng-bind="game.time"></div>
+<div class="container timer-wrapper">
+  <span class="time" ng-bind="game.time"></span>
+  <div class="progress" ng-hide="game.state === 'winner has been chosen' || game.state === 'waiting for czar to decide' || game.state === 'awaiting players'" >
+    <div class="determinate game-time" style="transition: 2s; background:#A1232E; width:{{game.percentageTime}}%" ></div>
+  </div>
+  <p class="center-align" ng-show="game.state === 'winner has been chosen'"> Next Round In</span>
+  <p class="center-align" ng-show="game.state === 'waiting for czar to decide'"> Czar Choosing</span>
 </div>

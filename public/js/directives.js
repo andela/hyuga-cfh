@@ -65,12 +65,12 @@ angular.module('mean.directives', [])
       templateUrl: '/views/timer.html',
       link: function(scope, elem, attr){}
     };
-  }).directive('landing', function() {
+  }).directive('landing', function(storage) {
     return {
       restrict: 'EA',
       link: function(scope, elem, attr) {
         scope.showOptions = true;
-        if (window.user) {
+        if (storage.getUser()) {
           scope.showOptions = false;
         }
       }
