@@ -84,46 +84,28 @@ exports.friendship = function (req, res) {
 };
 
 exports.search = function (req, res) {
-  User.findById(req.query._id, function (err, details) {
+  User.findById(req.query._id, function (err, user) {
     if(err) {
       return res.send(500, { message: err.errors });
     }
-    var allFriends = [];
-    details.friends.forEach(function (eachFriendID) {
-      User.findById(eachFriendID, function (err, friendDetails) {
-        console.log(friendDetails);
-        allFriends.push({
-          'id': eachFriendID,
-          'name': friendDetails.name
-        });
-      });
+    User.find({_id: {$in: user.friends }}, function (err, friends) {
+      return res.send(200, friends);
     });
-    console.log(allFriends);
-    // return res.send(200, allFriends);
-  });
-  var name = new RegExp(req.query.name, 'i');
-
-  User.find({ name: name }, function (err, users) {
-    if (err) {
-      return res.send(500, { message: err.errors });
-    }
-
-    res.send(users);
   });
 };
 
-function saveFriend(user1, user2, callback) {
-  User.findById(user1, function (err, userDetails) {
+function saveFriend(userId, firendId, callback) {
+  User.findById(userId, function (err, userDetails) {
     if (err) {
       return callback({status: 500, message: 'Internal server error'});
     }
     if (!userDetails) {
       return callback({status: 401, message: 'User does not exist'});
     }
-    if (userDetails.friends.indexOf(user2) >= 0) {
+    if (userDetails.friends.indexOf(firendId) >= 0) {
       return callback({status: 401, message: 'Already friends'});
     }
-    userDetails.friends.push(user2);
+    userDetails.friends.push(firendId);
     userDetails.save(function (err, updates) {
       if (err) {
         return callback({status: 500, message: 'Internal server error'});

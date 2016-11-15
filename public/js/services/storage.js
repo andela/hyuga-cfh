@@ -1,3 +1,5 @@
+/* globals angular */
+
 angular.module('mean.system')
   .factory('storage', ['$http', '$window', function ($http, $window) {
     'use strict';
@@ -11,7 +13,7 @@ angular.module('mean.system')
     };
 
     storage.getUser = function () {
-      if ($window.localStorage.user) {
+      if ($window.localStorage.user !== 'undefined') {
         return (JSON.parse($window.localStorage.user || false));
       }
       return false;
