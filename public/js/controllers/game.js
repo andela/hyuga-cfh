@@ -7,7 +7,8 @@ angular.module('mean.system')
     '$location',
     '$http',
     'MakeAWishFactsService',
-    '$dialog', function ($scope, game, chat, $timeout, $location, $http, MakeAWishFactsService, $dialog) {
+    '$dialog', function ($scope, game, chat, $timeout,
+    $location, $http, MakeAWishFactsService) {
       $scope.hasPickedCards = false;
       $scope.winningCardPicked = false;
       $scope.showTable = false;
@@ -272,13 +273,13 @@ angular.module('mean.system')
       };
 
       $scope.getPlayerId = function () {
-        let userDetails = {};
+        var userDetails = {};
         userDetails = JSON.parse(localStorage.getItem('user'));
         return (userDetails) ? userDetails._id : false;
       };
 
       $scope.isAddable = function (playerID) {
-        let userID = $scope.getPlayerId();
+        var userID = $scope.getPlayerId();
         return playerID !== 'unauthenticated' &&
           playerID !== userID && userID;
       };

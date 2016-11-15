@@ -83,6 +83,35 @@ exports.friendship = function (req, res) {
   });
 };
 
+exports.search = function (req, res) {
+  User.findById(req.query._id, function (err, details) {
+    if(err) {
+      return res.send(500, { message: err.errors });
+    }
+    var allFriends = [];
+    details.friends.forEach(function (eachFriendID) {
+      User.findById(eachFriendID, function (err, friendDetails) {
+        console.log(friendDetails);
+        allFriends.push({
+          'id': eachFriendID,
+          'name': friendDetails.name
+        });
+      });
+    });
+    console.log(allFriends);
+    // return res.send(200, allFriends);
+  });
+  var name = new RegExp(req.query.name, 'i');
+
+  User.find({ name: name }, function (err, users) {
+    if (err) {
+      return res.send(500, { message: err.errors });
+    }
+
+    res.send(users);
+  });
+};
+
 function saveFriend(user1, user2, callback) {
   User.findById(user1, function (err, userDetails) {
     if (err) {
