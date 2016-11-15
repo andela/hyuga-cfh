@@ -3,6 +3,7 @@
  */
 var mongoose = require('mongoose'),
   User = mongoose.model('User'),
+  GameHistory = mongoose.model('History'),
   jwt = require('jsonwebtoken'),
   avatars = require('../avatars').all();
 
@@ -79,5 +80,28 @@ exports.gameHistory = function (req, res) {
   }
   var historyID = jwt.sign({ userId: req.user._id }, secret);
 
-  return res.send({ name: req.user.name, gameID: historyID, userID: req.user._id });
+  var currentGameHistory = { name: req.user.name, gameID: historyID, userID: req.user._id };
+
+  var History = mongoose.model('History');
+
+  var gameHistory = new History(currentGameHistory);
+
+  gameHistory.save(function (err) {
+    if (err) {
+      console.err(err);
+    } else {
+      console.log('game history saved successfully');
+    }
+  });
+
+  History.findOne({name: req.user.name}, function (err, historyDetail) {
+    console.log(historyDetail);
+    if (err) {
+      console.error(err);
+    } else if (historyDetail) {
+      console.log('Found:', historyDetail);
+    } else {
+      console.error('Cannot find Game history');
+    }
+  });
 };
