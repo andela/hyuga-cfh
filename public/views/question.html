@@ -18,16 +18,12 @@
     <button ng-show="checkState('gameCanStart')" ng-click="startGame()" class="btn btn-large valign app-buttons">START GAME</button>
   </div>
   <div ng-show="checkState('awaiting-players')">
-    <div class="input-field col s12 m6 l4 offset-m3 offset-l4">
-      <select multiple>
+    <div class="input-field col s12 m6 l6 offset-m3 offset-l3">
+      <select ng-model="invited" multiple class="col l7">
         <option value="" disabled selected>Invite Players</option>
-        <option value="1">Option 1</option>
-        <option value="2">Option 2</option>
-        <option value="3">Option 3</option>
-        <option value="4">Option 1</option>
-        <option value="5">Option 2</option>
-        <option value="6">Option 3</option>
+        <option ng-repeat="friend in friendList" value={{friend._id}}>{{friend.name}}</option>
       </select>
+      <input ng-click="invitePlayers()" type="submit" class="btn app-buttons" value="Invite"/>
     </div>
   </div>
   <div class="waiting valign-wrapper" ng-show="checkState('gameEndPeopleLeft')">

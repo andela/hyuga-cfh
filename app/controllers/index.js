@@ -21,13 +21,17 @@ exports.render = function (req, res) {
   if (req.user) {
     user = req.user;
 
-    user.getFriends(function (err, users) {
-      friends = users;
+    user.getFriends(function (err, friends) {
+      // user.allFriends = friends;
+      res.render('index', {
+        user: user ? JSON.stringify(user) : null,
+        friends: friends ? JSON.stringify(friends) : null
+      });
+    });
+  } else {
+    res.render('index', {
+      user: user ? JSON.stringify(user) : null,
+      friends: friends ? JSON.stringify(friends) : null
     });
   }
-
-  res.render('index', {
-    user: user ? JSON.stringify(user) : null,
-    friends: friends ? JSON.stringify(friends) : null
-  });
 };

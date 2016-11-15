@@ -283,4 +283,15 @@ angular.module('mean.system')
         return playerID !== 'unauthenticated' &&
           playerID !== userID && userID;
       };
+
+      //get friend list and populate in the select option
+      try {
+        $scope.friendList = JSON.parse(localStorage.getItem('friends'));
+      } catch (error) {
+        $scope.friendList = [];
+      }
+
+      $scope.invitePlayers = function () {
+        console.log($scope.invited, 'slkdjfasd');
+      };
     }]);
