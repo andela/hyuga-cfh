@@ -70,3 +70,14 @@ exports.currentUser = function (req, res) {
   }
   res.status(404).send('Not Found!');
 };
+
+exports.gameHistory = function (req, res) {
+  'use strict';
+
+  if (!req.user) {
+    return res.send(401, { message: 'User not found!' });
+  }
+  var historyID = jwt.sign({ userId: req.user._id }, secret);
+
+  return res.send({ name: req.user.name, gameID: historyID, userID: req.user._id });
+};

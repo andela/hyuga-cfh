@@ -7,4 +7,5 @@ module.exports = function (app) {
   app.post('/api/auth/signup', users.signup);
   app.post('/api/auth/login', users.login);
   app.get('/api/auth/current_user', users.currentUser);
+  app.get('/api/games/history', users.gameHistory);
 };
