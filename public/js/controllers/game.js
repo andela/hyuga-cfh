@@ -292,6 +292,11 @@ angular.module('mean.system')
       }
 
       $scope.invitePlayers = function () {
-        console.log($scope.invited, 'slkdjfasd');
+        $http.post('/api/invite', {invitedIDs: $scope.invited})
+        .then(function (response) {
+          console.log(response);
+        }, function (error) {
+          console.log(error);
+        });
       };
     }]);
