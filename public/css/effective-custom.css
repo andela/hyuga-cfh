@@ -307,12 +307,21 @@ footer {
   background: none;
 }
 
-.notification:hover i {
+.notification:hover i, .notification:hover span {
   color: #A1232E;
 }
 
 #notifydropdown {
-  width: 200px !important;
+  width: 250px !important;
+}
+
+#bell {
+  display: inline-block;
+}
+
+.number {
+  display: block;
+  float: right;
 }
 
 @media screen and (min-width: 992px) {

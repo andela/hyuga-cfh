@@ -23,6 +23,9 @@ angular.module('mean.system')
     return {
       getInvitations: function () {
         return $http.get('/api/invitation');
+      },
+      readNotification: function () {
+        return $http.put('/api/invitation', {status: 1});
       }
     };
   }])

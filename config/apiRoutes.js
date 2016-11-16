@@ -11,4 +11,5 @@ module.exports = function (app) {
   app.get('/api/search/users', users.search);
   app.post('/api/invite', invitation.invite);
   app.get('/api/invitation', invitation.getInvitation);
+  app.put('/api/invitation', invitation.readInvitation);
 };

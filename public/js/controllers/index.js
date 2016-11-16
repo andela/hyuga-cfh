@@ -24,7 +24,8 @@ angular.module('mean.system')
     $scope.invitations = [];
     InvitationService.getInvitations()
     .then(function (response) {
-      $scope.invitations = response.data;
+      $scope.invitations = response.data.reverse();
+      $scope.unreadNotifications = $scope.invitations.length;
     });
 
     $scope.avatars = [];
@@ -32,4 +33,11 @@ angular.module('mean.system')
       .then(function(data) {
         $scope.avatars = data;
       });
+    
+    $scope.readNotifications = function () {
+      InvitationService.readNotification()
+      .then(function (response) {
+        $scope.unreadNotifications = 0;
+      });
+    };
 }]);

@@ -242,7 +242,6 @@ angular.module('mean.system')
       };
 
       if ($location.search().game && !(/^\d+$/).test($location.search().game)) {
-        console.log('joining custom game');
         game.joinGame('joinGame', $location.search().game);
       } else if ($location.search().custom) {
         game.joinGame('joinGame', null, true);
@@ -292,7 +291,11 @@ angular.module('mean.system')
       }
 
       $scope.invitePlayers = function () {
-        $http.post('/api/invite', {invitedIDs: $scope.invited, link: document.URL})
+        var gameUrl = document.URL.split('/');
+        $http.post('/api/invite', {
+          invitedIDs: $scope.invited,
+          link: '#!/'+gameUrl[(gameUrl.length) - 1]
+        })
         .then(function (response) {
           $scope.action = {done: true, message: 'Invitation sent'};
         }, function (error) {
