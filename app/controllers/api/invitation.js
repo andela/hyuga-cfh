@@ -32,8 +32,9 @@ exports.getInvitation = function (req, res) {
 };
 
 exports.readInvitation = function (req, res) {
-  Invitation.update({to: req.user._id.toString()}, {$set: {status: 1}},
-  function (err) {
+  Invitation.update({'to': req.user._id.toString()},
+  {$set: {'status': 1}}, {multi: true},
+  function (err, updates) {
     if (err) {
       return res.send(500, {message: 'Internal server error'});
     }
