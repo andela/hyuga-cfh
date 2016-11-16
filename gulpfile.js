@@ -9,7 +9,6 @@ var sass = require('gulp-sass');
 var eslint = require('gulp-eslint');
 var mochaTest = require('gulp-mocha');
 var gutil = require('gulp-util');
-
 var istanbul = require('gulp-istanbul');
 var spawn = require('child_process').spawn;
 
@@ -30,7 +29,6 @@ gulp.task('browser-sync', ['nodemon'], function () {
 gulp.task('nodemon', function (cb) {
   'use strict';
   var started = false;
-
   return nodemon({
     script: 'server.js'
   }).on('start', function () {
@@ -41,7 +39,6 @@ gulp.task('nodemon', function (cb) {
     }
   });
 });
-
 
 // Gulp bower
 gulp.task('bower', function () {
@@ -104,7 +101,6 @@ gulp.task('test', ['before-test'], function () {
     stdio: 'inherit'
   }).on('close', process.exit);
 });
-
 
 // Gulp will watch files for changes
 gulp.task('watch', function () {

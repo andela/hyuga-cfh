@@ -1,8 +1,9 @@
 'use strict';
 window.onload = function() {
   $('.button-collapse').sideNav();
-
-  //Twitter buttons
+  $('select').material_select();
+  $(".dropdown-button").dropdown();
+  // Twitter buttons
   var twitter = function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0],
         p = /^http:/.test(d.location) ? 'http' : 'https';

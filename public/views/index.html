@@ -12,6 +12,12 @@
         <li ng-show="showOptions" data-target='modal1'><a>SIGN IN</a></li>
         <li ng-show="showOptions"><a href="#!signup">SIGN UP</a></li>
         <li ng-hide="showOptions"><a href="/signout">SIGN OUT</a></li>
+        <li ng-show="showOptions" data-target='modal1'><a>SIGN IN</a></li>
+        <li ng-hide="showOptions"><a data-activates="notifydropdown" class="notification dropdown-button"><i class="material-icons">notifications</i></a>
+          <ul class="dropdown-content" id="notifydropdown">
+
+          </ul>
+        </li>
       </ul>
       <ul class="side-nav" id="mobile-menu">
         <li><a ng-click="goTo('how-to-play')">HOW TO PLAY</a></li>
@@ -19,6 +25,12 @@
         <li ng-show="showOptions"><a class="waves-effect waves-light btn" href="#modal1">SIGN IN</a></li>
         <li ng-show="showOptions"><a href="#!signup">SIGN UP</a></li>
         <li ng-hide="showOptions"><a href="/signout">SIGN OUT</a></li>
+        <li ng-show="showOptions"><a class="waves-effect waves-light btn" href="#modal1">SIGN IN</a></li>
+        <li ng-hide="showOptions"><a data-activates="notifydropdownmob" class="notification dropdown-button"><i class="material-icons">notifications</i></a>
+          <ul class="dropdown-content" id="notifydropdownmob">
+            
+          </ul>
+        </li>
       </ul>
     </div>
   </nav>

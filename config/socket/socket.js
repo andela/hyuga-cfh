@@ -95,6 +95,7 @@ module.exports = function(io) {
           player.username = user.name;
           player.premium = user.premium || 0;
           player.avatar = user.avatar || avatars[Math.floor(Math.random()*4)+12];
+          player.userID = data.userID;
         }
         getGame(player,socket,data.room,data.createPrivate);
       });

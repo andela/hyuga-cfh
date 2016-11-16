@@ -64,14 +64,57 @@ exports.signup = function (req, res) {
   });
 };
 
-exports.search = function (req, res) {
-  var name = new RegExp(req.query.name, 'i');
+exports.currentUser = function (req, res) {
+  if (req.user) {
+    return res.send(req.user);
+  }
+  res.status(404).send('Not Found!');
+};
 
-  User.find({ name: name }, function (err, users) {
+exports.friendship = function (req, res) {
+  // req.user._id = req.body.userid;
+  saveFriend(req.user._id, req.body.friendid,
+  function (reply) {
+    if (reply.status === 200) {
+      res.send(reply.status, {message: 'Friendship done'});
+    } else {
+      res.send(reply.status, {message: reply.message});
+    }
+  });
+};
+
+exports.search = function (req, res) {
+  User.findById(req.query._id, function (err, user) {
     if (err) {
       return res.send(500, { message: err.errors });
     }
+    User.find({_id: {$in: user.friends }}, function (err, friends) {
+      if (err) {
+        return res.send(500, { message: err.errors });
+      }
 
-    res.send(users);
+      return res.send(200, friends);
+    });
   });
 };
+
+function saveFriend(userId, firendId, callback) {
+  User.findById(userId, function (err, userDetails) {
+    if (err) {
+      return callback({status: 500, message: 'Internal server error'});
+    }
+    if (!userDetails) {
+      return callback({status: 401, message: 'User does not exist'});
+    }
+    if (userDetails.friends.indexOf(firendId) >= 0) {
+      return callback({status: 401, message: 'Already friends'});
+    }
+    userDetails.friends.push(firendId);
+    userDetails.save(function (err, updates) {
+      if (err) {
+        return callback({status: 500, message: 'Internal server error'});
+      }
+      return callback({status: 200});
+    });
+  });
+}
