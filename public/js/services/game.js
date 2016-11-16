@@ -99,8 +99,8 @@ angular.module('mean.system')
       game.fullTime = game.time = game.timeLimits.stateJudging - 1;
       timeSetViaUpdate = true;
     } else if (newState && data.state === 'winner has been chosen') {
-      game.fullTime = game.time = game.timeLimits.stateResults - 1;
-      timeSetViaUpdate = true;
+      // game.fullTime = game.time = game.timeLimits.stateResults - 1;
+      // timeSetViaUpdate = true;
     }
 
     // Set these properties on each update
@@ -207,6 +207,10 @@ angular.module('mean.system')
   };
 
   decrementTime();
+
+  game.beginNextRound = function() {
+    socket.emit('nextRound');
+  };
 
   return game;
 }]);

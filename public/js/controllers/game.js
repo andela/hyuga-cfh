@@ -181,6 +181,12 @@ angular.module('mean.system')
       }
     });
 
+    $scope.beginNextRound = function () {
+      if ($scope.isCzar()) {
+        game.beginNextRound();
+      }
+    };
+
     $scope.checkState = function (state) {
       switch (state) {
         case 'gameEndPeopleLeft':
