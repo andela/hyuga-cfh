@@ -274,12 +274,8 @@ angular.module('mean.system')
 
       $scope.getPlayerId = function () {
         var userDetails = {};
-        try {
-          userDetails = JSON.parse(localStorage.getItem('user'));
-          return (userDetails) ? userDetails._id : false;
-        } catch (ex) {
-          return false;
-        }
+        userDetails = JSON.parse(localStorage.getItem('user'));
+        return (userDetails) ? userDetails._id : false;
       };
 
       $scope.isAddable = function (playerID) {
@@ -296,6 +292,7 @@ angular.module('mean.system')
       }
 
       $scope.invitePlayers = function () {
+        console.log('IDS;', $scope.invited);
         $http.post('/api/invite', {invitedIDs: $scope.invited})
         .then(function (response) {
           console.log(response);
