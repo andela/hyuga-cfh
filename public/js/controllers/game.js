@@ -274,8 +274,12 @@ angular.module('mean.system')
 
       $scope.getPlayerId = function () {
         var userDetails = {};
-        userDetails = JSON.parse(localStorage.getItem('user'));
-        return (userDetails) ? userDetails._id : false;
+        try {
+          userDetails = JSON.parse(localStorage.getItem('user'));
+          return (userDetails) ? userDetails._id : false;
+        } catch (ex) {
+          return false;
+        }
       };
 
       $scope.isAddable = function (playerID) {

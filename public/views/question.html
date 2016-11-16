@@ -17,7 +17,7 @@
     </div>
     <button ng-show="checkState('gameCanStart')" ng-click="startGame()" class="btn btn-large valign app-buttons">START GAME</button>
   </div>
-  <div ng-show="checkState('awaiting-players')">
+  <div ng-if="checkState('awaiting-players') && isCustomGame()">
     <div class="input-field col s12 m6 l6 offset-m3 offset-l3">
       <select ng-model="invited" multiple class="col l7">
         <option value="" disabled selected>Invite Players</option>
