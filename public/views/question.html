@@ -58,7 +58,7 @@
     </div>
     <div class="col s6 m4 l3 offset-l4 offset-s3">
       <div class="card hoverable">
-        <div class="card-content valign-wrapper each-question">
+        <div class="card-content valign-wrapper each-question" ng-if="!winningCardPicked" ng-animate="{enter:'animated fadeInLeft', leave:'animated fadeOut'}">
           <p class="valign" ng-bind-html-unsafe="game.curQuestion.text"></p>
         </div>
       </div>
