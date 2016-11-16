@@ -294,11 +294,11 @@ angular.module('mean.system')
         var gameUrl = document.URL.split('/');
         $http.post('/api/invite', {
           invitedIDs: $scope.invited,
-          link: '#!/'+gameUrl[(gameUrl.length) - 1]
+          link: '#!/' + gameUrl[(gameUrl.length) - 1]
         })
-        .then(function (response) {
+        .then(function () {
           $scope.action = {done: true, message: 'Invitation sent'};
-        }, function (error) {
+        }, function () {
           $scope.action = {message: 'Invitation not sent'};
         });
         $scope.clearMessage();

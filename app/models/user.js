@@ -54,19 +54,25 @@ UserSchema.path('name').validate(function (name) {
 
 UserSchema.path('email').validate(function (email) {
   // if you are authenticating by any of the oauth strategies, don't validate
-  if (authTypes.indexOf(this.provider) !== -1) return true;
+  if (authTypes.indexOf(this.provider) !== -1) {
+    return true;
+  }
   return email.length;
 }, 'Email cannot be blank');
 
 UserSchema.path('username').validate(function (username) {
   // if you are authenticating by any of the oauth strategies, don't validate
-  if (authTypes.indexOf(this.provider) !== -1) return true;
+  if (authTypes.indexOf(this.provider) !== -1) {
+    return true;
+  }
   return username.length;
 }, 'Username cannot be blank');
 
 UserSchema.path('hashed_password').validate(function (hashed_password) {
   // if you are authenticating by any of the oauth strategies, don't validate
-  if (authTypes.indexOf(this.provider) !== -1) return true;
+  if (authTypes.indexOf(this.provider) !== -1) {
+    return true;
+  }
   return hashed_password.length;
 }, 'Password cannot be blank');
 
@@ -75,12 +81,16 @@ UserSchema.path('hashed_password').validate(function (hashed_password) {
  * Pre-save hook
  */
 UserSchema.pre('save', function (next) {
-  if (!this.isNew) return next();
-
-  if (!validatePresenceOf(this.password) && authTypes.indexOf(this.provider) === -1)
+  if (!this.isNew) {
+    return next();
+  }
+  if (!validatePresenceOf(this.password) &&
+  authTypes.indexOf(this.provider) === -1) {
     next(new Error('Invalid password'));
-  else
+  }
+  else {
     next();
+  }
 });
 
 /**
@@ -107,12 +117,15 @@ UserSchema.methods = {
    * @api public
    */
   encryptPassword: function (password) {
-    if (!password) return '';
+    if (!password) {
+      return '';
+    }
     return bcrypt.hashSync(password, bcrypt.genSaltSync(10));
   },
 
   getFriends: function (callback) {
-    this.model('User').find({_id: {$in: this.friends }}, function (err, friends) {
+    this.model('User').find({_id: {$in: this.friends }},
+    function (err, friends) {
       if (err) {
         callback(err, null);
       } else {

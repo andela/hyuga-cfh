@@ -196,7 +196,7 @@ footer {
 }
 
 .answer-section {
-    padding-top: 20px;
+  padding-top: 20px;
 }
 
 .question {
@@ -246,7 +246,7 @@ footer {
 }
 
 #crDonateWidget_cfhio_cards4humanity {
-  margin:auto;
+  margin: auto;
   margin-top: 60px;
 }
 
@@ -261,10 +261,10 @@ footer {
 }
 
 .time {
-  float:right;
+  float: right;
   width: 2%;
-  font-size:18px;
-  display:block;
+  font-size: 18px;
+  display: block;
 }
 
 .timer-wrapper {
@@ -307,7 +307,8 @@ footer {
   background: none;
 }
 
-.notification:hover i, .notification:hover span {
+.notification:hover i,
+.notification:hover span {
   color: #A1232E;
 }
 
@@ -328,7 +329,6 @@ footer {
   #banner-bg-card {
     margin: 40px 0 -227px 0;
   }
-
   .brief-text {
     padding-right: 20px;
   }

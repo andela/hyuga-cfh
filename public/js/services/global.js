@@ -19,7 +19,7 @@ angular.module('mean.system')
       }
     };
   }])
-  .factory('InvitationService', ['$http', '$q', function ($http, $q) {
+  .factory('InvitationService', ['$http', function ($http) {
     return {
       getInvitations: function () {
         return $http.get('/api/invitation');

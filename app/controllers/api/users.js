@@ -94,7 +94,7 @@ exports.search = function (req, res) {
   });
 };
 
-function saveFriend(userId, firendId, callback) {
+function saveFriend(userId, friendId, callback) {
   User.findById(userId, function (err, userDetails) {
     if (err) {
       return callback({status: 500, message: 'Internal server error'});
@@ -102,10 +102,10 @@ function saveFriend(userId, firendId, callback) {
     if (!userDetails) {
       return callback({status: 401, message: 'User does not exist'});
     }
-    if (userDetails.friends.indexOf(firendId) >= 0) {
+    if (userDetails.friends.indexOf(friendId) >= 0) {
       return callback({status: 401, message: 'Already friends'});
     }
-    userDetails.friends.push(firendId);
+    userDetails.friends.push(friendId);
     userDetails.save(function (err, updates) {
       if (err) {
         return callback({status: 500, message: 'Internal server error'});
