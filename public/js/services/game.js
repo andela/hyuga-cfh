@@ -214,7 +214,7 @@ angular.module('mean.system')
 
       decrementTime();
 
-      game.beginNextRound = function() {
+      game.beginNextRound = function () {
         socket.emit('nextRound');
       };
       return game;
