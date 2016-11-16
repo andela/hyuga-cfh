@@ -13,21 +13,33 @@ var secret = process.env.JWT_SECRET || 'super duper secret';
 exports.login = function (req, res) {
   'use strict';
 
-  User.findOne({ email: req.body.email }, function (err, user) {
+  User.findOne({
+    email: req.body.email
+  }, function (err, user) {
     if (err) {
-      return res.send(500, { error: err.error });
+      return res.send(500, {
+        error: err.error
+      });
     }
 
     if (!user) {
-      return res.send(401, { message: 'User not found' });
+      return res.send(401, {
+        message: 'User not found'
+      });
     }
 
     if (!user.authenticate(req.body.password)) {
-      return res.send(400, { message: 'Invalid password' });
+      return res.send(400, {
+        message: 'Invalid password'
+      });
     }
 
-    var token = jwt.sign({ userId: user._id }, secret);
-    return res.send({ token: token });
+    var token = jwt.sign({
+      userId: user._id
+    }, secret);
+    return res.send({
+      token: token
+    });
   });
 };
 
@@ -35,12 +47,18 @@ exports.signup = function (req, res) {
   'use strict';
 
   if (!(req.body.name && req.body.password && req.body.email)) {
-    return res.send(400, { message: 'Incomplete parameters. User\'s name, email and password are required.' });
+    return res.send(400, {
+      message: 'Incomplete parameters. User\'s name, email and password are required.'
+    });
   }
 
-  User.findOne({ email: req.body.email }, function (err, existingUser) {
+  User.findOne({
+    email: req.body.email
+  }, function (err, existingUser) {
     if (existingUser) {
-      return res.send(409, { message: 'User already exist.' });
+      return res.send(409, {
+        message: 'User already exist.'
+      });
     }
 
     var user = new User(req.body);
@@ -50,16 +68,24 @@ exports.signup = function (req, res) {
 
     user.save(function (err) {
       if (err) {
-        return res.send(500, { message: err.errors });
+        return res.send(500, {
+          message: err.errors
+        });
       }
 
       req.logIn(user, function (err) {
         if (err) {
-          return res.send(500, { message: err.errors });
+          return res.send(500, {
+            message: err.errors
+          });
         }
 
-        var token = jwt.sign({ userId: user._id }, secret);
-        return res.send({ token: token });
+        var token = jwt.sign({
+          userId: user._id
+        }, secret);
+        return res.send({
+          token: token
+        });
       });
     });
   });
@@ -75,31 +101,51 @@ exports.currentUser = function (req, res) {
 exports.gameHistory = function (req, res) {
   'use strict';
 
+  var currentHistory = {};
+  var today = Date().substr(0, 24);
   if (!req.user) {
-    return res.send(401, { message: 'User not found!' });
+    return res.send(401, {
+      message: 'User not found!'
+    });
   }
-  var historyID = jwt.sign({ userId: req.user._id }, secret);
+  var historyID = jwt.sign({
+      userId: req.user._id
+    }, secret),
+    currentGameHistory = {
+      name: req.user.name,
+      gameID: historyID,
+      userID: req.user._id,
+      datePlayed: today
+    },
+    History = mongoose.model('History'),
+    gameHistory = new History(currentGameHistory);
 
-  var currentGameHistory = { name: req.user.name, gameID: historyID, userID: req.user._id };
-
-  var History = mongoose.model('History');
-
-  var gameHistory = new History(currentGameHistory);
-
-  gameHistory.save(function (err) {
-    if (err) {
-      console.err(err);
-    } else {
-      console.log('game history saved successfully');
-    }
-  });
-
-  History.findOne({name: req.user.name}, function (err, historyDetail) {
-    console.log(historyDetail);
-    if (err) {
+  History.find({
+    userID: req.user._id
+  }, function (err, historyDetail) {
+    if (err) {  // Create a history if history does not exist for this user
       console.error(err);
+      gameHistory.save(function (err) {
+        if (err) {
+          console.err(err);
+        } else {
+          console.log('game history saved successfully');
+        }
+      });
     } else if (historyDetail) {
-      console.log('Found:', historyDetail);
+      console.log(historyDetail.gameID, historyID);
+      if (historyDetail.gameID !== historyID){  // Create a new history if the history in the database is not same for the present game.
+        // gameHistory.save(function (err) {
+        //   if (err) {
+        //     console.err(err);
+        //   } else {
+        //     console.log('game history saved successfully');
+        //   }
+        // });
+      }
+      currentHistory = historyDetail;
+      // console.log('History Found:', currentHistory);
+      return res.send(currentHistory);
     } else {
       console.error('Cannot find Game history');
     }

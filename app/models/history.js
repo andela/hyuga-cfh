@@ -4,7 +4,8 @@ var mongoose = require('mongoose'),
 var historySchema = new Schema({
   name: String,
   gameID: String,
-  userID: String
+  userID: String,
+  datePlayed: String
 });
 
 var History = mongoose.model('History', historySchema);

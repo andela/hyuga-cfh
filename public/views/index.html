@@ -9,7 +9,8 @@
       <a id="mobile-menu-icon" data-activates="mobile-menu" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
         <li><a ng-click="goTo('how-to-play')">HOW TO PLAY</a></li>
-        <li><a ng-click="goTo('view-history')">GAME HISTORY</a></li>
+        <!-- Modal Trigger -->
+        <li><a href="#modal1">GAME HISTORY</a></li>
         <li><a ng-click="goTo('charity')">CHARITY</a></li>
         <li ng-show="showOptions"><a href="#!signup">SIGN UP</a></li>
         <li ng-hide="showOptions"><a href="/signout">SIGN OUT</a></li>
@@ -17,7 +18,8 @@
       </ul>
       <ul class="side-nav" id="mobile-menu">
         <li><a ng-click="goTo('how-to-play')">HOW TO PLAY</a></li>
-        <li><a ng-click="goTo('view-history')">GAME HISTORY</a></li>
+        <!-- Modal Trigger -->
+        <li><a href="#modal1">GAME HISTORY</a></li>
         <li><a ng-click="goTo('charity')">CHARITY</a></li>
         <li ng-show="showOptions"><a href="#!signup">SIGN UP</a></li>
         <li ng-hide="showOptions"><a href="/signout">SIGN OUT</a></li>
@@ -76,6 +78,31 @@
     </div>
   </div>
   <!-- Banner ends -->
+
+  <!-- History section -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <table class="striped">
+        <thead>
+          <tr>
+            <th data-field="id">Game ID</th>
+            <th data-field="name">Date Played</th>
+            <th data-field="price">Winner</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>123456</td>
+            <td>Nov 29 2016</td>
+            <td>ethanet</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">View</a>
+      </div>
+    </div>
+  </div>
 
   <!-- how to play section -->
   <div id="how-to-play" class="section">
