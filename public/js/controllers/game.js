@@ -1,3 +1,5 @@
+/* global angular Materialize */
+
 angular.module('mean.system')
   .controller('GameController', [
     '$scope',
@@ -199,6 +201,8 @@ angular.module('mean.system')
                   'background': 'white',
                   'color': 'black'
                 }).text(link);
+
+                Materialize.toast('You need to invite a minimum of 3 players', 10000);
               }, 200);
               $scope.modalShown = true;
             }
@@ -284,7 +288,7 @@ angular.module('mean.system')
           playerID !== userID && userID;
       };
 
-      //get friend list and populate in the select option
+      // get friend list and populate in the select option
       try {
         $scope.friendList = JSON.parse(localStorage.getItem('friends'));
       } catch (error) {
@@ -292,12 +296,15 @@ angular.module('mean.system')
       }
 
       $scope.invitePlayers = function () {
-        console.log('IDS;', $scope.invited);
-        $http.post('/api/invite', {invitedIDs: $scope.invited})
-        .then(function (response) {
-          console.log(response);
-        }, function (error) {
-          console.log(error);
-        });
+        if ($scope.invited.length < 12) {
+          $http.post('/api/invite', {invitedIDs: $scope.invited})
+          .then(function (response) {
+            console.log(response);
+          }, function (error) {
+            console.log(error);
+          });
+        } else {
+          Materialize.toast('You can only invite a maximum of 11 players', 10000);
+        }
       };
     }]);
