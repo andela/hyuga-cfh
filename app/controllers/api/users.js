@@ -115,7 +115,8 @@ exports.gameHistory = function (req, res) {
       name: req.user.name,
       gameID: historyID,
       userID: req.user._id,
-      datePlayed: today
+      datePlayed: today,
+      winner: 'Femi'
     },
     History = mongoose.model('History'),
     gameHistory = new History(currentGameHistory);
@@ -144,7 +145,6 @@ exports.gameHistory = function (req, res) {
         // });
       }
       currentHistory = historyDetail;
-      // console.log('History Found:', currentHistory);
       return res.send(currentHistory);
     } else {
       console.error('Cannot find Game history');
