@@ -252,22 +252,22 @@ angular.module('mean.system')
 
       $scope.clearMessage = function () {
         $timeout(function () {
-          $scope.friendship = false;
+          $scope.action = false;
         }, 5000);
       };
 
       $scope.addFriend = function (friendid) {
-        $scope.friendship = {};
+        $scope.action = {};
         $http.post('/api/friend', {
           friendid: friendid
         }).then(function (response) {
           if (response.status === 200) {
-            $scope.friendship.done = true;
+            $scope.action.done = true;
           }
-          $scope.friendship.message = response.data.message;
+          $scope.action.message = response.data.message;
           $scope.clearMessage();
         }, function (error) {
-          $scope.friendship.message = error.data.message;
+          $scope.action.message = error.data.message;
           $scope.clearMessage();
         });
       };
@@ -288,7 +288,7 @@ angular.module('mean.system')
           playerID !== userID && userID;
       };
 
-      //get friend list and populate in the select option
+      // get friend list and populate in the select option
       try {
         $scope.friendList = JSON.parse(localStorage.getItem('friends'));
       } catch (error) {
@@ -296,11 +296,14 @@ angular.module('mean.system')
       }
 
       $scope.invitePlayers = function () {
-        $http.post('/api/invite', {invitedIDs: $scope.invited})
+        console.log($scope.invited);
+        return false;
+        $http.post('/api/invite', {invitedIDs: $scope.invited, link: document.URL})
         .then(function (response) {
-          console.log(response);
+          $scope.action = {done: true, message: 'Invitation sent'};
         }, function (error) {
-          console.log(error);
+          $scope.action = {message: 'Invitation not sent'};
         });
+        $scope.clearMessage();
       };
     }]);

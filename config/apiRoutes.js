@@ -10,4 +10,5 @@ module.exports = function (app) {
   app.post('/api/friend', users.friendship);
   app.get('/api/search/users', users.search);
   app.post('/api/invite', invitation.invite);
+  app.get('/api/invitation', invitation.getInvitation);
 };

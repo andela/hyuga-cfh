@@ -76,7 +76,7 @@ exports.friendship = function (req, res) {
   saveFriend(req.user._id, req.body.friendid,
   function (reply) {
     if (reply.status === 200) {
-      res.send(reply.status, {message: 'Friendship done'});
+      res.send(reply.status, {message: 'Friend added'});
     } else {
       res.send(reply.status, {message: reply.message});
     }

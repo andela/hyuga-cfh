@@ -311,6 +311,10 @@ footer {
   color: #A1232E;
 }
 
+#notifydropdown {
+  width: 200px !important;
+}
+
 @media screen and (min-width: 992px) {
   #banner-bg-card {
     margin: 40px 0 -227px 0;
