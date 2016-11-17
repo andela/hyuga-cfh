@@ -17,6 +17,15 @@
     </div>
     <button ng-show="checkState('gameCanStart')" ng-click="startGame()" class="btn btn-large valign app-buttons">START GAME</button>
   </div>
+  <div ng-show="checkState('awaiting-players') && isCustomGame()">
+    <div class="input-field col s12 m6 l6 offset-m3 offset-l3">
+      <select ng-model="invited" multiple class="col l7">
+        <option value="" disabled selected>Invite Players</option>
+        <option ng-repeat="friend in friendList" value={{friend._id}}>{{friend.name}}</option>
+      </select>
+      <input ng-click="invitePlayers()" type="submit" class="btn app-buttons" value="Invite"/>
+    </div>
+  </div>
   <div class="waiting valign-wrapper" ng-show="checkState('gameEndPeopleLeft')">
     <p class="center-align" >What the!? The game ended because too many people left! Our sincere apologies.</p>
   </div>

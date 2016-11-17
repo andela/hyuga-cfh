@@ -19,6 +19,16 @@ angular.module('mean.system')
       }
     };
   }])
+  .factory('InvitationService', ['$http', function ($http) {
+    return {
+      getInvitations: function () {
+        return $http.get('/api/invitation');
+      },
+      readNotification: function () {
+        return $http.put('/api/invitation', {status: 1});
+      }
+    };
+  }])
   .factory('DonationService', ['$http', '$q', function($http, $q) {
     return {
       userDonated: function(donationObject) {
