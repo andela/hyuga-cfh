@@ -5,7 +5,8 @@ var mongoose = require('mongoose'),
 var InvitationSchema = new Schema({
   for: String,
   from: String,
-  link: String
+  link: String,
+  status: Number
 });
 
 mongoose.model('Invitation', InvitationSchema);

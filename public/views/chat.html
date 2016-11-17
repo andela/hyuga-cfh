@@ -13,13 +13,13 @@
     </div>
     <form id="message-form" class="message-form" ng-submit="sendMessage()">
       <div>
-        <input placeholder="Message..." type="text" id="message">
+        <input placeholder="Message..." type="text" id="message" data-emojiable="true">
       </div>
       <button class="btn waves-effect waves-light" type="submit" name="action">Send
       <i class="material-icons right">send</i>
       </button>
     </form>
   </div>
+  <script src="../views/emoji-picker/lib/js/emoji-init.js"></script>
 </body>
-
 </html>

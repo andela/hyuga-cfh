@@ -76,7 +76,7 @@ exports.friendship = function (req, res) {
   saveFriend(req.user._id, req.body.friendid,
   function (reply) {
     if (reply.status === 200) {
-      res.send(reply.status, {message: 'Friendship done'});
+      res.send(reply.status, {message: 'Friend added'});
     } else {
       res.send(reply.status, {message: reply.message});
     }
@@ -98,7 +98,7 @@ exports.search = function (req, res) {
   });
 };
 
-function saveFriend(userId, firendId, callback) {
+function saveFriend(userId, friendId, callback) {
   User.findById(userId, function (err, userDetails) {
     if (err) {
       return callback({status: 500, message: 'Internal server error'});
@@ -106,10 +106,10 @@ function saveFriend(userId, firendId, callback) {
     if (!userDetails) {
       return callback({status: 401, message: 'User does not exist'});
     }
-    if (userDetails.friends.indexOf(firendId) >= 0) {
+    if (userDetails.friends.indexOf(friendId) >= 0) {
       return callback({status: 401, message: 'Already friends'});
     }
-    userDetails.friends.push(firendId);
+    userDetails.friends.push(friendId);
     userDetails.save(function (err, updates) {
       if (err) {
         return callback({status: 500, message: 'Internal server error'});

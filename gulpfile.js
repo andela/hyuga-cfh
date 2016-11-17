@@ -114,3 +114,4 @@ gulp.task('watch', function () {
     'app/views/**'
   ]).on('change', browserSync.reload);
 });
+

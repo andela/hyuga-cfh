@@ -52,9 +52,10 @@
           <br/>
         </div>
       </div>
-      <div class="card hoverable">
+      <div class="card hoverable" ng-click="beginNextRound()">
         <div class="card-content">
           <img src="img/tri_1.png" />
+          <p class="center-align" ng-if="isCzar() && winningCardPicked">Click here to start next round</p>
           <h5 class="center-align">
             <span class="app-color-blue">CARDS</span><br/>
             <span class="app-color-red">FOR</span><br/>
@@ -67,7 +68,7 @@
     </div>
     <div class="col s6 m4 l3 offset-l4 offset-s3">
       <div class="card hoverable">
-        <div class="card-content valign-wrapper each-question">
+        <div class="card-content valign-wrapper each-question" ng-if="!winningCardPicked" ng-animate="{enter:'animated fadeInLeft', leave:'animated fadeOut'}">
           <p class="valign" ng-bind-html-unsafe="game.curQuestion.text"></p>
         </div>
       </div>

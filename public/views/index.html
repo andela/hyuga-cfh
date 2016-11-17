@@ -12,9 +12,9 @@
         <li ng-show="showOptions"><a href="#!signup">SIGN UP</a></li>
         <li ng-hide="showOptions"><a href="/signout">SIGN OUT</a></li>
         <li ng-show="showOptions" data-target='modal1'><a>SIGN IN</a></li>
-        <li ng-hide="showOptions"><a data-activates="notifydropdown" class="notification dropdown-button"><i class="material-icons">notifications</i></a>
+        <li ng-hide="showOptions"><a ng-click="readNotifications()" data-beloworigin="true" data-activates="notifydropdown" class="notification dropdown-button"><i class="material-icons" id="bell">notifications</i><span class="number">{{unreadNotifications}}</span></a>
           <ul class="dropdown-content" id="notifydropdown">
-
+            <li ng-repeat="each in invitations"><a href="{{each.link}}">Invitation from {{each.from}}</a></li>
           </ul>
         </li>
       </ul>
@@ -25,9 +25,9 @@
         <li ng-show="showOptions"><a href="#!signup">SIGN UP</a></li>
         <li ng-hide="showOptions"><a href="/signout">SIGN OUT</a></li>
         <li ng-show="showOptions"><a class="waves-effect waves-light btn" href="#modal1">SIGN IN</a></li>
-        <li ng-hide="showOptions"><a data-activates="notifydropdownmob" class="notification dropdown-button"><i class="material-icons">notifications</i></a>
+        <li ng-hide="showOptions"><a ng-click="readNotifications()" data-beloworigin="true" data-activates="notifydropdownmob" class="notification dropdown-button"><i class="material-icons" id="bell">notifications</i><span class="number">{{unreadNotifications}}</span></a>
           <ul class="dropdown-content" id="notifydropdownmob">
-            
+            <li ng-repeat="each in invitations"><a href="{{each.link}}">Invitation from {{each.from}}</a></li>
           </ul>
         </li>
       </ul>
@@ -38,7 +38,7 @@
   <div id="banner" class="section">
     <div class="container">
       <div class="row">
-        <div class="col s6 m4 l3 offset-s3">
+        <div class="col s6 m4 l3 offset-s3 hide-on-small-only">
           <!-- card display for cards for humanity -->
           <div class="card hoverable" id="banner-bg-card">
             <div class="card-content">

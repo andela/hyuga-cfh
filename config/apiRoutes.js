@@ -15,4 +15,6 @@ module.exports = function (app) {
   // User routes
   app.post('/api/friend', users.friendship);
   app.post('/api/invite', invitation.invite);
+  app.get('/api/invitation', invitation.getInvitation);
+  app.put('/api/invitation', invitation.readInvitation);
 };

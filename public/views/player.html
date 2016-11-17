@@ -1,4 +1,4 @@
-<p class="friend-notifications" ng-class="{'success-notify' : friendship.done}" ng-if="friendship">{{friendship.message}}</p>
+<p class="friend-notifications" ng-class="{'success-notify' : action.done}" ng-if="action">{{action.message}}</p>
 <h5>{{game.players.length}} Player(s)</h5>
 <div class="row container">
   <div ng-repeat="player in game.players" class="col s6 m4 l2 a_player" ng-class="{'aplayer-hover' : isAddable(player.userID)}">

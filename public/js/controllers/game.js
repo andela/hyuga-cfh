@@ -210,6 +210,13 @@ angular.module('mean.system')
         }
       });
 
+      // Handles ng-click event to start new round
+      $scope.beginNextRound = function () {
+        if ($scope.isCzar()) {
+          game.beginNextRound();
+        }
+      };
+
       $scope.checkState = function (state) {
         switch (state) {
         case 'gameEndPeopleLeft':
@@ -246,7 +253,6 @@ angular.module('mean.system')
       };
 
       if ($location.search().game && !(/^\d+$/).test($location.search().game)) {
-        console.log('joining custom game');
         game.joinGame('joinGame', $location.search().game);
       } else if ($location.search().custom) {
         game.joinGame('joinGame', null, true);
@@ -256,22 +262,22 @@ angular.module('mean.system')
 
       $scope.clearMessage = function () {
         $timeout(function () {
-          $scope.friendship = false;
+          $scope.action = false;
         }, 5000);
       };
 
       $scope.addFriend = function (friendid) {
-        $scope.friendship = {};
+        $scope.action = {};
         $http.post('/api/friend', {
           friendid: friendid
         }).then(function (response) {
           if (response.status === 200) {
-            $scope.friendship.done = true;
+            $scope.action.done = true;
           }
-          $scope.friendship.message = response.data.message;
+          $scope.action.message = response.data.message;
           $scope.clearMessage();
         }, function (error) {
-          $scope.friendship.message = error.data.message;
+          $scope.action.message = error.data.message;
           $scope.clearMessage();
         });
       };
@@ -297,12 +303,17 @@ angular.module('mean.system')
 
       $scope.invitePlayers = function () {
         if ($scope.invited.length < 12) {
-          $http.post('/api/invite', {invitedIDs: $scope.invited})
-          .then(function (response) {
-            console.log(response);
-          }, function (error) {
-            console.log(error);
+          var gameUrl = document.URL.split('/');
+          $http.post('/api/invite', {
+            invitedIDs: $scope.invited,
+            link: '#!/' + gameUrl[(gameUrl.length) - 1]
+          })
+          .then(function () {
+            $scope.action = {done: true, message: 'Invitation sent'};
+          }, function () {
+            $scope.action = {message: 'Invitation not sent'};
           });
+          $scope.clearMessage();
         } else {
           Materialize.toast('You can only invite a maximum of 11 players', 10000);
         }
