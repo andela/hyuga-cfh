@@ -60,14 +60,6 @@ gulp.task('bower', function () {
     .pipe(gulp.dest('public/lib'));
 });
 
-// Webpack task
-gulp.task('webpack', function (done) {
-  "use strict";
-  return childProcess
-    .spawn('node_modules/webpack/bin/webpack.js', { stdio: 'inherit' })
-    .on('close', done);
-});
-
 // Script task
 gulp.task('scripts', function () {
   'use strict';
@@ -121,8 +113,8 @@ gulp.task('test', ['before-test'], function () {
     .once('error', gutil.log);
 
   childProcess.spawn('node_modules/karma/bin/karma', ['start', '--single-run'], {
-      stdio: 'inherit'
-    }).on('close', process.exit);
+    stdio: 'inherit'
+  }).on('close', process.exit);
 });
 
 // Gulp will watch files for changes
