@@ -9,5 +9,5 @@ module.exports = function (app) {
   app.get('/api/auth/current_user', users.currentUser);
   app.post('/api/games/save_history', users.saveGameHistory);
   app.get('/api/games/get_history', users.getGameHistory);
-  app.post('/api/games/delete_history', users.deleteGameHistory);
+  app.get('/api/games/delete_history', users.deleteGameHistory);
 };

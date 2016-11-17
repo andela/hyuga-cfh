@@ -138,7 +138,7 @@ exports.deleteGameHistory = function (req, res) {
       message: 'User not found!'
     });
   }
-  var gameHistory = new GameHistory();
+
   GameHistory.find({
     userID: req.user._id
   }, function (err) {
@@ -146,7 +146,7 @@ exports.deleteGameHistory = function (req, res) {
       return res.send(401, {message: 'Cannot find Game history'});
     }
 
-    gameHistory.remove({
+    GameHistory.remove({
       userID: req.user._id
     }, function (error) {
       if (!error) {

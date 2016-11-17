@@ -41,9 +41,11 @@ angular.module('mean.system')
 
   // Delete user history
   $scope.deleteGameHistory = function () {
-    $http.post('/api/games/delete_history').success(function (data) {
-      console.log(data);
-      $scope.$apply();
-    });
+    var confirmDelete = confirm('All user history will be deleted. Proceed?');
+    if (confirmDelete) {
+      $http.get('/api/games/delete_history').success(function (data) {
+        $scope.History = [];
+      });
+    }
   };
 }]);
