@@ -214,6 +214,8 @@ angular.module('mean.system')
           game.players.forEach(function (player) {
             game.allPlayers.push(player.username);
           });
+          
+          // Check if there was a winner
           if (game.gameWinner === -1) {
             theWinner = 'No Winner';
           }

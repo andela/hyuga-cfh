@@ -107,10 +107,7 @@ exports.saveGameHistory = function (req, res) {
     timestamp: date.getTime()
   }, function (err) {
     if (!err) {
-      console.log('Game history already saved!');
-      // return res.send(302, {
-      //   message: 'Game history already saved!'
-      // });
+      // Do nothing if history is already created
     }
     gameHistory.save(function (err) {
       if (err) {
@@ -150,7 +147,7 @@ exports.getGameHistory = function (req, res) {
 exports.deleteGameHistory = function (req, res) {
   'use strict';
 
-  // if user has logged.
+  // check if user is logged in
   if (!req.user) {
     return res.send(401, {
       message: 'User not found!'
