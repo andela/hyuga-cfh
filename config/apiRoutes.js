@@ -1,4 +1,5 @@
-var users = require('../app/controllers/api/users');
+var users = require('../app/controllers/api/users'),
+  invitation = require('../app/controllers/api/invitation');
 
 module.exports = function (app) {
   'use strict';
@@ -10,4 +11,9 @@ module.exports = function (app) {
   app.post('/api/games/save_history', users.saveGameHistory);
   app.get('/api/games/get_history', users.getGameHistory);
   app.get('/api/games/delete_history', users.deleteGameHistory);
+  app.post('/api/friend', users.friendship);
+  app.get('/api/search/users', users.search);
+  app.post('/api/invite', invitation.invite);
+  app.get('/api/invitation', invitation.getInvitation);
+  app.put('/api/invitation', invitation.readInvitation);
 };

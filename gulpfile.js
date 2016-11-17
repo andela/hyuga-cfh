@@ -131,3 +131,4 @@ gulp.task('watch', function () {
   // Watch .jade files
   gulp.watch('app/views/**').on('change', browserSync.reload);
 });
+

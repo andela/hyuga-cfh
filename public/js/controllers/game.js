@@ -5,8 +5,10 @@ angular.module('mean.system')
     'chat',
     '$timeout',
     '$location',
+    '$http',
     'MakeAWishFactsService',
-    '$dialog', function ($scope, game, chat, $timeout, $location, MakeAWishFactsService, $dialog) {
+    '$dialog', function ($scope, game, chat, $timeout,
+    $location, $http, MakeAWishFactsService) {
       $scope.hasPickedCards = false;
       $scope.winningCardPicked = false;
       $scope.showTable = false;
@@ -41,9 +43,8 @@ angular.module('mean.system')
           return {
             'cursor': 'pointer'
           };
-        } else {
-          return {};
         }
+        return {};
       };
 
       $scope.sendPickedCards = function () {
@@ -54,33 +55,23 @@ angular.module('mean.system')
       $scope.cardIsFirstSelected = function (card) {
         if (game.curQuestion.numAnswers > 1) {
           return card === $scope.pickedCards[0];
-        } else {
-          return false;
         }
+        return false;
       };
 
       $scope.cardIsSecondSelected = function (card) {
         if (game.curQuestion.numAnswers > 1) {
           return card === $scope.pickedCards[1];
-        } else {
-          return false;
         }
+        return false;
       };
 
       $scope.firstAnswer = function ($index) {
-        if ($index % 2 === 0 && game.curQuestion.numAnswers > 1) {
-          return true;
-        } else {
-          return false;
-        }
+        return ($index % 2 === 0 && game.curQuestion.numAnswers > 1);
       };
 
       $scope.secondAnswer = function ($index) {
-        if ($index % 2 === 1 && game.curQuestion.numAnswers > 1) {
-          return true;
-        } else {
-          return false;
-        }
+        return ($index % 2 === 1 && game.curQuestion.numAnswers > 1);
       };
 
       $scope.showFirst = function (card) {
@@ -114,9 +105,8 @@ angular.module('mean.system')
       $scope.winningColor = function ($index) {
         if (game.winningCardPlayer !== -1 && $index === game.winningCard) {
           return $scope.colors[game.players[game.winningCardPlayer].color];
-        } else {
-          return '#f9f9f9';
         }
+        return '#f9f9f9';
       };
 
       $scope.pickWinning = function (winningSet) {
@@ -216,6 +206,13 @@ angular.module('mean.system')
         }
       });
 
+// Handles ng-click event to start new round
+      $scope.beginNextRound = function () {
+        if ($scope.isCzar()) {
+          game.beginNextRound();
+        }
+      };
+
       $scope.checkState = function (state) {
         switch (state) {
         case 'gameEndPeopleLeft':
@@ -252,11 +249,65 @@ angular.module('mean.system')
       };
 
       if ($location.search().game && !(/^\d+$/).test($location.search().game)) {
-        console.log('joining custom game');
         game.joinGame('joinGame', $location.search().game);
       } else if ($location.search().custom) {
         game.joinGame('joinGame', null, true);
       } else {
         game.joinGame();
       }
+
+      $scope.clearMessage = function () {
+        $timeout(function () {
+          $scope.action = false;
+        }, 5000);
+      };
+
+      $scope.addFriend = function (friendid) {
+        $scope.action = {};
+        $http.post('/api/friend', {
+          friendid: friendid
+        }).then(function (response) {
+          if (response.status === 200) {
+            $scope.action.done = true;
+          }
+          $scope.action.message = response.data.message;
+          $scope.clearMessage();
+        }, function (error) {
+          $scope.action.message = error.data.message;
+          $scope.clearMessage();
+        });
+      };
+
+      $scope.getPlayerId = function () {
+        var userDetails = {};
+        userDetails = JSON.parse(localStorage.getItem('user'));
+        return (userDetails) ? userDetails._id : false;
+      };
+
+      $scope.isAddable = function (playerID) {
+        var userID = $scope.getPlayerId();
+        return playerID !== 'unauthenticated' &&
+          playerID !== userID && userID;
+      };
+
+      // get friend list and populate in the select option
+      try {
+        $scope.friendList = JSON.parse(localStorage.getItem('friends'));
+      } catch (error) {
+        $scope.friendList = [];
+      }
+
+      $scope.invitePlayers = function () {
+        var gameUrl = document.URL.split('/');
+        $http.post('/api/invite', {
+          invitedIDs: $scope.invited,
+          link: '#!/' + gameUrl[(gameUrl.length) - 1]
+        })
+        .then(function () {
+          $scope.action = {done: true, message: 'Invitation sent'};
+        }, function () {
+          $scope.action = {message: 'Invitation not sent'};
+        });
+        $scope.clearMessage();
+      };
     }]);

@@ -196,7 +196,7 @@ footer {
 }
 
 .answer-section {
-    padding-top: 20px;
+  padding-top: 20px;
 }
 
 .question {
@@ -234,7 +234,7 @@ footer {
 }
 
 .waiting {
-  height: 300px;
+  height: 200px;
 }
 
 .waiting p {
@@ -246,7 +246,7 @@ footer {
 }
 
 #crDonateWidget_cfhio_cards4humanity {
-  margin:auto;
+  margin: auto;
   margin-top: 60px;
 }
 
@@ -261,10 +261,10 @@ footer {
 }
 
 .time {
-  float:right;
+  float: right;
   width: 2%;
-  font-size:18px;
-  display:block;
+  font-size: 18px;
+  display: block;
 }
 
 .timer-wrapper {
@@ -275,11 +275,60 @@ footer {
   width: 98%;
 }
 
+.a_player .material-icons {
+  color: #A1232E;
+  margin: -38px 0 0 35%;
+  display: none;
+}
+
+.aplayer-hover:hover {
+  opacity: 0.3;
+}
+
+.aplayer-hover:hover .material-icons {
+  display: block;
+  cursor: pointer;
+}
+
+.friend-notifications {
+  position: fixed;
+  top: 64px;
+  right: 0px;
+  padding: 10px;
+  background: #A1232E;
+  color: #fff;
+}
+
+.success-notify {
+  background: #4F914A;
+}
+
+.notification:hover {
+  background: none;
+}
+
+.notification:hover i,
+.notification:hover span {
+  color: #A1232E;
+}
+
+#notifydropdown {
+  width: 250px !important;
+}
+
+#bell {
+  display: inline-block;
+}
+
+.number {
+  display: block;
+  float: right;
+}
+
 @media screen and (min-width: 992px) {
   #banner-bg-card {
     margin: 40px 0 -227px 0;
   }
-
   .brief-text {
     padding-right: 20px;
   }

@@ -19,6 +19,16 @@ angular.module('mean.system')
       }
     };
   }])
+  .factory('InvitationService', ['$http', function ($http) {
+    return {
+      getInvitations: function () {
+        return $http.get('/api/invitation');
+      },
+      readNotification: function () {
+        return $http.put('/api/invitation', {status: 1});
+      }
+    };
+  }])
   .factory('GameHistory', ['$http', function ($http) {
     return {
       getHistory: function () {
@@ -27,19 +37,6 @@ angular.module('mean.system')
         }, function (err) {
           console.error(err);
         });
-        // var promise = new Promise(function (resolve, reject) {
-        //   $http.get('/api/games/history').then(function (data) {
-        //     resolve(data);
-        //   }, function (err) {
-        //     reject(err);
-        //   });
-        // })
-        //   .then(function (data) {
-        //     return data;
-        //   })
-        //   .catch(function (err) {
-        //     console.log(err);
-        //   });
       }
     };
   }])
