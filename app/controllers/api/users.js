@@ -98,15 +98,31 @@ exports.currentUser = function (req, res) {
   res.status(404).send('Not Found!');
 };
 
-
 exports.saveGameHistory = function (req, res) {
   var gameHistory = new GameHistory(req.body);
-  gameHistory.save(function (err) {
-    if (err) {
-      console.err(err);
-    } else {
-      console.log('game history saved successfully');
+  var date = new Date();
+
+  // Check if history data has already been created.
+  GameHistory.find({
+    timestamp: date.getTime()
+  }, function (err) {
+    if (!err) {
+      console.log('Game history already saved!');
+      // return res.send(302, {
+      //   message: 'Game history already saved!'
+      // });
     }
+    gameHistory.save(function (err) {
+      if (err) {
+        return res.send(501, {
+          message: 'Could not save game history'
+        });
+      }
+
+      return res.send(201, {
+        message: 'Game history created successfully'
+      });
+    });
   });
 };
 
@@ -119,11 +135,12 @@ exports.getGameHistory = function (req, res) {
     });
   }
 
+  // Find all games stored for this user
   GameHistory.find({
     userID: req.user._id
   }, function (err, historyDetail) {
-    if (err) {  // Create a history if history does not exist for this user
-      return res.send(401, {message: 'Cannot find Game history'});
+    if (err) {
+      return res.send(404, {message: 'Cannot find Game history'});
     }
 
     return res.send(historyDetail);
@@ -133,6 +150,7 @@ exports.getGameHistory = function (req, res) {
 exports.deleteGameHistory = function (req, res) {
   'use strict';
 
+  // if user has logged.
   if (!req.user) {
     return res.send(401, {
       message: 'User not found!'
@@ -143,14 +161,14 @@ exports.deleteGameHistory = function (req, res) {
     userID: req.user._id
   }, function (err) {
     if (err) {  // Create a history if history does not exist for this user
-      return res.send(401, {message: 'Cannot find Game history'});
+      return res.send(404, {message: 'Cannot find Game history'});
     }
 
     GameHistory.remove({
       userID: req.user._id
     }, function (error) {
       if (!error) {
-        return res.send(200, {message: 'User history removed'});
+        return res.send(200, {message: 'Game history removed'});
       }
     });
   });

@@ -34,7 +34,6 @@ angular.module('mean.system')
       var timeout = false;
       var self = this;
       var joinOverrideTimeout = 0;
-      var gameStarted = false;
 
       var addToNotificationQueue = function (msg) {
         notificationQueue.push(msg);
@@ -199,40 +198,41 @@ angular.module('mean.system')
 
       game.startGame = function () {
         socket.emit('startGame');
-        gameStarted = true;
       };
 
       game.leaveGame = function () {
         var currentPlayer = storage.getUser();
-        if (gameStarted && !!currentPlayer) {
+        if ((game.round > 0) && !!currentPlayer) {
           // Save game history before leaving game
           var today = Date().substr(0, 24);
           var userID = storage.getUser()._id;
           var username = storage.getUser().name;
           var date = new Date();
-
           var historyData = {};
+          var theWinner = game.gameWinner;
           game.allPlayers = [];
           game.players.forEach(function (player) {
             game.allPlayers.push(player.username);
           });
-
+          if (game.gameWinner === -1) {
+            theWinner = 'No Winner';
+          }
           historyData = {
             gameID: game.gameID,
             name: username,
             userID: userID,
             datePlayed: today,
-            players: JSON.stringify(game.allPlayers),
-            winner: username,
+            players: game.allPlayers,
+            rounds: game.round,
+            winner: theWinner,
             timestamp: date.getTime()
           };
           try {
             $http({method: 'POST', url: '/api/games/save_history', data: historyData});
           } catch (e) {
-            // Do nothing
+            // Do nothing if it fails to post to the endpoint.
           }
         }
-
         game.players = [];
         game.time = 0;
         socket.emit('leaveGame');

@@ -7,6 +7,7 @@ var historySchema = new Schema({
   userID: String,
   datePlayed: String,
   players: String,
+  rounds: String,
   winner: String,
   timestamp: String
 });

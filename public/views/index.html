@@ -84,15 +84,39 @@
     <div class="modal-content">
       <h5 class="center-align">Games Played</h5>
       <ul class="collapsible" data-collapsible="accordion">
-        <li ng-repeat="history in History | orderBy:'timestamp'">
+        <li ng-repeat="history in History | orderBy:'timestamp':true">
           <div class="collapsible-header"><i class="material-icons">list</i ><strong>{{history.datePlayed}}</strong></div>
           <div class="collapsible-body">
-            <p>Game ID: {{history._id}} <br><br> User ID: {{history.userID}}  <br><br> Players: {{history.players}}  <br><br> Winner: {{history.winner}}</p>
+            <table class="bordered">
+              <tbody>
+                <tr>
+                  <td><strong>Game ID:</strong></td>
+                  <td>{{history._id}}</td>
+                </tr>
+                <tr>
+                  <td><strong>User ID:</strong></td>
+                  <td>{{history.userID}}</td>
+                </tr>
+                <tr>
+                  <td><strong>Players:</strong></td>
+                  <td>{{history.players}}</td>
+                </tr>
+                <tr>
+                  <td><strong>Rounds:</strong></td>
+                  <td>{{history.rounds}}</td>
+                </tr>
+                <tr>
+                  <td><strong>Winner:</strong></td>
+                  <td>{{history.winner}}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </li>
       </ul>
       <div class="modal-footer" ng-if="History.length > 0">
-        <a ng-click="deleteGameHistory()" class=" modal-action modal-close waves-effect waves-green btn-flat">Delete All</a>
+        <a class="btn tooltipped" data-position="top" data-delay="50" data-tooltip="All History will be cleared" ng-click="confirmDelete()">Delete All</a>
+        <a ng-if="showConfirm" ng-click="deleteGameHistory()" class=" modal-action modal-close waves-effect waves-green btn-flat">Confirm Delete</a>
       </div>
     </div>
   </div>
@@ -248,5 +272,6 @@
           $('#modal1').modal();
           $('#modal2').modal();
           $('.collapsible').collapsible();
+          $('.tooltipped').tooltip({delay: 50});
         });
   </script>
