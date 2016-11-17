@@ -216,6 +216,13 @@ angular.module('mean.system')
         }
       });
 
+// Handles ng-click event to start new round
+      $scope.beginNextRound = function () {
+        if ($scope.isCzar()) {
+          game.beginNextRound();
+        }
+      };
+
       $scope.checkState = function (state) {
         switch (state) {
         case 'gameEndPeopleLeft':
