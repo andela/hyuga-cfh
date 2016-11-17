@@ -44,11 +44,12 @@ angular.module('mean.system')
       // Add a new message entry to the Firebase Database.
       messagesRef.push({
         name: chat.username,
-        text: msg
+        text: emojione.toShort(msg)
       }).then(function () {}).catch(function (error) {
         console.error('Error writing new message to Firebase Database', error);
       });
       document.getElementById('message-form').reset();
+      document.getElementsByClassName('emoji-wysiwyg-editor')[0].innerHTML = '';
     };
 
     // Clear messages when a new game startsS
@@ -76,7 +77,7 @@ angular.module('mean.system')
       div.querySelector('.name').textContent = ' ~ ' + name;
       var messageElement = div.querySelector('.message');
       if (text) { // If the message is text.
-        messageElement.textContent = text;
+        messageElement.innerHTML = emojione.toImage(text);
         // Replace all line breaks by <br>.
         messageElement.innerHTML = messageElement.innerHTML
           .replace(/\n/g, '<br>');
