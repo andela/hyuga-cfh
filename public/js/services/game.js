@@ -34,6 +34,7 @@ angular.module('mean.system')
       var timeout = false;
       var self = this;
       var joinOverrideTimeout = 0;
+      var gameStarted = false;
 
       var addToNotificationQueue = function (msg) {
         notificationQueue.push(msg);
@@ -198,35 +199,40 @@ angular.module('mean.system')
 
       game.startGame = function () {
         socket.emit('startGame');
+        gameStarted = true;
       };
 
       game.leaveGame = function () {
-        // Save game history before leaving game
-        var today = Date().substr(0, 24);
-        var userID = storage.getUser()._id;
-        var username = storage.getUser().name;
-        var date = new Date();
+        var currentPlayer = storage.getUser();
+        if (gameStarted && !!currentPlayer) {
+          // Save game history before leaving game
+          var today = Date().substr(0, 24);
+          var userID = storage.getUser()._id;
+          var username = storage.getUser().name;
+          var date = new Date();
 
-        var historyData = {};
-        game.allPlayers = [];
-        game.players.forEach(function (player) {
-          game.allPlayers.push(player.username);
-        });
+          var historyData = {};
+          game.allPlayers = [];
+          game.players.forEach(function (player) {
+            game.allPlayers.push(player.username);
+          });
 
-        historyData = {
-          gameID: game.gameID,
-          name: username,
-          userID: userID,
-          datePlayed: today,
-          players: JSON.stringify(game.allPlayers),
-          winner: username,
-          timestamp: date.getTime()
-        };
-        try {
-          $http({method: 'POST', url: '/api/games/save_history', data: historyData});
-        } catch (e) {
-          // Do nothing
+          historyData = {
+            gameID: game.gameID,
+            name: username,
+            userID: userID,
+            datePlayed: today,
+            players: JSON.stringify(game.allPlayers),
+            winner: username,
+            timestamp: date.getTime()
+          };
+          try {
+            $http({method: 'POST', url: '/api/games/save_history', data: historyData});
+          } catch (e) {
+            // Do nothing
+          }
         }
+
         game.players = [];
         game.time = 0;
         socket.emit('leaveGame');
