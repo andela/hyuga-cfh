@@ -3,11 +3,13 @@ angular.module('mean.system')
     'socket',
     '$timeout',
     'chat',
-    'storage', function (socket, $timeout, chat, storage) {
+    'storage',
+    '$http', function (socket, $timeout, chat, storage, $http) {
       var game = {
         id: null, // This player's socket ID, so we know who this player is
         gameID: null,
         players: [],
+        allPlayers: [], // Username of all players who played
         playerIndex: 0,
         winningCard: -1,
         winningCardPlayer: -1,
@@ -199,6 +201,32 @@ angular.module('mean.system')
       };
 
       game.leaveGame = function () {
+        // Save game history before leaving game
+        var today = Date().substr(0, 24);
+        var userID = storage.getUser()._id;
+        var username = storage.getUser().name;
+        var date = new Date();
+
+        var historyData = {};
+        game.allPlayers = [];
+        game.players.forEach(function (player) {
+          game.allPlayers.push(player.username);
+        });
+
+        historyData = {
+          gameID: game.gameID,
+          name: username,
+          userID: userID,
+          datePlayed: today,
+          players: JSON.stringify(game.allPlayers),
+          winner: username,
+          timestamp: date.getTime()
+        };
+        try {
+          $http({method: 'POST', url: '/api/games/save_history', data: historyData});
+        } catch (e) {
+          // Do nothing
+        }
         game.players = [];
         game.time = 0;
         socket.emit('leaveGame');

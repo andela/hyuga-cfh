@@ -22,7 +22,7 @@ angular.module('mean.system')
   .factory('GameHistory', ['$http', function ($http) {
     return {
       getHistory: function () {
-        $http.get('/api/games/history').then(function (data) {
+        $http.get('/api/games/get_history').then(function (data) {
           return data;
         }, function (err) {
           console.error(err);

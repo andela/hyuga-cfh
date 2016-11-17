@@ -98,56 +98,60 @@ exports.currentUser = function (req, res) {
   res.status(404).send('Not Found!');
 };
 
-exports.gameHistory = function (req, res) {
+
+exports.saveGameHistory = function (req, res) {
+  var gameHistory = new GameHistory(req.body);
+  gameHistory.save(function (err) {
+    if (err) {
+      console.err(err);
+    } else {
+      console.log('game history saved successfully');
+    }
+  });
+};
+
+exports.getGameHistory = function (req, res) {
   'use strict';
 
-  var currentHistory = {};
-  var today = Date().substr(0, 24);
   if (!req.user) {
     return res.send(401, {
       message: 'User not found!'
     });
   }
-  var historyID = jwt.sign({
-      userId: req.user._id
-    }, secret),
-    currentGameHistory = {
-      name: req.user.name,
-      gameID: historyID,
-      userID: req.user._id,
-      datePlayed: today,
-      winner: 'Femi'
-    },
-    History = mongoose.model('History'),
-    gameHistory = new History(currentGameHistory);
 
-  History.find({
+  GameHistory.find({
     userID: req.user._id
   }, function (err, historyDetail) {
     if (err) {  // Create a history if history does not exist for this user
-      console.error(err);
-      gameHistory.save(function (err) {
-        if (err) {
-          console.err(err);
-        } else {
-          console.log('game history saved successfully');
-        }
-      });
-    } else if (historyDetail) {
-      console.log(historyDetail.gameID, historyID);
-      if (historyDetail.gameID !== historyID){  // Create a new history if the history in the database is not same for the present game.
-        // gameHistory.save(function (err) {
-        //   if (err) {
-        //     console.err(err);
-        //   } else {
-        //     console.log('game history saved successfully');
-        //   }
-        // });
-      }
-      currentHistory = historyDetail;
-      return res.send(currentHistory);
-    } else {
-      console.error('Cannot find Game history');
+      return res.send(401, {message: 'Cannot find Game history'});
     }
+
+    return res.send(historyDetail);
+  });
+};
+
+exports.deleteGameHistory = function (req, res) {
+  'use strict';
+
+  if (!req.user) {
+    return res.send(401, {
+      message: 'User not found!'
+    });
+  }
+  var gameHistory = new GameHistory();
+  GameHistory.find({
+    userID: req.user._id
+  }, function (err) {
+    if (err) {  // Create a history if history does not exist for this user
+      return res.send(401, {message: 'Cannot find Game history'});
+    }
+
+    gameHistory.remove({
+      userID: req.user._id
+    }, function (error) {
+      if (!error) {
+        return res.send(200, {message: 'User history removed'});
+      }
+    });
   });
 };

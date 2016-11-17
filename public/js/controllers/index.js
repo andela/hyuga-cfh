@@ -30,12 +30,20 @@ angular.module('mean.system')
 // Create empty history array to hold history objects
   $scope.History = [];
   $scope.getGameHistory = function () {
-    $http.get('/api/games/history').then(function (response) {
+    $http.get('/api/games/get_history').then(function (response) {
       response.data.forEach(function (history) {
         $scope.History.push(history);
       });
     }, function (err) {
       console.error(err);
+    });
+  };
+
+  // Delete user history
+  $scope.deleteGameHistory = function () {
+    $http.post('/api/games/delete_history').success(function (data) {
+      console.log(data);
+      $scope.$apply();
     });
   };
 }]);

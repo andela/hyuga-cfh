@@ -6,7 +6,9 @@ var historySchema = new Schema({
   gameID: String,
   userID: String,
   datePlayed: String,
-  winner: String
+  players: String,
+  winner: String,
+  timestamp: String
 });
 
 var History = mongoose.model('History', historySchema);

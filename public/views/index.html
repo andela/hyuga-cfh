@@ -10,7 +10,7 @@
       <ul class="right hide-on-med-and-down">
         <li><a ng-click="goTo('how-to-play')">HOW TO PLAY</a></li>
         <!-- Modal Trigger -->
-        <li><a data-target='modal2' ng-click="getGameHistory()">GAME HISTORY</a></li>
+        <li ng-hide="showOptions"><a data-target='modal2' ng-click="getGameHistory()">GAME HISTORY</a></li>
         <li><a ng-click="goTo('charity')">CHARITY</a></li>
         <li ng-show="showOptions"><a href="#!signup">SIGN UP</a></li>
         <li ng-hide="showOptions"><a href="/signout">SIGN OUT</a></li>
@@ -19,7 +19,7 @@
       <ul class="side-nav" id="mobile-menu">
         <li><a ng-click="goTo('how-to-play')">HOW TO PLAY</a></li>
         <!-- Modal Trigger -->
-        <li><a data-target='modal2' ng-click="getGameHistory()">GAME HISTORY</a></li>
+        <li ng-hide="showOptions"><a data-target='modal2' ng-click="getGameHistory()">GAME HISTORY</a></li>
         <li><a ng-click="goTo('charity')">CHARITY</a></li>
         <li ng-show="showOptions"><a href="#!signup">SIGN UP</a></li>
         <li ng-hide="showOptions"><a href="/signout">SIGN OUT</a></li>
@@ -82,14 +82,18 @@
   <!-- History section -->
   <div id="modal2" class="modal">
     <div class="modal-content">
-    <ul class="collapsible" data-collapsible="accordion">
-      <li ng-repeat="history in History | orderBy:'datePlayed'">
-        <div class="collapsible-header"><i class="material-icons">list</i >{{history.datePlayed}}</div>
-        <div class="collapsible-body">
-          <p>Game ID: {{history.userID}} <br><br> User ID: {{history.userID}}  <br><br> Winner: {{history.winner}}</p>
-        </div>
-      </li>
-    </ul>
+      <h5 class="center-align">Games Played</h5>
+      <ul class="collapsible" data-collapsible="accordion">
+        <li ng-repeat="history in History | orderBy:'timestamp'">
+          <div class="collapsible-header"><i class="material-icons">list</i ><strong>{{history.datePlayed}}</strong></div>
+          <div class="collapsible-body">
+            <p>Game ID: {{history._id}} <br><br> User ID: {{history.userID}}  <br><br> Players: {{history.players}}  <br><br> Winner: {{history.winner}}</p>
+          </div>
+        </li>
+      </ul>
+      <div class="modal-footer">
+        <a ng-click="deleteGameHistory()" class=" modal-action modal-close waves-effect waves-green btn-flat">Delete All</a>
+      </div>
     </div>
   </div>
 
