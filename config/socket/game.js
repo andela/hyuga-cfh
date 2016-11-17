@@ -37,7 +37,6 @@ function Game(gameID, io) {
   this.timeLimits = {
     stateChoosing: 21,
     stateJudging: 16
-    // stateResults: 6
   };
   // setTimeout ID that triggers the czar judging state
   // Used to automatically run czar judging if players don't pick before time limit
@@ -218,7 +217,7 @@ Game.prototype.stateResults = function(self) {
   }, self.timeLimits.stateResults * 1000);
 };
 
-Game.prototype.beginNextRound = function (self) {
+Game.prototype.beginNextRound = function(self) {
   self.stateChoosing(self);
 };
 
