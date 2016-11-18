@@ -1354,7 +1354,7 @@ i:focus {
    }
  }
  
- #chat_frame{
+ #chat_frame {
     position: fixed;
     min-width: 400px;
     right: 0;
