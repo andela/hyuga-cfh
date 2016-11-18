@@ -184,10 +184,14 @@ exports.friendship = function (req, res) {
 
 exports.search = function (req, res) {
   User.findById(req.query._id, function (err, user) {
-    if(err) {
+    if (err) {
       return res.send(500, { message: err.errors });
     }
     User.find({_id: {$in: user.friends }}, function (err, friends) {
+      if (err) {
+        return res.send(500, { message: err.errors });
+      }
+
       return res.send(200, friends);
     });
   });

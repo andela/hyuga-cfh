@@ -1,14 +1,14 @@
-var app = require('../../server'),
-  request = require('supertest'),
-  mongoose = require('mongoose'),
-  User = mongoose.model('User'),
-  userFactory = require('../factories').user;
+var app = require('../../server');
+var request = require('supertest');
+var mongoose = require('mongoose');
+var User = mongoose.model('User');
+var userFactory = require('../factories').user;
 
 // Globals
 var user;
 
 describe('Auth api', function () {
-  "use strict";
+  'use strict';
 
   beforeEach(function (done) {
     user = new User(userFactory);
@@ -38,11 +38,10 @@ describe('Auth api', function () {
         .send(userFactory)
         .expect(200, done);
     });
-
   });
 
   describe('Signup route', function () {
-    describe('incoplete param', function () {
+    describe('incomplete param', function () {
       it('should fail without a name', function (done) {
         request(app).post('/api/auth/signup')
           .send({
@@ -53,7 +52,8 @@ describe('Auth api', function () {
       });
 
       it('should fail without a email', function (done) {
-        request(app).post('/api/auth/signup')
+        request(app)
+          .post('/api/auth/signup')
           .send({
             name: userFactory.name,
             password: userFactory.password
@@ -62,7 +62,8 @@ describe('Auth api', function () {
       });
 
       it('should fail without a password', function (done) {
-        request(app).post('/api/auth/signup')
+        request(app)
+          .post('/api/auth/signup')
           .send({
             email: userFactory.email,
             name: userFactory.name
@@ -82,6 +83,14 @@ describe('Auth api', function () {
       user.remove();
       request(app).post('/api/auth/signup')
         .send(userFactory)
+        .expect(200, done);
+    });
+  });
+
+  describe('Search route', function () {
+    it('routes successfully', function (done) {
+      request(app)
+        .get('/api/search/users?name=')
         .expect(200, done);
     });
   });

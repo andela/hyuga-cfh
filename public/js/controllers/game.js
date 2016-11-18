@@ -1,3 +1,5 @@
+/* global angular Materialize */
+
 angular.module('mean.system')
   .controller('GameController', [
     '$scope',
@@ -199,6 +201,8 @@ angular.module('mean.system')
                   'background': 'white',
                   'color': 'black'
                 }).text(link);
+
+                Materialize.toast('You need to invite a minimum of 3 players', 10000);
               }, 200);
               $scope.modalShown = true;
             }
@@ -206,7 +210,7 @@ angular.module('mean.system')
         }
       });
 
-// Handles ng-click event to start new round
+      // Handles ng-click event to start new round
       $scope.beginNextRound = function () {
         if ($scope.isCzar()) {
           game.beginNextRound();
@@ -298,16 +302,20 @@ angular.module('mean.system')
       }
 
       $scope.invitePlayers = function () {
-        var gameUrl = document.URL.split('/');
-        $http.post('/api/invite', {
-          invitedIDs: $scope.invited,
-          link: '#!/' + gameUrl[(gameUrl.length) - 1]
-        })
-        .then(function () {
-          $scope.action = {done: true, message: 'Invitation sent'};
-        }, function () {
-          $scope.action = {message: 'Invitation not sent'};
-        });
-        $scope.clearMessage();
+        if ($scope.invited.length < 12) {
+          var gameUrl = document.URL.split('/');
+          $http.post('/api/invite', {
+            invitedIDs: $scope.invited,
+            link: '#!/' + gameUrl[(gameUrl.length) - 1]
+          })
+          .then(function () {
+            $scope.action = {done: true, message: 'Invitation sent'};
+          }, function () {
+            $scope.action = {message: 'Invitation not sent'};
+          });
+          $scope.clearMessage();
+        } else {
+          Materialize.toast('You can only invite a maximum of 11 players', 10000);
+        }
       };
     }]);
