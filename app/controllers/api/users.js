@@ -157,7 +157,7 @@ exports.deleteGameHistory = function (req, res) {
   GameHistory.find({
     userID: req.user._id
   }, function (err) {
-    if (err) {  // Create a history if history does not exist for this user
+    if (err) {
       return res.send(404, {message: 'Cannot find Game history'});
     }
 

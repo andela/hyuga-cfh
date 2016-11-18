@@ -38,10 +38,11 @@ angular.module('mean.system')
         $scope.avatars = data;
       });
 
-// Create empty history array to hold history objects
+    // Create empty history array to hold history objects
     $scope.getGameHistory = function () {
       $scope.History = [];
-      $http.get('/api/games/get_history').then(function (response) {
+      $http.get('/api/games/get_history')
+      .then(function (response) {
         response.data.forEach(function (history) {
           $scope.History.push(history);
         });
@@ -50,7 +51,7 @@ angular.module('mean.system')
       });
     };
 
-  // Delete user history
+    // Delete user history
     $scope.confirmDelete = function () {
       setTimeout(function () {
         $scope.showConfirm = false;
