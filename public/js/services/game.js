@@ -217,7 +217,7 @@ angular.module('mean.system')
           
           // Check if there was a winner
           if (game.gameWinner === -1) {
-            theWinner = 'No Winner';
+            theWinner = 'N/A';
           }
           historyData = {
             gameID: game.gameID,
