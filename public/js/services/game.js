@@ -177,7 +177,40 @@ angular.module('mean.system')
           joinOverrideTimeout = $timeout(function () {
             game.joinOverride = true;
           }, 15000);
-        } else if (data.state === 'game dissolved' || data.state === 'game ended') {
+        } else if (data.state === 'game dissolved' || data.state === 'game ended') {          
+          var currentPlayer = storage.getUser();
+          if ((game.round > 0) && !!currentPlayer) {
+            // Save game history before leaving game
+            var today = Date().substr(0, 24);
+            var userID = storage.getUser()._id;
+            var username = storage.getUser().name;
+            var date = new Date();
+            var historyData = {};
+            game.allPlayers = [];
+            game.players.forEach(function (player) {
+              game.allPlayers.push(player.username);
+            });
+            var theWinner = game.allPlayers[game.gameWinner];
+            // Check if there was a winner
+            if (game.gameWinner === -1) {
+              theWinner = 'N/A';
+            }
+            historyData = {
+              gameID: game.gameID,
+              name: username,
+              userID: userID,
+              datePlayed: today,
+              players: game.allPlayers,
+              rounds: game.round,
+              winner: theWinner,
+              timestamp: date.getTime()
+            };
+            try {
+              $http({ method: 'POST', url: '/api/games/save_history', data: historyData });
+            } catch (e) {
+              // Do nothing if it fails to post to the endpoint.
+            }
+          }
           game.players[game.playerIndex].hand = [];
           game.time = 0;
         }
@@ -201,40 +234,6 @@ angular.module('mean.system')
       };
 
       game.leaveGame = function () {
-        var currentPlayer = storage.getUser();
-        if ((game.round > 0) && !!currentPlayer) {
-          // Save game history before leaving game
-          var today = Date().substr(0, 24);
-          var userID = storage.getUser()._id;
-          var username = storage.getUser().name;
-          var date = new Date();
-          var historyData = {};
-          var theWinner = game.gameWinner;
-          game.allPlayers = [];
-          game.players.forEach(function (player) {
-            game.allPlayers.push(player.username);
-          });
-          
-          // Check if there was a winner
-          if (game.gameWinner === -1) {
-            theWinner = 'N/A';
-          }
-          historyData = {
-            gameID: game.gameID,
-            name: username,
-            userID: userID,
-            datePlayed: today,
-            players: game.allPlayers,
-            rounds: game.round,
-            winner: theWinner,
-            timestamp: date.getTime()
-          };
-          try {
-            $http({method: 'POST', url: '/api/games/save_history', data: historyData});
-          } catch (e) {
-            // Do nothing if it fails to post to the endpoint.
-          }
-        }
         game.players = [];
         game.time = 0;
         socket.emit('leaveGame');
