@@ -9,7 +9,10 @@ module.exports = function (app) {
   app.post('/api/auth/signup', users.signup);
   app.post('/api/auth/login', users.login);
 
-  // Users routes
+  app.get('/api/auth/current_user', users.currentUser);
+  app.post('/api/games/save_history', users.saveGameHistory);
+  app.get('/api/games/get_history', users.getGameHistory);
+  app.get('/api/games/delete_history', users.deleteGameHistory);
   app.get('/api/search/users', users.search);
 
   // User routes
