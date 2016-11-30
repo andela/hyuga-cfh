@@ -1,11 +1,13 @@
 /**
  * Module dependencies.
  */
+
 var express = require('express'),
     fs = require('fs'),
     passport = require('passport'),
     logger = require('mean-logger'),
     io = require('socket.io');
+require('dotenv').config({ silent: true });
 
 /**
  * Main application entry file.
@@ -14,17 +16,20 @@ var express = require('express'),
 
 //Load configurations
 //if test env, load example file
-var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
-    config = require('./config/config'),
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
+var config = require('./config/config'),
     auth = require('./config/middlewares/authorization'),
     mongoose = require('mongoose');
 
 //Bootstrap db connection
-var db = mongoose.connect(config.db);
+mongoose.connect(config.db);
 
 //Bootstrap models
 var models_path = __dirname + '/app/models';
 var walk = function(path) {
+    "use strict";
+
     fs.readdirSync(path).forEach(function(file) {
         var newPath = path + '/' + file;
         var stat = fs.statSync(newPath);
@@ -44,15 +49,12 @@ require('./config/passport')(passport);
 
 var app = express();
 
-app.use(function(req, res, next){
-    next();
-});
-
 //express settings
 require('./config/express')(app, passport, mongoose);
 
 //Bootstrap routes
 require('./config/routes')(app, passport, auth);
+require('./config/apiRoutes')(app);
 
 //Start the app by listening on <port>
 var port = config.port;

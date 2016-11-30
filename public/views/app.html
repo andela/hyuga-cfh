@@ -1,33 +1,59 @@
 </script>
-<div id="app-container" ng-controller="GameController">
-  <div id="menu-container">
-    <div id="logo">
-      <span id="first-word">Cards</span>
-      <span id="second-word"> for</span>
-      <span id="third-word">Humanity</span>
+<div class="main_background" ng-controller="GameController">
+  <nav>
+    <div class="nav-wrapper container">
+      <a href="/" class="brand-logo">
+        <img src="img/logo.png" />
+      </a>
+      <a id="mobile-menu-icon" data-activates="mobile-menu" class="button-collapse">
+        <i class="material-icons">menu</i>
+      </a>
+      <ul class="right hide-on-med-and-down">
+        <li><a ng-click="abandonGame()">ABANDON GAME</a></li>
+        <li>
+          <a href="https://twitter.com/share" data-url="http://cfh.io" data-text="Cards for Humanity: A Game for Horrible People Desperately Trying to do Good"
+            data-related="CFH_App">TWEET</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+      </ul>
+      <ul class="side-nav" id="mobile-menu">
+        <li><a ng-click="abandonGame()">EXIT</a></li>
+        <li>
+          <a href="https://twitter.com/share" data-url="http://cfh.io" data-text="Cards for Humanity: A Game for Horrible People Desperately Trying to do Good"
+            data-related="CFH_App">TWEET</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </li>
+      </ul>
     </div>
-    <div id = 'abandon-game-button' ng-click="abandonGame()">
-        Abandon Game
-    </div>
-        <span id="tweet-container">
-      <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://cfh.io" data-text="Cards for Humanity: A Game for Horrible People Desperately Trying to do Good" data-related="CFH_App">Tweet</a>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-    </span>
+  </nav>
+  <div class="players">
+    <player></player>
   </div>
-  <div id="gameplay-container">
-    <div id="upper-gameplay-container">
-      <div id="menu-timeremaining-container">
-        <div id="menu-container">
-          <span id="menu-button">Menu</span>
-        </div>
-        <div id="timer-container">
-          <timer></timer>
-        </div>
-      </div>
-      <div id="question-container-outer">
-        <question></question>
-      </div>
-    </div>
+
+  <div>
+    <question></question>
+  </div>
+  <div class="timer">
+    <timer></timer>
+  </div>
+  <div>
     <answers></answers>
+  </div>
+  <div class="donate row container">
+    <div class="col s6 m4 l2 offset-s3 offset-m4 offset-l5">
+      <button class="btn btn-large app-buttons">DONATE NOW</button>
+    </div>
+  </div>
+  <footer class="section">
+    <div class="container">
+      <p class="center-align">
+        Legal stuff: This game is based on the <a href="https://cardsagainsthumanity.com" class="inline-link">Cards against humanity</a>        card game, which is CC licensed (BY-NC-SA). Cards for Humanity is not affiliated with Cards Against Humanity. In
+        complying with the Creative Commons license of the Cards Against Humanity card game, all proceeds from donations
+        go directly to charity, as managed by <a href="https://crowdrise.com" class="inline-link">crowdrise</a>
+      </p>
+    </div>
+  </footer>
+  <div id="chat_frame">
+    <chat></chat>
   </div>
 </div>

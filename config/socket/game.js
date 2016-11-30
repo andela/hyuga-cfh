@@ -36,8 +36,7 @@ function Game(gameID, io) {
   this.curQuestion = null;
   this.timeLimits = {
     stateChoosing: 21,
-    stateJudging: 16,
-    stateResults: 6
+    stateJudging: 16
   };
   // setTimeout ID that triggers the czar judging state
   // Used to automatically run czar judging if players don't pick before time limit
@@ -61,7 +60,8 @@ Game.prototype.payload = function() {
       avatar: player.avatar,
       premium: player.premium,
       socketID: player.socket.id,
-      color: player.color
+      color: player.color,
+      userID: player.userID
     });
   });
   return {
@@ -145,7 +145,6 @@ Game.prototype.sendUpdate = function() {
 
 Game.prototype.stateChoosing = function(self) {
   self.state = "waiting for players to pick";
-  // console.log(self.gameID,self.state);
   self.table = [];
   self.winningCard = -1;
   self.winningCardPlayer = -1;
@@ -215,10 +214,12 @@ Game.prototype.stateResults = function(self) {
   self.resultsTimeout = setTimeout(function() {
     if (winner !== -1) {
       self.stateEndGame(winner);
-    } else {
-      self.stateChoosing(self);
     }
-  }, self.timeLimits.stateResults*1000);
+  }, self.timeLimits.stateResults * 1000);
+};
+
+Game.prototype.beginNextRound = function(self) {
+  self.stateChoosing(self);
 };
 
 Game.prototype.stateEndGame = function(winner) {

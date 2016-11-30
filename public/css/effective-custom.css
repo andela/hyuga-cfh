@@ -1,0 +1,335 @@
+body {
+  font-family: "Roboto";
+}
+
+#main_background,
+.main_background {
+  background: #fff;
+}
+
+a:hover {
+  border-radius: none;
+}
+
+nav {
+  background: #D7DCE2;
+}
+
+nav li a {
+  color: #000;
+}
+
+nav li a:hover {
+  background: #A1232E;
+  color: #fff;
+}
+
+#mobile-menu-icon {
+  color: #000;
+}
+
+.section {
+  padding: 20px 0;
+}
+
+.section:last-of-type {
+  margin-bottom: 0;
+}
+
+#banner,
+#charity {
+  background: #FAFAFA;
+}
+
+.pull-right {
+  float: right;
+}
+
+.card-content h5 {
+  line-height: 40px;
+}
+
+.app-color-blue {
+  color: #4575B5;
+}
+
+.app-color-red {
+  color: #A1232E;
+}
+
+.app-color-green {
+  color: #4F914A;
+}
+
+#banner-bg-card {
+  transform: rotate(345deg);
+  margin: 20px 0 -227px 0;
+}
+
+.brief-text {
+  line-height: 30px;
+  text-align: justify;
+}
+
+.inline-link {
+  color: #A1232E;
+}
+
+.inline-link:hover {
+  font-weight: bold;
+  color: #4575B5;
+}
+
+#how-to-play,
+footer {
+  background: #E9E9E9;
+}
+
+#how-to-play .card {
+  height: 250px;
+}
+
+#how-to-play .card:hover {
+  transform: scale(1.05, 1.05);
+  transition: 0.5s;
+}
+
+.quote {
+  font-weight: bold;
+}
+
+.app-buttons {
+  background: #A1232E;
+  color: #fff;
+}
+
+.app-buttons:hover {
+  background: #4575B5;
+  color: #fff;
+}
+
+#give-card .card {
+  height: 250px;
+}
+
+#give-card .card {
+  background-image: url('../img/love.png');
+  background-size: 100%;
+  background-position: 0 31px;
+  background-repeat: no-repeat;
+}
+
+#give-card .card .card-content {
+  width: 100%;
+}
+
+#give-card .bg-card {
+  margin-bottom: -250px;
+  transform-origin: bottom left;
+}
+
+#give-card #bg1 {
+  transform: rotate(350deg);
+}
+
+#give-card #bg2 {
+  transform: rotate(355deg);
+}
+
+#play-action {
+  bottom: 45px;
+  right: 30px;
+}
+
+#play-action a {
+  background-color: #A1232E;
+}
+
+.a_player {
+  background: #fff;
+}
+
+.a_player>div {
+  width: 90%;
+  margin-left: 5%;
+  background: #E9E9E9;
+  height: 50px;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.a_player .score {
+  height: 30px;
+  width: 30px;
+  color: #fff;
+  text-align: center;
+  background: #A1232E;
+  float: left;
+  margin-left: -10px;
+  padding-top: 5px;
+}
+
+.a_player>div img {
+  float: right;
+  width: 25%;
+}
+
+.a_player span {
+  width: 65%;
+}
+
+.players h5,
+.answer-section h5 {
+  text-align: center;
+}
+
+.players .container {
+  padding: 0;
+  margin-bottom: 0
+}
+
+.question,
+.answer-section {
+  background: #E9E9E9;
+  padding-bottom: 30px;
+  margin-bottom: 0px;
+}
+
+.answer-section {
+  padding-top: 20px;
+}
+
+.question {
+  height: 300px;
+}
+
+.each-question {
+  height: 220px;
+  background: #4575B5;
+  color: #fff;
+  margin-top: 40px;
+  text-align: center;
+}
+
+.timer>div {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.answer-section .hoverable:hover {
+  background: #A1232E;
+  color: #fff;
+  transform: scale(1.05, 1.05);
+  transition: 0.5s;
+}
+
+.an-answer {
+  height: 220px;
+}
+
+.donate {
+  margin: 30px auto;
+}
+
+.waiting {
+  height: 200px;
+}
+
+.waiting p {
+  width: 100%;
+}
+
+.answer-section li {
+  line-height: 40px;
+}
+
+#crDonateWidget_cfhio_cards4humanity {
+  margin: auto;
+  margin-top: 60px;
+}
+
+.fact {
+  padding: 10px 2%;
+  background: #ccc;
+}
+
+.fact h4 {
+  font-style: italic;
+  font-weight: bold;
+}
+
+.time {
+  float: right;
+  width: 2%;
+  font-size: 18px;
+  display: block;
+}
+
+.timer-wrapper {
+  padding: 0;
+}
+
+.timer-wrapper .progress {
+  width: 98%;
+}
+
+.a_player .material-icons {
+  color: #A1232E;
+  margin: -38px 0 0 35%;
+  display: none;
+}
+
+.aplayer-hover:hover {
+  opacity: 0.3;
+}
+
+.aplayer-hover:hover .material-icons {
+  display: block;
+  cursor: pointer;
+}
+
+.friend-notifications {
+  position: fixed;
+  top: 64px;
+  right: 0px;
+  padding: 10px;
+  background: #A1232E;
+  color: #fff;
+}
+
+.success-notify {
+  background: #4F914A;
+}
+
+.notification:hover {
+  background: none;
+}
+
+.notification:hover i,
+.notification:hover span {
+  color: #A1232E;
+}
+
+#notifydropdown {
+  width: 250px !important;
+}
+
+#bell {
+  display: inline-block;
+}
+
+.number {
+  display: block;
+  float: right;
+}
+
+@media screen and (min-width: 992px) {
+  #banner-bg-card {
+    margin: 40px 0 -227px 0;
+  }
+  .brief-text {
+    padding-right: 20px;
+  }
+}

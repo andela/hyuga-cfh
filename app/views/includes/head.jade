@@ -12,7 +12,7 @@ head
   meta(name="viewport", content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=0")
 
   link(href='/img/icons/favicon.ico', rel='shortcut icon', type='image/x-icon')
-  link(href='http://fonts.googleapis.com/css?family=Lobster', rel='stylesheet', type='text/css')
+  link(href='https://fonts.googleapis.com/css?family=Lobster', rel='stylesheet', type='text/css')
 
   meta(property='fb:app_id', content='APP_ID')
   meta(property='og:title', content='#{appName} - #{title}')
@@ -23,11 +23,26 @@ head
   meta(property='og:site_name', content='Cards for Humanity')
   meta(property='fb:admins', content='APP_ADMIN')
 
-  link(rel='stylesheet', href='/lib/bootstrap/css/bootstrap.css')
-  link(rel='stylesheet', href='/css/common.css')
+  link(rel='stylesheet', href='/lib/bootstrap/dist/css/bootstrap.min.css')
+  
   link(rel='stylesheet', href='/css/animate.css')
   link(rel='stylesheet', href='/css/style.css')
+  link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+  link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en")
+  link(rel='stylesheet', href='/lib/materialize/dist/css/materialize.min.css')
+  link(rel='stylesheet', href='/css/effective-custom.css')
+  link(rel="stylesheet" href="/css/chat.css")
 
+  // Emoji Picker Styles
+  link(rel="stylesheet" href="/views/emoji-picker/lib/css/nanoscroller.css")
+  link(rel="stylesheet" href="/views/emoji-picker/lib/css/emoji.css")
+
+  // Font Awesome CDN
+  script(src="https://use.fontawesome.com/3c82830ea0.js")
+
+  // EmojiOne Style & Script
+  <script src="https://cdn.jsdelivr.net/emojione/2.2.6/lib/js/emojione.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/emojione/2.2.6/assets/css/emojione.min.css"/>
 
   //if lt IE 9
     script(src='http://html5shim.googlecode.com/svn/trunk/html5.js')

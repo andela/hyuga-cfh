@@ -65,15 +65,20 @@ angular.module('mean.directives', [])
       templateUrl: '/views/timer.html',
       link: function(scope, elem, attr){}
     };
-  }).directive('landing', function() {
+  }).directive('landing', function(storage) {
     return {
       restrict: 'EA',
       link: function(scope, elem, attr) {
         scope.showOptions = true;
-
-        if (scope.$$childHead.global.authenticated === true) {
+        if (storage.getUser()) {
           scope.showOptions = false;
         }
       }
+    };
+  }).directive('chat', function(){
+    return {
+      restrict: 'EA',
+      templateUrl: '/views/chat.html',
+      link: function(scope, elem, attr){}
     };
   });
